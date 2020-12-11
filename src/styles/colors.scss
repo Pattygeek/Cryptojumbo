@@ -1,0 +1,65 @@
+@import 'variables';
+// text colors
+.color-white {
+  color: $white;
+}
+.color-primary {
+  color: $primary;
+}
+
+.color-gray-text {
+  color: $gray-text;
+}
+
+.color-dark {
+  color: $dark;
+}
+
+.color-gray-heading {
+  color: $gray-heading;
+}
+
+.color-success {
+  color: $success;
+}
+
+.color-danger {
+  color: $danger;
+}
+
+.color-warning {
+  color: $warning;
+}
+
+// background colors
+.bg-white {
+  background: $white;
+}
+
+.bg-primary {
+  background: $primary;
+}
+
+.bg-secondary {
+  background: $secondary;
+}
+
+.bg-white-opacity-0.7 {
+  background: rgba($color: #ffffff, $alpha: 0.7);
+}
+
+.bg-gray {
+  background: #e1e1e1;
+}
+
+.bg-success-transparent {
+  background: rgba($color: $success, $alpha: 0.2);
+}
+
+.bg-warning-transparent {
+  background: rgba($color: $warning, $alpha: 0.2);
+}
+
+.bg-danger-transparent {
+  background: rgba($color: $danger, $alpha: 0.2);
+}
