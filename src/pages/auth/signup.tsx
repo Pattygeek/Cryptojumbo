@@ -1,12 +1,25 @@
-import React from 'react';
-import { SubmitButton, FormInput } from '../components';
+import React, { useEffect } from 'react';
+import { SubmitButton, FormInput, useAjaxToast } from '../components';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Text, Flex, Box } from '@chakra-ui/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { AuthProps } from './types';
+import { signUpRequest, AppState } from '../../redux';
 
 export type SignUpProps = AuthProps;
 const SignUp: React.FC<AuthProps> = ({ setState }): JSX.Element => {
+  const dispatch = useDispatch();
+  const toast = useAjaxToast();
+  const { loading, error, success } = useSelector((state: AppState) => {
+    const { signUp: loading } = state.loadingIndicators;
+    const {
+      success: { signUp: success },
+      errors: { signUp: error },
+    } = state.ajaxStatuses;
+    return { loading, error, success };
+  });
   const formik = useFormik({
     initialValues: {
       password: '',
@@ -20,9 +33,17 @@ const SignUp: React.FC<AuthProps> = ({ setState }): JSX.Element => {
     }),
 
     onSubmit: ({ email, password }) => {
-      // loginRequest({ email, password });
+      dispatch(signUpRequest({ email, password }));
     },
   });
+  useEffect(() => {
+    if (error)
+      toast({
+        title: 'error',
+        description: error.error,
+      });
+  }, [error]);
+  if (success) return <Redirect to="/dashboard" />;
   return (
     <Box>
       <Flex direction="column" justify="center" align="center" mb={5}>
@@ -52,12 +73,15 @@ const SignUp: React.FC<AuthProps> = ({ setState }): JSX.Element => {
             labelClassName="color-primary"
           />
           <Flex justify="flex-end">
-            <button type="button" onClick={() => setState('forgot-password')}>
+            <button
+              type="button"
+              className="color-gray-text font-sm"
+              onClick={() => setState('forgot-password')}>
               Forgot Password?
             </button>
           </Flex>
           <SubmitButton
-            // loading={loading}
+            loading={loading}
             disabled={!(formik.isValid && formik.dirty)}
             action={formik.handleSubmit}>
             SignUp
@@ -66,7 +90,7 @@ const SignUp: React.FC<AuthProps> = ({ setState }): JSX.Element => {
         <Text className="color-gray-text font-weight-400 font-sm padding-vertical-sm">
           Already have an account?{' '}
           <button
-            onClick={() => setState('login')}
+            onClick={() => setState('signup')}
             type="button"
             className="font-weight-500">
             Login

@@ -1,12 +1,25 @@
-import React from 'react';
-import { SubmitButton, FormInput } from '../components';
+import React, { useEffect } from 'react';
+import { SubmitButton, FormInput, useAjaxToast } from '../components';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Text, Flex, Box } from '@chakra-ui/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import { AuthProps } from './types';
+import { loginRequest, AppState } from '../../redux';
 
 export type LoginProps = AuthProps;
 const Login: React.FC<AuthProps> = ({ setState }): JSX.Element => {
+  const dispatch = useDispatch();
+  const toast = useAjaxToast();
+  const { loading, error, success } = useSelector((state: AppState) => {
+    const { login: loading } = state.loadingIndicators;
+    const {
+      success: { login: success },
+      errors: { login: error },
+    } = state.ajaxStatuses;
+    return { loading, error, success };
+  });
   const formik = useFormik({
     initialValues: {
       password: '',
@@ -14,15 +27,21 @@ const Login: React.FC<AuthProps> = ({ setState }): JSX.Element => {
     },
     validationSchema: yup.object({
       email: yup.string().email('Invalid email address').required('Required'),
-      password: yup
-        .string()
-        .test('len', 'Password too short', (len) => (len ? len.length >= 8 : false)),
+      password: yup.string().required('Required'),
     }),
 
     onSubmit: ({ email, password }) => {
-      // loginRequest({ email, password });
+      dispatch(loginRequest({ email, password }));
     },
   });
+  useEffect(() => {
+    if (error)
+      toast({
+        title: 'error',
+        description: error.error,
+      });
+  }, [error]);
+  if (success) return <Redirect to="/dashboard" />;
   return (
     <Box>
       <Flex direction="column" justify="center" align="center" mb={5}>
@@ -62,7 +81,7 @@ const Login: React.FC<AuthProps> = ({ setState }): JSX.Element => {
             </Box>
           </Flex>
           <SubmitButton
-            // loading={loading}
+            loading={loading}
             disabled={!(formik.isValid && formik.dirty)}
             action={formik.handleSubmit}>
             Login

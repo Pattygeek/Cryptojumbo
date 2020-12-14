@@ -4,9 +4,9 @@ import { NavigationTop, AvailableCoinsSmallBox, Footer } from '../components';
 import Login from './login';
 import SignUp from './signup';
 const Auth: React.FC = (): JSX.Element => {
-  const [state, setState] = useState<'login' | 'signup' | 'forgot-password'>(
-    'login',
-  );
+  const [state, setState] = useState<
+    'login' | 'signup' | 'forgot-password' | 'reset-password' | 'verify-otp'
+  >('login');
   return (
     <Box>
       <Box as="header" className="header" p="20px 40px">
