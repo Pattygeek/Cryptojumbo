@@ -21,7 +21,6 @@ ReactDOM.render(
           <App />
         </PersistGate>
       </Provider>
-      <App />
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root'),
