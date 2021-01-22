@@ -1,0 +1,432 @@
+@import 'variables';
+@import 'colors';
+@import 'fonts';
+@import 'spaces';
+@import 'chakra-overrides';
+@import 'breakpoints';
+
+@mixin text-overflow($value) {
+  display: -webkit-box;
+  -webkit-line-clamp: $value;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@for $i from 1 through 5 {
+  .text-overflow-#{$i} {
+    @include text-overflow($i);
+  }
+}
+
+.trade {
+  .trade-sidebar {
+    background: #eaeaea;
+    border-radius: 0px 6px 6px 0px;
+    // transform: matrix(-1, 0, 0, 1, 0, 0);
+  }
+  .trade-type-btn-group {
+    background: #f7f7f7;
+    border-radius: 10px;
+  }
+}
+
+//border styles
+.border-r-circle {
+  border-radius: 50%;
+}
+.border-radius-sm {
+  border-radius: $border-radius-sm;
+}
+.border-radius-xs {
+  border-radius: $border-radius-xs;
+}
+.border-radius-inherit {
+  border-radius: inherit;
+}
+
+.slim-border-top-white {
+  border-top: 1px solid $white;
+}
+
+.slim-border-white {
+  border: 1px solid $white;
+}
+
+.slim-border-bottom {
+  border-bottom: 1px solid rgba(231, 231, 231, 0.31);
+}
+
+.slim-border-primary {
+  border: 1px solid $primary;
+}
+
+.slim-border-right {
+  border-right: 1px solid #e0e0e0;
+}
+
+.slim-border {
+  border: 1px solid $gray-text;
+}
+
+.secondary-ripple-effect {
+  background-position: center;
+  transition: background 0.8s;
+  &:hover {
+    background: rgba($secondary, 0.04)
+      radial-gradient(circle, transparent 1%, rgba($secondary, 0.04) 1%)
+      center/15000%;
+  }
+  &:active {
+    background-color: rgba($secondary, 0.04);
+    background-size: 100%;
+    transition: background 0s;
+  }
+}
+
+.offers {
+  @extend .font-sm;
+  img {
+    width: 30px;
+    height: auto;
+    @include media-breakpoint-up(sm) {
+      width: 75px;
+    }
+  }
+  @include media-breakpoint-up(sm) {
+    font: $md;
+  }
+}
+
+.coin-logo {
+  width: 25px;
+  height: 25px;
+  @extend .border-r-circle;
+}
+
+.trade-coin-logo {
+  width: 55px;
+  height: 55px;
+  // @extend .border-r-circle;
+}
+
+.card-shadow {
+  box-shadow: 8px 8px 16px 4px rgba(137, 143, 150, 0.04);
+}
+
+.trade {
+  @extend .card-shadow;
+  overflow: hidden;
+  .trade-upload-area {
+    border: 0.5px solid #ebebf9;
+    border-radius: 20px;
+    height: 150px;
+    padding: 4px;
+    > * {
+      border: 1px dashed #ebebf9;
+      border-radius: 12px;
+    }
+  }
+
+  .cancel-trade-btn {
+    width: 40px;
+    height: 40px;
+    background: rgba($color: #ffffff, $alpha: 0.3);
+    border-radius: 5px;
+    &:hover {
+      background: $danger;
+      opacity: 1;
+    }
+  }
+
+  .payment-method {
+    border: 1px solid transparent;
+    &.checked {
+      border-color: $primary;
+    }
+  }
+}
+
+.logo {
+  width: 30px;
+  height: 30px;
+}
+
+.header {
+  background-image: url('../assets/header-cover.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  // width: 100%;
+  // height: 100%;
+  @include media-breakpoint-up(md) {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.sticky_nav {
+  position: fixed;
+  top: 20px;
+  right: 40px;
+  left: 40px;
+  z-index: 10;
+  @include media-breakpoint-down(md) {
+    top: 0px;
+    right: 0;
+    left: 0;
+  }
+}
+
+.academy-header {
+  @extend .header;
+  background-image: url('../assets/academy.png');
+}
+
+.academy {
+  .stroke {
+    background: #f6f7fb;
+  }
+  &:hover {
+    .stroke {
+      background: rgba($primary, 0.5);
+    }
+  }
+}
+
+@mixin pointer($color) {
+  content: '';
+  position: absolute;
+  bottom: 20%;
+  right: -11%;
+  border-width: 15px;
+  border-style: solid;
+  border-color: transparent transparent transparent $color;
+  z-index: 2;
+  @include media-breakpoint-down(xs) {
+    bottom: -22%;
+    right: 80%;
+    border-color: $color transparent transparent transparent;
+  }
+  @include media-breakpoint-up(xlg) {
+    right: -7.5%;
+  }
+}
+.how-it-works-step {
+  position: relative;
+  // transition: 0.3s background-color;
+  img {
+    width: 55px;
+    height: auto;
+  }
+  &:nth-child(1) {
+    background-color: #172434;
+    &::after {
+      @include pointer(#172434);
+    }
+  }
+  &:nth-child(2) {
+    background-color: #273d58;
+    &::after {
+      @include pointer(#273d58);
+    }
+  }
+  &:nth-child(3) {
+    background-color: #37567c;
+    &::after {
+      @include pointer(#37567c);
+    }
+  }
+  &:nth-child(4) {
+    background-color: #466e9f;
+  }
+  &:hover {
+    background-color: $primary;
+    &::after {
+      border-color: transparent transparent transparent $primary;
+      @include media-breakpoint-down(xs) {
+        border-color: $primary transparent transparent transparent;
+      }
+    }
+  }
+}
+
+.btn {
+  border-radius: 5px;
+  @extend .padding-horizontal-sm;
+  @include padding-vertical(8px);
+  font-weight: 500;
+}
+.btn-primary-outline {
+  @extend .btn;
+  border: 1px solid $primary;
+  color: $primary;
+}
+
+.btn-white-outline {
+  @extend .btn;
+  border: 1px solid $white;
+  color: $white;
+}
+
+.btn-disabled {
+  background: #fff6e8;
+  border: 1.5px solid #ffffff;
+  color: #fcc69a;
+  cursor: not-allowed;
+  @extend .btn;
+}
+
+.btn-white-disabled {
+  background: rgba($color: #fff, $alpha: 0.7);
+  color: #fff;
+  cursor: not-allowed;
+}
+.dashboard-navbar {
+  a {
+    color: $gray-text;
+    display: inline-flex;
+    &:hover,
+    &.active {
+      color: $primary;
+    }
+  }
+}
+
+.custom-file-input {
+  visibility: hidden;
+}
+
+.coin-logo-sm {
+  width: 20px;
+  height: 20px;
+}
+
+.mobile-frame {
+  transform: scale(1.5) translateY(-20px);
+  @include media-breakpoint-up(md) {
+    transform: scale(2.2) translateY(-20px);
+  }
+}
+
+.what-we-do {
+  img {
+    width: 35px;
+  }
+}
+nav {
+  .navlink-wrapper {
+    .nav-links {
+      .navlink.active {
+        color: $primary;
+      }
+    }
+    @include media-breakpoint-down(md) {
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 999;
+      background: rgba($color: #000000, $alpha: 0.4);
+      transform: translateX(-100%);
+      height: 100vh;
+      .nav-links {
+        background: #fbfbfb;
+        width: auto !important;
+        height: 100vh;
+        transform: translateX(-100%);
+        transition: 0.3s transform;
+        .navlink {
+          border-left: px solid transparent;
+          padding-left: 20px !important;
+          padding-right: 40px !important;
+          width: 100%;
+          &.active {
+            border-left-color: $primary;
+            background: $white;
+          }
+        }
+        a.btn-primary-outline {
+          margin-left: 20px !important;
+        }
+      }
+      &.toggle {
+        transform: translateX(0%);
+        .nav-links {
+          transform: translateX(0%);
+        }
+      }
+    }
+  }
+}
+
+// .asset-container {
+//   @extend .slim-border-bottom;
+//   @include media-breakpoint-up(sm) {
+//     border-bottom: none;
+//     &:nth-of-type(odd) {
+//       border-right: 1px solid #e0e0e0;
+//     }
+//   }
+// }
+
+// .asset-wrapper-divider {
+//   border-bottom: none;
+//   @include media-breakpoint-up(sm) {
+//     border-bottom: 1px solid rgba(231, 231, 231, 0.31);
+//   }
+// }
+
+.tooltip {
+  opacity: 0;
+  transition: 0.3 opacity;
+  &.active {
+    opacity: 1;
+  }
+  &::backdrop {
+    opacity: 0;
+  }
+}
+
+.tooltip-wrapper {
+  position: relative;
+  display: inline-flex;
+  .tooltip {
+    visibility: hidden;
+    min-width: 150px;
+    border-radius: 6px 0px 6px 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 9999;
+    // margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 1%;
+      left: 102%;
+      margin-left: -5px;
+      border-width: 10px;
+      border-style: solid;
+      border-color: transparent transparent transparent #fff;
+    }
+  }
+  .logout-dropdown {
+    visibility: hidden;
+    position: absolute;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  &:hover .tooltip,
+  &:hover .logout-dropdown {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.split-payment-container {
+  border-bottom: 1px solid #e0e0e0;
+  &:last-of-type {
+    border-bottom: none;
+  }
+}
