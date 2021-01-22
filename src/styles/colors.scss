@@ -7,8 +7,20 @@
   color: $primary;
 }
 
+.color-secondary {
+  color: $secondary;
+}
+
 .color-gray-text {
   color: $gray-text;
+}
+
+.color-gray-2 {
+  color: #c4c4c4;
+}
+
+.color-gray-3 {
+  color: #cfcfcf;
 }
 
 .color-dark {
@@ -32,12 +44,25 @@
 }
 
 // background colors
+
+.bg-transparent {
+  background: transparent;
+}
+
 .bg-white {
   background: $white;
 }
 
 .bg-primary {
   background: $primary;
+}
+
+.bg-primary-transparent {
+  background: #fcc69a;
+}
+
+.bg-primary-gradient {
+  background: linear-gradient(149.86deg, #f77408 -1.52%, #f2994a 98.11%);
 }
 
 .bg-secondary {
@@ -49,17 +74,56 @@
 }
 
 .bg-gray {
-  background: #e1e1e1;
+  background: $gray-bg;
+}
+
+.bg-gray-light {
+  background: rgba(255, 255, 255, 0.31);
+}
+
+.bg-dark {
+  background: $dark;
+}
+
+.bg-dark-gradient {
+  background: linear-gradient(106.26deg, #8e94a7 -8.61%, #172434 91.65%);
 }
 
 .bg-success-transparent {
-  background: rgba($color: $success, $alpha: 0.2);
+  background: rgba($color: $success, $alpha: 0.1);
 }
 
 .bg-warning-transparent {
-  background: rgba($color: $warning, $alpha: 0.2);
+  background: rgba($color: $warning, $alpha: 0.1);
 }
 
+.bg-danger {
+  background: $danger;
+}
 .bg-danger-transparent {
-  background: rgba($color: $danger, $alpha: 0.2);
+  background: rgba($color: $danger, $alpha: 0.1);
+}
+
+.bg-primary-gradient-opacity {
+  background: linear-gradient(
+    180deg,
+    rgba(247, 144, 0, 0.15) 0%,
+    rgba(247, 116, 8, 0.15) 100%
+  );
+}
+
+.accordion-btn-bg {
+  background: linear-gradient(107.12deg, #fd9800 -24.88%, #ea7c01 93.28%);
+}
+
+.bg-primary-dirty {
+  background: #be6013;
+}
+
+.color-primary-dirty {
+  color: #be6013;
+}
+
+.slim-line {
+  background: linear-gradient(#be6013 0%, #e5e5e5 100%);
 }
