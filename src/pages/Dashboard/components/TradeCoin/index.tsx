@@ -1,8 +1,24 @@
-import React from 'react';
-import { Flex, Image, Box, Text } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import {
+  Flex,
+  Image,
+  Box,
+  Text,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  Stack,
+} from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { BsArrowRight } from 'react-icons/bs';
-import { RiArrowDropDownLine } from 'react-icons/ri';
+import { IoIosArrowDown } from 'react-icons/io';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import btc from '../../../../assets/bitcoin.png';
+import etherum from '../../../../assets/etherum.png';
+import usdt from '../../../../assets/udth.png';
+import { swapOptions } from '../../../../utils';
+import { swapCryptoRequest } from '../../../../redux';
 
 export interface TradeCoinProps {
   logo: string;
@@ -14,91 +30,155 @@ export const TradeCoin: React.FC<TradeCoinProps> = ({
   symbol,
 }): JSX.Element => {
   return (
-    <Flex
+    <Stack
       align="center"
       flex={1}
-      flexBasis={{ base: '100%', sm: '48%', md: '24%' }}
-      maxWidth={{ base: '100%', sm: '48%', md: '24%' }}
+      // maxWidth={{ base: '100%', sm: '160px', md: '270.81px' }}
       className="bg-white border-radius-sm"
-      mr={2}
-      mb={2}
-      p="15px"
-      flexDirection={{ base: 'column', sm: 'row' }}>
-      <Flex flex={1} mb={{ sm: 5, md: 0 }} align="center">
+      spacing={'20px'}
+      p={{ base: '15px', sm: '15px 20px' }}
+      direction={{ base: 'column', sm: 'row' }}>
+      <Flex align="center">
         <Image
           src={logo}
-          mr={2}
+          mr={{ base: '10px', sm: '20px' }}
           flex={{ base: 1, sm: 0 }}
-          width={{ base: '25px', md: '43px' }}
-          height={{ base: '25px', md: '43px' }}
-          objectFit="cover"
+          width={{ base: '43px', md: '53px' }}
+          height={{ base: '43px', md: '53px' }}
         />
         <Box>
-          <Text as="h3" className="font-md font-weight-600">
+          <Text
+            as="h3"
+            className="font-md color-dark font-weight-600"
+            lineHeight="20px">
             {symbol}
           </Text>
-          <Text className="color-gray-text font-xs">Buy / Sell</Text>
-          <Text className="color-gray-text font-xs font-weight-500">
-            # 400 / #401
+          <Text
+            className="color-gray-text font-xs font-weight-400"
+            lineHeight="14px"
+            textOverflow="nowrap">
+            Buy / Sell
+          </Text>
+          <Text
+            className="color-gray-text font-xs font-weight-500"
+            lineHeight="14px"
+            textOverflow="nowrap">
+            #400 / #401
           </Text>
         </Box>
       </Flex>
-      <Link className="color-primary font-weight-500 font-sm" to="/dashboard/trade">
+      <Box
+        as={Link}
+        _hover={{ background: '#F9F1EA' }}
+        borderRadius="5px"
+        p="10px 15px"
+        className="color-primary font-weight-500"
+        to="/dashboard/trade"
+        lineHeight="20px"
+        fontSize="12px">
         Buy/Sell
-      </Link>
-    </Flex>
+      </Box>
+    </Stack>
   );
 };
 
-export interface SwapCoinProp {
-  initialCoinlogo: string;
-  finalCoinLogo: string;
-}
-export const SwapCoin: React.FC<SwapCoinProp> = ({
-  initialCoinlogo,
-  finalCoinLogo,
-}): JSX.Element => {
+export const coinLogos: any = {
+  ETH: etherum,
+  BTC: btc,
+  USDT: usdt,
+};
+
+export const SwapCoin: React.FC = (): JSX.Element => {
+  const { push } = useHistory();
+  const [swapCoin, setSwapCoin] = useState<{ from: string; to: string }>({
+    from: 'USDT',
+    to: 'ETH',
+  });
+
+  const { from, to } = swapCoin;
   return (
-    <Flex
+    <Stack
       align="center"
-      flex={{ base: 0, sm: 1 }}
-      flexBasis={{ base: '100%', sm: '48%', md: '24%' }}
-      maxWidth={{ base: '100%', sm: '48%', md: '24%' }}
-      className="bg-white border-radius-sm trade-coin"
-      mr={2}
-      mb={2}
-      p={5}
-      flexDirection={{ base: 'column', sm: 'row' }}>
-      <Flex
+      flex={1}
+      borderWidth="2px"
+      borderColor="brand.100"
+      borderStyle="solid"
+      borderRadius="15px"
+      className="bg-white"
+      p={'15px 20px'}
+      spacing={'20px'}
+      direction={{ base: 'column', sm: 'row' }}>
+      <Stack
+        direction="row"
+        spacing="10px"
         borderRadius={5}
-        className="slim-border"
+        border="1px solid #BDBDBD"
         mb={{ sm: 5, md: 0 }}
-        p={2}
-        flex={1}>
+        p={'6px'}
+        align="center">
         <Flex align="center">
           <Image
-            src={initialCoinlogo}
-            flex={{ base: 1, sm: 0 }}
-            width={{ base: '25px', md: '43px' }}
-            height={{ base: '25px', md: '43px' }}
-            mr={3}
+            src={coinLogos[swapCoin.from]}
+            width={{ base: 25, md: 30 }}
+            height={{ base: 25, md: 30 }}
+            mr={2}
           />
-          <BsArrowRight className="color-gray-heading" size={25} />
+          <BsArrowRight className="color-gray-text" size={23} />
         </Flex>
         <Flex align="center">
           <Image
-            src={finalCoinLogo}
-            flex={{ base: 1, sm: 0 }}
-            width={{ base: '25px', md: '43px' }}
-            height={{ base: '25px', md: '43px' }}
-            mr={3}
+            src={coinLogos[swapCoin.to]}
+            width={{ base: 25, md: 30 }}
+            height={{ base: 25, md: 30 }}
+            mr={2}
           />
-          <RiArrowDropDownLine size={25} />
+          <Box position="relative" className="tooltip-wrapper" mt="-4px">
+            <Box as="button">
+              <IoIosArrowDown size={20} />
+            </Box>
+            <Box
+              mb={5}
+              py={3}
+              position="absolute"
+              right="50%"
+              transform="translateX(50%)"
+              top="100%"
+              className="bg-white slim-border card-shadow tooltip"
+              border="none"
+              minWidth="150px">
+              {swapOptions.map((option, index) => (
+                <Box
+                  as="button"
+                  width="full"
+                  onClick={() => setSwapCoin({ from: option[0], to: option[1] })}
+                  key={index}
+                  px={2}
+                  py={3}
+                  className="font-sm color-dark font-weight-500 secondary-ripple-effect">
+                  {option[0]} to {option[1]}
+                </Box>
+              ))}
+            </Box>
+          </Box>
         </Flex>
-      </Flex>
-      <Link className="color-primary font-weight-500 font-sm" to="/dashboard/trade">
+      </Stack>
+      <Box
+        as="button"
+        onClick={() =>
+          push('/dashboard/wallet/transact', {
+            swapProp: { from, to },
+            transactionType: 'swap',
+            coinSymbol: 'swap',
+          })
+        }
+        _hover={{ background: '#F9F1EA' }}
+        borderRadius="5px"
+        p="10px 15px"
+        className="color-primary font-weight-500"
+        lineHeight="20px"
+        fontSize="12px">
         Swap
-      </Link>
-    </Flex>
+      </Box>
+    </Stack>
   );
 };
