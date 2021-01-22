@@ -10,5 +10,25 @@ body {
 }
 
 input:focus {
-  border-color: $primary;
+  border-color: solid #faac6b;
+}
+
+input:not(:focus),
+textarea:not(:focus) {
+  border: 1px solid #c4c4c4;
+  &:hover {
+    border: 1px solid #c4c4c4 !important;
+  }
+}
+
+.borderless-input {
+  border: none !important;
+}
+
+button {
+  background: none;
+  &::-moz-focus-inner {
+    border: none;
+  }
+  cursor: pointer;
 }
