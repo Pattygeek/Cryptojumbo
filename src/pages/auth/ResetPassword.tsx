@@ -11,13 +11,14 @@ export type ResetPasswordProps = AuthProps;
 const ResetPassword: React.FC<AuthProps> = ({ setState }): JSX.Element => {
   const dispatch = useDispatch();
   const toast = useAjaxToast();
-  const { loading, error, success } = useSelector((state: AppState) => {
+  const { loading, error, success, email } = useSelector((state: AppState) => {
+    const { email } = state.auth;
     const { resetPassword: loading } = state.loadingIndicators;
     const {
       success: { resetPassword: success },
       errors: { resetPassword: error },
     } = state.ajaxStatuses;
-    return { loading, error, success };
+    return { loading, error, success, email };
   });
   const formik = useFormik({
     initialValues: {
@@ -33,13 +34,21 @@ const ResetPassword: React.FC<AuthProps> = ({ setState }): JSX.Element => {
         .oneOf([yup.ref('password'), undefined], 'Passwords do not match'),
     }),
 
-    onSubmit: ({ password }) => {
-      // dispatch(resetPasswordRequest({ data: { password } }));
+    onSubmit: ({ password, confirm_password }) => {
+      dispatch(
+        resetPasswordRequest({
+          data: { password, confirm_password },
+          email: email as string,
+        }),
+      );
     },
   });
   useEffect(() => {
-    if (success.status) setState('reset-password');
-    if (error.error) toast({ title: 'error', description: error.error });
+    if (success) {
+      toast({ status: 'success', description: success.message });
+      setState('login');
+    }
+    if (error) toast({ status: 'error', description: error.error });
   }, [success, error]);
   return (
     <Box>
@@ -47,34 +56,36 @@ const ResetPassword: React.FC<AuthProps> = ({ setState }): JSX.Element => {
         <Text
           as="h2"
           mb={3}
-          className="capitalize color-blue-medium font-md font-weight-600">
+          className="capitalize color-blue-medium font-lg font-weight-600">
           Set new password
         </Text>
       </Flex>
-      <Flex direction="column" align="center" mb={5}>
-        <form onSubmit={formik.handleSubmit}>
-          <Box mb={5}>
-            <FormInput
-              {...formik.getFieldProps('password')}
-              placeholder="password"
-              label="Password"
-              isRequired
-              labelClassName="color-blue-medium"
-            />
-            <FormInput
-              {...formik.getFieldProps('confirm_password')}
-              placeholder="confirm password"
-              label="Confirm Password"
-              isRequired
-              labelClassName="color-blue-medium"
-            />
-          </Box>
-          <SubmitButton
-            loading={loading}
-            disabled={!(formik.isValid && formik.dirty)}
-            action={formik.handleSubmit}>
-            ResetPassword
-          </SubmitButton>
+      <Flex direction="column" align="center" mb={5} px={10} flex={1}>
+        <form onSubmit={formik.handleSubmit} style={{ flex: 1, height: '80%' }}>
+          <Flex direction="column" justify="space-between" flex={1} height="100%">
+            <Box mb={5}>
+              <FormInput
+                {...formik.getFieldProps('password')}
+                placeholder="password"
+                label="Password"
+                isRequired
+                labelClassName="color-blue-medium"
+              />
+              <FormInput
+                {...formik.getFieldProps('confirm_password')}
+                placeholder="confirm password"
+                label="Confirm Password"
+                isRequired
+                labelClassName="color-blue-medium"
+              />
+            </Box>
+            <SubmitButton
+              loading={loading}
+              disabled={!(formik.isValid && formik.dirty)}
+              action={formik.handleSubmit}>
+              ResetPassword
+            </SubmitButton>
+          </Flex>
         </form>
       </Flex>
     </Box>

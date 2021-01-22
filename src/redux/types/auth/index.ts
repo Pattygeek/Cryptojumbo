@@ -12,6 +12,7 @@ export interface UserProps {
 export interface LoginRequestPayload {
   email: string;
   password: string;
+  project: string;
 }
 
 export interface LoginSuccessPayload extends AjaxSuccessPayload {
@@ -29,17 +30,15 @@ export interface SignUpSuccessPayload {
 export interface ForgotPasswordRequestPayload {
   data: {
     email: string;
+    project: 'CJ';
   };
 }
 
 export type ForgotPasswordSuccessPayload = AjaxSuccessPayload;
 
 export interface ResetPasswordRequestPayload {
-  data: {
-    uid?: string;
-    new_password1: string;
-    new_password2: string;
-  };
+  data: { password: string; confirm_password: string };
+  email: string;
 }
 
 export type ResetPasswordSuccessPayload = AjaxSuccessPayload;
@@ -64,19 +63,33 @@ export interface ConfirmResetPasswordRequestPayload extends Token {
 
 export type ConfirmResetPasswordSuccessPayload = AjaxSuccessPayload;
 
-export interface VerifyOtpRequestPayload extends Token {
+export interface VerifyOtpRequestPayload {
   otp: string;
+  email: string;
 }
 
 export type VerifyOtpSuccessPayload = AjaxSuccessPayload;
 
-export interface Get2FARequestPayload extends Token {
+export interface GetOtpRequestPayload {
   email: string;
 }
+
+export type GetOtpSuccessPayload = AjaxSuccessPayload & {
+  email: string;
+};
 
 export interface SaveTokenSuccessPayload {
   token: string;
 }
+
+export interface ActivateAccountRequestPayload extends Token {
+  uidb64: string;
+}
+
+export type ActivateAccountSuccessPayload = AjaxSuccessPayload;
+
+export type LogoutRequestPayload = Token;
+export type LogoutSuccessPayload = AjaxSuccessPayload;
 
 // Actions
 export interface LoginRequestProp extends Type {
@@ -135,11 +148,34 @@ export interface VerifyOtpSuccessProp extends Type {
   payload: VerifyOtpSuccessPayload;
 }
 
+export interface GetOtpRequestProp extends Type {
+  payload: GetOtpRequestPayload;
+}
+
+export interface GetOtpSuccessProp extends Type {
+  payload: GetOtpSuccessPayload;
+}
+
+export interface ActivateAccountRequestProp extends Type {
+  payload: ActivateAccountRequestPayload;
+}
+
+export interface ActivateAccountSuccessProp extends Type {
+  payload: ActivateAccountSuccessPayload;
+}
+
 export interface SaveTokenSuccessProps extends Type {
   payload: SaveTokenSuccessPayload;
 }
 
 export type Logout = Type;
+export interface LogoutRequestProp extends Type {
+  payload: LogoutRequestPayload;
+}
+
+export interface LogoutSuccessProp extends Type {
+  payload: LogoutSuccessPayload;
+}
 
 export type AuthActions = LoginSuccessProp &
   SignUpSuccessProp &
@@ -147,4 +183,8 @@ export type AuthActions = LoginSuccessProp &
   ConfirmResetPasswordSuccessProp &
   SaveTokenSuccessProps &
   ChangePasswordSuccessProp &
-  ForgotPasswordSuccessProp;
+  ForgotPasswordSuccessProp &
+  ActivateAccountSuccessProp &
+  LogoutSuccessProp &
+  GetOtpSuccessProp &
+  VerifyOtpSuccessProp;

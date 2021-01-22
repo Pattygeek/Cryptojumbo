@@ -40,17 +40,17 @@ import {
   CONFIRM_RESET_PASSWORD_LOADING_INDICATOR,
   VerifyOtpRequestPayload,
   VerifyOtpRequestProp,
-  ACTIVATE_2FA_REQUEST,
-  ACTIVATE_2FA_SUCCESS,
+  VERIFY_OTP_REQUEST,
+  VERIFY_OTP_SUCCESS,
   VerifyOtpSuccessPayload,
   VerifyOtpSuccessProp,
-  ACTIVATE_2FA_FAILURE,
-  ACTIVATE_2FA_LOADING_INDICATOR,
-  Get2FARequestPayload,
-  GET_2FA_REQUEST,
-  GET_2FA_SUCCESS,
-  GET_2FA_FAILURE,
-  GET_2FA_LOADING_INDICATOR,
+  VERIFY_OTP_FAILURE,
+  VERIFY_OTP_LOADING_INDICATOR,
+  GetOtpRequestPayload,
+  GET_OTP_REQUEST,
+  GET_OTP_SUCCESS,
+  GET_OTP_FAILURE,
+  GET_OTP_LOADING_INDICATOR,
   ChangePasswordRequestPayload,
   ChangePasswordRequestProp,
   CHANGE_PASSWORD_REQUEST,
@@ -67,6 +67,26 @@ import {
   SaveTokenSuccessPayload,
   SaveTokenSuccessProps,
   SAVE_TOKEN_REQUEST,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
+  LOGOUT_LOADING_INDICATOR,
+  Type,
+  LogoutSuccessPayload,
+  LogoutSuccessProp,
+  LogoutRequestPayload,
+  LogoutRequestProp,
+  ActivateAccountRequestPayload,
+  ActivateAccountRequestProp,
+  ACTIVATE_ACCOUNT_REQUEST,
+  ActivateAccountSuccessPayload,
+  ActivateAccountSuccessProp,
+  ACTIVATE_ACCOUNT_SUCCESS,
+  ACTIVATE_ACCOUNT_FAILURE,
+  ACTIVATE_ACCOUNT_LOADING_INDICATOR,
+  GetOtpRequestProp,
+  GetOtpSuccessPayload,
+  GetOtpSuccessProp,
 } from '../../types';
 
 // Login actions
@@ -239,7 +259,7 @@ export const verifyOtpRequest = (
   prop: VerifyOtpRequestPayload,
 ): VerifyOtpRequestProp => {
   return {
-    type: ACTIVATE_2FA_REQUEST,
+    type: VERIFY_OTP_REQUEST,
     payload: prop,
   };
 };
@@ -248,14 +268,14 @@ export const verifyOtpSuccess = (
   prop: VerifyOtpSuccessPayload,
 ): VerifyOtpSuccessProp => {
   return {
-    type: ACTIVATE_2FA_SUCCESS,
+    type: VERIFY_OTP_SUCCESS,
     payload: prop,
   };
 };
 
 export const verifyOtpFailure = (prop?: AjaxErrorPayload): AjaxErrorProp => {
   return {
-    type: ACTIVATE_2FA_FAILURE,
+    type: VERIFY_OTP_FAILURE,
     payload: prop,
   };
 };
@@ -264,7 +284,35 @@ export const verifyOtpLoadingIndicator = (
   loading: boolean,
 ): LoadingIndicatorProp => {
   return {
-    type: ACTIVATE_2FA_LOADING_INDICATOR,
+    type: VERIFY_OTP_LOADING_INDICATOR,
+    payload: { loading },
+  };
+};
+
+export const getOtpRequest = (prop: GetOtpRequestPayload): GetOtpRequestProp => {
+  return {
+    type: GET_OTP_REQUEST,
+    payload: prop,
+  };
+};
+
+export const getOtpSuccess = (prop: GetOtpSuccessPayload): GetOtpSuccessProp => {
+  return {
+    type: GET_OTP_SUCCESS,
+    payload: prop,
+  };
+};
+
+export const getOtpFailure = (prop?: AjaxErrorPayload): AjaxErrorProp => {
+  return {
+    type: GET_OTP_FAILURE,
+    payload: prop,
+  };
+};
+
+export const getOtpLoadingIndicator = (loading: boolean): LoadingIndicatorProp => {
+  return {
+    type: GET_OTP_LOADING_INDICATOR,
     payload: { loading },
   };
 };
@@ -300,6 +348,68 @@ export const changePasswordLoadingIndicator = (
 ): LoadingIndicatorProp => {
   return {
     type: CHANGE_PASSWORD_LOADING_INDICATOR,
+    payload: { loading },
+  };
+};
+
+export const activateAccountRequest = (
+  prop: ActivateAccountRequestPayload,
+): ActivateAccountRequestProp => {
+  return {
+    type: ACTIVATE_ACCOUNT_REQUEST,
+    payload: prop,
+  };
+};
+
+export const activateAccountSuccess = (
+  prop: ActivateAccountSuccessPayload,
+): ActivateAccountSuccessProp => {
+  return {
+    type: ACTIVATE_ACCOUNT_SUCCESS,
+    payload: prop,
+  };
+};
+
+export const activateAccountFailure = (prop?: AjaxErrorPayload): AjaxErrorProp => {
+  return {
+    type: ACTIVATE_ACCOUNT_FAILURE,
+    payload: prop,
+  };
+};
+
+export const activateAccountLoadingIndicator = (
+  loading: boolean,
+): LoadingIndicatorProp => {
+  return {
+    type: ACTIVATE_ACCOUNT_LOADING_INDICATOR,
+    payload: { loading },
+  };
+};
+
+export const logoutRequest = (prop: LogoutRequestPayload): LogoutRequestProp => {
+  return {
+    type: LOGOUT_REQUEST,
+    payload: prop,
+  };
+};
+
+export const logoutSuccess = (prop: LogoutSuccessPayload): LogoutSuccessProp => {
+  return {
+    type: LOGOUT_SUCCESS,
+    payload: prop,
+  };
+};
+
+export const logoutFailure = (prop?: AjaxErrorPayload): AjaxErrorProp => {
+  return {
+    type: LOGOUT_FAILURE,
+    payload: prop,
+  };
+};
+
+export const logoutLoadingIndicator = (loading: boolean): LoadingIndicatorProp => {
+  return {
+    type: LOGOUT_LOADING_INDICATOR,
     payload: { loading },
   };
 };
