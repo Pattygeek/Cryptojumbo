@@ -11,6 +11,7 @@ import { ajaxStatuses, AjaxStatusesStore } from './ajaxStatuses';
 import { ProfileStore, profileReducer as profile } from './profile';
 import { TransactionStore, transactionReducer as transaction } from './transactions';
 import { WalletStore, walletReducer as wallet } from './wallet';
+import { otherReducer as others, OtherStore } from './others';
 
 const authPersistConfig = {
   key: 'auth',
@@ -25,6 +26,7 @@ declare type AppState = {
   profile: ProfileStore;
   transaction: TransactionStore;
   wallet: WalletStore;
+  others: OtherStore;
 };
 
 const allReducers = combineReducers<AppState>({
@@ -34,6 +36,7 @@ const allReducers = combineReducers<AppState>({
   profile,
   transaction,
   wallet,
+  others,
 });
 
 export default allReducers;
