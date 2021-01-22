@@ -1,0 +1,14 @@
+@import 'variables';
+
+body {
+  background: $app-background !important;
+}
+
+* {
+  font-family: $font-family;
+  box-sizing: border-box;
+}
+
+input:focus {
+  border-color: $primary;
+}
