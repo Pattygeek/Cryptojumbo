@@ -1,5 +1,9 @@
 export { default as NavigationTop } from './Navigation';
 export { default as PrivateRoute } from './PrivateRoute';
-export { default as Footer } from './Footer';
+export * from './Footer';
 export * from './AvailableCoins';
 export * from './Form';
+export * from './Alert';
+export * from './TransactionStatus';
+export * from './Spinners';
+export * from './Accordion';
