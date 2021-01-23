@@ -143,13 +143,13 @@ const Overview: React.FC = (): JSX.Element => {
                 <TransactionCard key={index} {...asset} icon={icons[asset.status]} />
               ))
             ) : (
-                <Center px="15px" size="100px">
-                  <SectionSpinnerWithText
-                    spinning={loading}
-                    text="Fetching Transactions..."
-                  />
-                </Center>
-              )}
+              <Center px="15px" size="100px">
+                <SectionSpinnerWithText
+                  spinning={loading}
+                  text="Fetching Transactions..."
+                />
+              </Center>
+            )}
             <Center px="15px">
               {!loading && (
                 <Box
