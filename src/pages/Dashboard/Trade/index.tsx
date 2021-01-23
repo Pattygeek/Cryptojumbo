@@ -14,7 +14,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import bitcoin from '../../../assets/bitcoin.png';
-import eth from '../../../assets/etherum.png';
+import eth from '../../../assets/ethereum.png';
 import usdt from '../../../assets/udth.png';
 import { SubmitButton } from '../components';
 import Buy from './Buy';
@@ -123,11 +123,10 @@ const Trade: React.FC = (): JSX.Element => {
                     objectFit="cover"
                   />
                   <Text
-                    className={`font-md font-weight-500 ${
-                      coins[el].symbol === coin.symbol
+                    className={`font-md font-weight-500 ${coins[el].symbol === coin.symbol
                         ? 'color-dark'
                         : 'color-gray-text'
-                    } `}>
+                      } `}>
                     {coins[el].symbol}
                   </Text>
                 </Box>

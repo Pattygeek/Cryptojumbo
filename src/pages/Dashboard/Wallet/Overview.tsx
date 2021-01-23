@@ -15,7 +15,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { AppState, CurrencySymbols } from '../../../redux';
 import btc from '../../../assets/bitcoin.png';
-import etherum from '../../../assets/etherum.png';
+import ethereum from '../../../assets/ethereum.png';
 import usdt from '../../../assets/udth.png';
 import naira from '../../../assets/naira.png';
 import { swapOptions } from '../../../utils';
@@ -78,8 +78,8 @@ const Assets: React.FC = (): JSX.Element => {
           spacing={2}>
           <Asset
             {...cryptos[CurrencySymbols.ETH]}
-            logo={etherum}
-            currencyName="Etherum"
+            logo={ethereum}
+            currencyName="Ethereum"
             action1="send"
             action2="receive"
             maxWidth="48%"

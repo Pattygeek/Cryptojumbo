@@ -115,7 +115,7 @@ const NavigationBar: React.FC = () => {
             FAQ
           </Box>
           <a
-            href="https://blog.cryptojumbo.org"
+            href="https://blog.cryptojumbo.io"
             target="_blank"
             rel="noreferrer noopener"
             className="capitalize color-gray-text font-sm font-weight-500 padding-sm navlink">

@@ -22,7 +22,7 @@ export const FAQs: React.FC = () => {
           answer="Bitcoin is a cryptocurrency invented in 2008 by an unknown person or group of people using the name Satoshi Nakamoto and started in 2009 when its implementation was released as open-source software."
         />
         <FAQ
-          question="What is Etherum?"
+          question="What is Ethereum?"
           answer="Ethereum is a decentralized open source blockchain featuring smart contract functionality. It is the second-largest cryptocurrency by market capitalization, behind Bitcoin"
         />
       </Stack>

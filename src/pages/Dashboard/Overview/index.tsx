@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppState, CurrencySymbols, allTransactionRequest } from '../../../redux';
 import btc from '../../../assets/bitcoin.png';
-import etherum from '../../../assets/etherum.png';
+import ethereum from '../../../assets/ethereum.png';
 import usdt from '../../../assets/udth.png';
 import naira from '../../../assets/naira.png';
 
@@ -44,14 +44,14 @@ const Overview: React.FC = (): JSX.Element => {
 
   const tradableCoins: TradeCoinProps[] = [
     { logo: btc, symbol: 'BTC' },
-    { logo: etherum, symbol: 'ETH' },
+    { logo: ethereum, symbol: 'ETH' },
     { logo: usdt, symbol: 'USDT' },
   ];
 
   const assets: any = {
     ETH: {
-      currencyName: 'Etherum',
-      logo: etherum,
+      currencyName: 'Ethereum',
+      logo: ethereum,
       action1: 'send',
       action2: 'receive',
     },
@@ -143,13 +143,13 @@ const Overview: React.FC = (): JSX.Element => {
                 <TransactionCard key={index} {...asset} icon={icons[asset.status]} />
               ))
             ) : (
-              <Center px="15px" size="100px">
-                <SectionSpinnerWithText
-                  spinning={loading}
-                  text="Fetching Transactions..."
-                />
-              </Center>
-            )}
+                <Center px="15px" size="100px">
+                  <SectionSpinnerWithText
+                    spinning={loading}
+                    text="Fetching Transactions..."
+                  />
+                </Center>
+              )}
             <Center px="15px">
               {!loading && (
                 <Box
