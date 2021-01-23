@@ -36,7 +36,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { v4 as uuidv4 } from 'uuid';
 import bitcoin from '../../../assets/bitcoin.png';
-import eth from '../../../assets/etherum.png';
+import eth from '../../../assets/ethereum.png';
 import usdt from '../../../assets/udth.png';
 import naira from '../../../assets/naira.png';
 import swap from '../../../assets/swap.png';
@@ -65,7 +65,7 @@ declare interface LocationState {
 const coinProps: any = {
   ETH: {
     coinLogo: eth,
-    coin: 'Etherum',
+    coin: 'Ethereum',
   },
   BTC: {
     coinLogo: bitcoin,

@@ -2,14 +2,14 @@ import React from 'react';
 import { Flex, Box, Text, Image, Stack } from '@chakra-ui/react';
 import { formatAmount } from '../../utils';
 import bitcoin from '../../assets/bitcoin.png';
-import etherum from '../../assets/etherum.png';
+import ethereum from '../../assets/ethereum.png';
 import usdt from '../../assets/udth.png';
 import { useSelector } from 'react-redux';
 import { AppState } from '../../redux';
 import { Link } from 'react-router-dom';
 
 const coinLogo: any = {
-  ETH: etherum,
+  ETH: ethereum,
   BTC: bitcoin,
   USDT: usdt,
 };

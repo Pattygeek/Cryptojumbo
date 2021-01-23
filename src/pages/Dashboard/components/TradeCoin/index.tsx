@@ -15,7 +15,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import btc from '../../../../assets/bitcoin.png';
-import etherum from '../../../../assets/etherum.png';
+import ethereum from '../../../../assets/ethereum.png';
 import usdt from '../../../../assets/udth.png';
 import { swapOptions } from '../../../../utils';
 import { swapCryptoRequest } from '../../../../redux';
@@ -83,7 +83,7 @@ export const TradeCoin: React.FC<TradeCoinProps> = ({
 };
 
 export const coinLogos: any = {
-  ETH: etherum,
+  ETH: ethereum,
   BTC: btc,
   USDT: usdt,
 };
