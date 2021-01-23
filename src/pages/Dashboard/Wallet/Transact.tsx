@@ -292,7 +292,6 @@ const WithdrawNaira: React.FC<AjaxStatusState> = ({ setStatus }): JSX.Element =>
             amount,
             account_bank: bank,
             account_number: accountNo,
-            project: 'CJ',
           },
         }),
       );
@@ -542,21 +541,21 @@ const SendCrypto: React.FC<SendCryptoProps> = ({
         dispatch(
           sendBTCRequest({
             token,
-            data: { amounts: [amount], to_addresses: [address], project: 'CJ' },
+            data: { amounts: [amount], to_addresses: [address] },
           }),
         );
       } else if (coinSymbol === CurrencySymbols.ETH) {
         dispatch(
           sendETHRequest({
             token,
-            data: { amount, to: address, project: 'CJ' },
+            data: { amount, to: address },
           }),
         );
       } else if (coinSymbol === CurrencySymbols.USDT) {
         dispatch(
           sendUSDTRequest({
             token,
-            data: { amount, to: address, project: 'CJ' },
+            data: { amount, to: address },
           }),
         );
       }

@@ -28,7 +28,6 @@ export interface BuyCryptoRequestPayload extends Token {
     receive_pay_method?: ReceivePaymentMethods;
     transaction_pin?: number;
     email?: string;
-    project: 'CJ';
   };
 }
 
@@ -47,7 +46,6 @@ export interface SellCryptoRequestPayload extends Token {
     split_payment: boolean;
     split_amounts: string[];
     email?: string;
-    project: 'CJ';
   };
 }
 

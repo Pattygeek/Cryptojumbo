@@ -201,7 +201,6 @@ const MakePayment: React.FC<MakePaymentProps> = ({
           receive_pay_method: ReceivePaymentMethods['In app wallet'],
           address_to_receive: address as string,
           email: user?.email,
-          project: 'CJ',
         },
       }),
     );

@@ -34,7 +34,7 @@ const SignUp: React.FC<AuthProps> = ({ setState, state }): JSX.Element => {
     }),
 
     onSubmit: ({ email, password }) => {
-      dispatch(signUpRequest({ email, password, project: 'CJ' }));
+      dispatch(signUpRequest({ email, password }));
     },
   });
   useEffect(() => {

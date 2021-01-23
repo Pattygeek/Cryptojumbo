@@ -12,7 +12,6 @@ export interface UserProps {
 export interface LoginRequestPayload {
   email: string;
   password: string;
-  project: string;
 }
 
 export interface LoginSuccessPayload extends AjaxSuccessPayload {
@@ -30,7 +29,6 @@ export interface SignUpSuccessPayload {
 export interface ForgotPasswordRequestPayload {
   data: {
     email: string;
-    project: 'CJ';
   };
 }
 

@@ -31,7 +31,7 @@ const Login: React.FC<AuthProps> = ({ setState }): JSX.Element => {
     }),
 
     onSubmit: ({ email, password }) => {
-      dispatch(loginRequest({ email, password, project: 'CJ' }));
+      dispatch(loginRequest({ email, password }));
     },
   });
   useEffect(() => {

@@ -215,7 +215,6 @@ const DebitFrom: React.FC<DebitFromProps> = ({
           split_payment: splitPayment,
           receive_pay_method: creditWallet as ReceivePaymentMethods,
           make_pay_method: sellFrom as MakePaymentMethods,
-          project: 'CJ',
         },
       }),
     );

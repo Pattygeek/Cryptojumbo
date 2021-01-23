@@ -31,7 +31,6 @@ export interface SendBTCRequestPayload extends Token {
   data: {
     amounts: string[];
     to_addresses: string[];
-    project: 'CJ';
   };
 }
 
@@ -41,7 +40,6 @@ export interface SendETHRequestPayload extends Token {
   data: {
     to: string;
     amount: string;
-    project: 'CJ';
   };
 }
 
@@ -52,7 +50,6 @@ export interface WithdrawNairaRequestPayload extends Token {
     account_bank: string;
     account_number: string;
     amount: string;
-    project: 'CJ';
   };
 }
 
