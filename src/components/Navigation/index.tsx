@@ -52,7 +52,11 @@ const NavigationBar: React.FC = () => {
         </Box>
         <Flex align="center">
           <Box as="img" src={logo} className="logo" mr="10px" />
-          <Text className="font-weight-600 font-md color-dark">CryptoJumbo</Text>
+          <Text
+            fontWeight={{ base: '500', md: '600' }}
+            className="font-md color-dark">
+            CryptoJumbo
+          </Text>
         </Flex>
       </Stack>
       <Flex

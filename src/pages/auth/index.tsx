@@ -29,7 +29,7 @@ const Auth: React.FC = (): JSX.Element => {
         className="header"
         p={{ base: '0px', sm: '15px 20px', md: '20px 40px' }}>
         <NavigationTop />
-        <Box px={{ base: 5, sm: 15, md: 30, lg: '70px' }}>
+        <Box px={{ base: 10, sm: 15, md: 30, lg: '70px' }}>
           <Flex direction="column" mt={'50px'}>
             <Stack direction={{ base: 'column', md: 'row' }} spacing={'80px'}>
               <Flex

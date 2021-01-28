@@ -53,7 +53,7 @@ const Login: React.FC<AuthProps> = ({ setState }): JSX.Element => {
         </Text>
         <Text className="capitalize color-gray-text font-md">Login</Text>
       </Flex>
-      <Flex direction="column" align="center" px={10}>
+      <Flex direction="column" align="center" px={{ base: '10px', md: 10 }}>
         <form onSubmit={formik.handleSubmit}>
           <Box mb={10}>
             <FormInput

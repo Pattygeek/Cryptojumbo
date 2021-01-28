@@ -61,7 +61,7 @@ const SignUp: React.FC<AuthProps> = ({ setState, state }): JSX.Element => {
             </Text>
             <Text className="capitalize color-gray-text font-md">Signup</Text>
           </Flex>
-          <Flex direction="column" align="center">
+          <Flex direction="column" align="center" px={{ base: '10px', md: 10 }}>
             <form onSubmit={formik.handleSubmit}>
               <FormInput
                 {...formik.getFieldProps('email')}

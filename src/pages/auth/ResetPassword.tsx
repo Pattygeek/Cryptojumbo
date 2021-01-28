@@ -60,7 +60,12 @@ const ResetPassword: React.FC<AuthProps> = ({ setState }): JSX.Element => {
           Set new password
         </Text>
       </Flex>
-      <Flex direction="column" align="center" mb={5} px={10} flex={1}>
+      <Flex
+        direction="column"
+        align="center"
+        mb={5}
+        px={{ base: '10px', md: 10 }}
+        flex={1}>
         <form onSubmit={formik.handleSubmit} style={{ flex: 1, height: '80%' }}>
           <Flex direction="column" justify="space-between" flex={1} height="100%">
             <Box mb={5}>

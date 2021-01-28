@@ -84,19 +84,19 @@
   }
 }
 
-.offers {
-  @extend .font-sm;
-  img {
-    width: 30px;
-    height: auto;
-    @include media-breakpoint-up(sm) {
-      width: 75px;
-    }
-  }
-  @include media-breakpoint-up(sm) {
-    font: $md;
-  }
-}
+// .offers {
+//   @extend .font-sm;
+//   img {
+//     width: 30px;
+//     height: auto;
+//     @include media-breakpoint-up(sm) {
+//       width: 75px;
+//     }
+//   }
+//   @include media-breakpoint-up(sm) {
+//     font: $md;
+//   }
+// }
 
 .coin-logo {
   width: 25px;
@@ -196,15 +196,15 @@
 @mixin pointer($color) {
   content: '';
   position: absolute;
-  bottom: 20%;
-  right: -11%;
-  border-width: 15px;
+  bottom: 15%;
+  right: -13%;
+  border-width: 25px;
   border-style: solid;
   border-color: transparent transparent transparent $color;
   z-index: 2;
   @include media-breakpoint-down(xs) {
-    bottom: -22%;
-    right: 80%;
+    bottom: -32%;
+    right: 65%;
     border-color: $color transparent transparent transparent;
   }
   @include media-breakpoint-up(xlg) {
@@ -302,7 +302,7 @@
 }
 
 .mobile-frame {
-  transform: scale(1.5) translateY(-20px);
+  transform: scaleX(1.5) scaleY(1.5) translateY(-10px);
   @include media-breakpoint-up(md) {
     transform: scale(2.2) translateY(-20px);
   }
@@ -354,6 +354,23 @@ nav {
           transform: translateX(0%);
         }
       }
+    }
+  }
+}
+
+.footer-link {
+  @include media-breakpoint-down(sm) {
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
     }
   }
 }

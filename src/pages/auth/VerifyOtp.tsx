@@ -36,7 +36,7 @@ const VerifyOtp: React.FC<AuthProps> = ({ setState }): JSX.Element => {
   }, [success, error]);
   return (
     <Box px={10}>
-      <Flex direction="column" align="center" mb={5}>
+      <Flex direction="column" align="center" mb={5} px={{ base: '10px', md: 10 }}>
         <Text
           as="h2"
           mb={3}

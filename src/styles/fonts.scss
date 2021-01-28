@@ -76,17 +76,18 @@ $xlg: 1.875em;
   .font-xs {
     font-size: 0.6em;
   }
-  .font-md {
+  .font-md,
+  .font-slg {
     font-size: 1em;
   }
   .font-lg {
-    font-size: 1.2em;
+    font-size: 1.15em;
   }
   .font-xlg {
     font-size: 1.5em;
     line-height: 30px;
   }
-  .font-slg {
-    font-size: 1.1em;
-  }
+  // .font-slg {
+  //   font-size: 1.1em;
+  // }
 }

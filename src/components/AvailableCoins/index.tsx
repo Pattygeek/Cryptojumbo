@@ -25,7 +25,7 @@ export const AvailableCoinsSmallBox: React.FC = (): JSX.Element => {
     <Stack
       direction="row"
       py={3}
-      px={6}
+      px={{ base: 3, md: 6 }}
       spacing={3}
       my={5}
       width={{ base: '100%', sm: '450px' }}

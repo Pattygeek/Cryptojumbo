@@ -52,7 +52,7 @@ const ForgotPassword: React.FC<AuthProps> = ({ setState }): JSX.Element => {
         align="center"
         justify="space-between"
         mb={5}
-        px={10}
+        px={{ base: '10px', md: 10 }}
         flex={1}
         height="80%">
         <Box>

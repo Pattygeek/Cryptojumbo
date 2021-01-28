@@ -36,7 +36,7 @@ const Home: React.FC = (): JSX.Element => {
         p={{ base: '0px', sm: '15px 20px', md: '20px 40px' }}
         mb={{ base: '70%', sm: '40%', md: '20%' }}>
         <NavigationTop />
-        <Box px={{ base: 5, sm: 15, md: 30, lg: '80px' }}>
+        <Box px={{ base: 10, sm: 15, md: 30, lg: '80px' }}>
           <Box mb={5}>
             <Flex direction="column" mt={40}>
               <Flex direction={{ base: 'column', md: 'row' }}>
@@ -66,62 +66,76 @@ const Home: React.FC = (): JSX.Element => {
             borderRadius={15}
             boxShadow="0px 5px 20px rgba(20, 102, 204, 0.15)"
             className="bg-white offers"
-            py={{ base: '40px', md: '60px' }}
+            py={{ base: '20px', md: '60px' }}
             px={{ base: 5, md: 20 }}
-            transform="translateY(50%)">
+            transform={{ base: 'translateY(80%)', md: 'translateY(50%)' }}>
             <Text
               textAlign="center"
               mb={'30px'}
-              className="color-gray-heading font-lg font-weight-500">
+              fontSize={{ base: '13px', md: '24px' }}
+              lineHeight="24px"
+              className="color-gray-heading font-weight-500">
               CryptoJumbo offers
             </Text>
             <Flex spacing={5} direction={{ base: 'column', md: 'row' }}>
               <Flex flex={1} mb={5}>
                 <Stack
                   flex={1}
-                  spacing={{ base: 5, md: 10 }}
+                  spacing={{ base: '10px', md: 10 }}
                   direction="column"
                   align="center"
                   justify="center">
-                  <Image src={secure} mb={2} />
-                  <Box display="inline-block" lineHeight="24px">
+                  <Image
+                    src={secure}
+                    width={{ base: '37px', md: '78px' }}
+                    height="auto"
+                  />
+                  <Box
+                    display="inline-block"
+                    fontSize={{ base: '9px', md: '18px' }}
+                    lineHeight={{ base: '12px', md: '24px' }}>
                     <Text
                       display="inline"
-                      className="color-gray-text font-md font-weight-400"
+                      className="color-gray-text font-weight-400"
                       textAlign="center"
                       mr={1}>
                       Easy &
                     </Text>
-                    <Text
-                      display="inline"
-                      className="color-primary font-md font-weight-600">
+                    <Text display="inline" className="color-primary font-weight-600">
                       Secured
                     </Text>
                     <Text
                       textAlign="center"
-                      className="color-primary font-md font-weight-600">
+                      className="color-primary font-weight-600">
                       transactions
                     </Text>
                   </Box>
                 </Stack>
                 <Stack
                   flex={1}
-                  spacing={{ base: 5, md: 10 }}
+                  spacing={{ base: '10px', md: 10 }}
                   direction="column"
                   align="center"
                   justify="center">
-                  <Image src={payout} mb={2} />
-                  <Box display="inline-block" lineHeight="24px" className="font-md">
+                  <Image
+                    src={payout}
+                    width={{ base: '37px', md: '78px' }}
+                    height="auto"
+                  />
+                  <Box
+                    display="inline-block"
+                    fontSize={{ base: '9px', md: '18px' }}
+                    lineHeight={{ base: '12px', md: '24px' }}>
                     <Text
                       display="inline"
-                      className="color-primary font-md font-weight-600"
+                      className="color-primary font-weight-600"
                       textAlign="center"
                       mr={2}>
                       Faster Payouts
                     </Text>
                     <Text
                       display="inline"
-                      className="color-gray-text font-md font-weight-400"
+                      className="color-gray-text font-weight-400"
                       textAlign="center">
                       on
                     </Text>
@@ -136,43 +150,56 @@ const Home: React.FC = (): JSX.Element => {
               <Flex flex={1} mb={5}>
                 <Stack
                   flex={1}
-                  spacing={{ base: 5, md: 10 }}
+                  spacing={{ base: '10px', md: 10 }}
                   direction="column"
                   align="center"
                   justify="center">
-                  <Image src={arrowDown} mb={2} />
-                  <Text
-                    className="color-gray-text font-md font-weight-400"
-                    textAlign="center">
-                    up-to-date &{' '}
-                    <Text className="color-primary font-weight-600">
-                      affordable rate
+                  <Image
+                    src={arrowDown}
+                    width={{ base: '37px', md: '78px' }}
+                    height="auto"
+                  />
+                  <Box
+                    fontSize={{ base: '9px', md: '18px' }}
+                    lineHeight={{ base: '12px', md: '24px' }}>
+                    <Text
+                      className="color-gray-text font-weight-400"
+                      textAlign="center">
+                      up-to-date &{' '}
+                      <Text className="color-primary font-weight-600">
+                        affordable rate
+                      </Text>
                     </Text>
-                  </Text>
+                  </Box>
                 </Stack>
                 <Stack
                   flex={1}
-                  spacing={{ base: 5, md: 10 }}
+                  spacing={{ base: '10px', md: 10 }}
                   direction="column"
                   align="center"
                   justify="center">
-                  <Image src={wallet} mb={2} />
-                  <Box display="inline-block" lineHeight="24px">
+                  <Image
+                    src={wallet}
+                    width={{ base: '37px', md: '78px' }}
+                    height="auto"
+                  />
+                  <Box
+                    display="inline-block"
+                    fontSize={{ base: '9px', md: '18px' }}
+                    lineHeight={{ base: '12px', md: '24px' }}>
                     <Text
                       display="inline"
-                      className="color-gray-text font-md font-weight-400"
+                      className="color-gray-text font-weight-400"
                       textAlign="center"
                       mr={1}>
                       We Provide
                     </Text>
-                    <Text
-                      display="inline"
-                      className="color-primary font-md font-weight-600">
+                    <Text display="inline" className="color-primary font-weight-600">
                       Multiple
                     </Text>
                     <Text
                       textAlign="center"
-                      className="color-primary font-md font-weight-600">
+                      className="color-primary font-weight-600">
                       Crypto-Wallet
                     </Text>
                   </Box>
@@ -194,71 +221,94 @@ const Home: React.FC = (): JSX.Element => {
 
 const HowItWorks: React.FC = (): JSX.Element => {
   return (
-    <SectionWrapper>
+    <SectionWrapper px={{ base: 10, md: 20 }}>
       <Center flexDirection="column" mb={5}>
-        <Box maxWidth="550px">
+        <Box maxWidth="550px" px="30px">
           <Text
             as="h2"
-            className="uppercase color-gray-heading font-slg font-weight-500"
+            fontSize={{ base: '13px', md: '24px' }}
+            lineHeight="24px"
+            className="uppercase color-gray-heading font-weight-500"
             textAlign="center"
-            mb={5}>
+            mb={'15px'}>
             HOW IT WORKS
           </Text>
           <Text
             as="h3"
-            className="font-weight-400 font-md color-gray-text"
+            fontSize={{ base: '10px', md: '18px' }}
+            lineHeight={{ base: '12px', md: '24px' }}
+            className="font-weight-400 color-gray-text"
             textAlign="center">
             Buying, selling and swapping cryptocurrency can be simple, easy and
             secure with Crypto Jumbo
           </Text>
         </Box>
       </Center>
-      <Stack spacing={0} direction={{ base: 'column', sm: 'row' }}>
+      <Stack spacing={'-1px'} direction={{ base: 'column', sm: 'row' }}>
         <Stack
           direction={{ base: 'row', sm: 'column' }}
+          justify={{ base: 'flex-start', sm: 'space-between' }}
+          align={{ base: 'center', md: 'flex-start' }}
           className="how-it-works-step"
           spacing={5}
-          flex={0.3}
-          p={7}
+          flex={0.35}
+          p={{ base: '40px 60px', sm: 7 }}
           borderTopLeftRadius={5}
-          borderBottomLeftRadius={5}>
-          <Image src={asteriks} width="60px" height="auto" alt="Security" />
-          <Text className="font-md font-weight-400 color-white" lineHeight="24px">
+          borderTopRightRadius={{ base: 5, md: 0 }}
+          borderBottomLeftRadius={{ base: 0, md: 5 }}>
+          <Image src={asteriks} width="54px" height="auto" alt="Security" />
+          <Text
+            fontSize={{ base: '11px', md: '18px' }}
+            lineHeight={{ base: '17.5px', md: '24px' }}
+            className="font-weight-400 color-white">
             Login or sign up to your trading dashboard
           </Text>
         </Stack>
         <Stack
           direction={{ base: 'row', sm: 'column' }}
+          align={{ base: 'center', md: 'flex-start' }}
           className="how-it-works-step"
           spacing={5}
-          flex={0.3}
-          p={7}>
-          <Image src={currencies} width="60px" height="auto" alt="Currencies" />
-          <Text className="font-md font-weight-400 color-white" lineHeight="24px">
+          flex={0.35}
+          p={{ base: '40px 60px', sm: 7 }}>
+          <Image src={currencies} width="54px" height="auto" alt="Currencies" />
+          <Text
+            fontSize={{ base: '11px', md: '18px' }}
+            lineHeight={{ base: '17.5px', md: '24px' }}
+            className="font-weight-400 color-white">
             Select digital currency to Buy, Sell or Swap
           </Text>
         </Stack>
         <Stack
           direction={{ base: 'row', sm: 'column' }}
+          align={{ base: 'center', md: 'flex-start' }}
           className="how-it-works-step"
           spacing={5}
-          flex={0.3}
-          p={7}>
-          <Image src={cheque} width="60px" height="auto" alt="Cheque" />
-          <Text className="font-md font-weight-400 color-white" lineHeight="24px">
+          flex={0.35}
+          p={{ base: '40px 60px', sm: 7 }}>
+          <Image src={cheque} width="54px" height="auto" alt="Cheque" />
+          <Text
+            fontSize={{ base: '11px', md: '18px' }}
+            lineHeight={{ base: '17.5px', md: '24px' }}
+            className="font-weight-400 color-white">
             Complete trading procedures
           </Text>
         </Stack>
         <Stack
           direction={{ base: 'row', sm: 'column' }}
+          align={{ base: 'center', md: 'flex-start' }}
           className="how-it-works-step"
           spacing={5}
-          flex={0.3}
-          p={7}
-          borderTopRightRadius={5}
-          borderBottomRightRadius={5}>
-          <Image src={money} width="60px" height="auto" alt="Cheque" />
-          <Text className="font-md font-weight-400 color-white" lineHeight="24px">
+          flex={0.35}
+          p={{ base: '40px 60px', sm: 7 }}
+          borderTopRightRadius={{ base: 0, md: 5 }}
+          borderBottomRightRadius={5}
+          borderBottomLeftRadius={{ base: 5, md: 0 }}>
+          <Image src={money} width="54px" height="auto" alt="Cheque" />
+          <Text
+            fontSize={{ base: '11px', md: '18px' }}
+            lineHeight={{ base: '17.5px', md: '24px' }}
+            className="font-weight-400 color-white">
             Recieve payment or crypto-currency
           </Text>
         </Stack>

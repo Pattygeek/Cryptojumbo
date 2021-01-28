@@ -40,7 +40,11 @@ const ActivateAccount: React.FC<
     );
   if (!loading && success)
     return (
-      <Center flexDirection="column" width="100%" height="100vh">
+      <Center
+        flexDirection="column"
+        width="100%"
+        height="100vh"
+        px={{ base: '10px', md: 10 }}>
         <TransactionStatus
           status="success"
           statusTitle="Account successfully verified"
@@ -52,7 +56,11 @@ const ActivateAccount: React.FC<
     );
   if (!loading && error)
     return (
-      <Center flexDirection="column" width="100%" height="100vh">
+      <Center
+        flexDirection="column"
+        width="100%"
+        height="100vh"
+        px={{ base: '10px', md: 10 }}>
         <TransactionStatus
           status="failure"
           statusTitle="Account verification failed"

@@ -7,24 +7,30 @@ import lady from '../../../assets/lady.png';
 export const WhyTrustUs: React.FC = (): JSX.Element => {
   return (
     <SectionWrapper>
-      <Stack direction={{ base: 'column', sm: 'row' }} spacing={5} justify="center">
+      <Stack
+        direction={{ base: 'row', sm: 'row' }}
+        align="flex-start"
+        spacing={5}
+        justify="center">
         <Box
           flex={1}
           maxWidth={{ base: 'auto', sm: '45%' }}
-          pt={10}
+          pt={{ base: 0, md: 10 }}
           lineHeight="24px">
           <Text
             textColor="gray.800"
             mb={3}
             as="h3"
-            className="font-slg font-weight-500"
+            className="font-weight-500"
+            fontSize={{ base: '13px', md: '24px' }}
             lineHeight="24px">
             Why Trust us ?
           </Text>
           <Text
-            mb={5}
-            className="font-md font-weight-normal color-gray-text"
-            lineHeight="24px">
+            mb={'5px'}
+            className="font-weight-400 color-gray-text"
+            fontSize={{ base: '10px', md: '18px' }}
+            lineHeight={{ base: '12px', md: '24px' }}>
             CryptoJumbo is a user friendly crypto platform, aimed at delivering the
             best crypto services. With active customers in over 15 countries in the
             world, including but not limited to, Nigeria, Ghana, South Africa,
@@ -38,7 +44,13 @@ export const WhyTrustUs: React.FC = (): JSX.Element => {
             _hover={{ color: 'brand.100' }}
             display="inline-flex"
             to="/about">
-            <Text mr={2}>Read more about us</Text>
+            <Text
+              fontSize={{ base: '11px', md: '18px' }}
+              className="color-dark font-weight-400"
+              lineHeight="16px"
+              mr={2}>
+              Read more about us
+            </Text>
             <Box
               as={BsArrowRightShort}
               _hover={{ color: 'brand.100' }}
@@ -50,8 +62,9 @@ export const WhyTrustUs: React.FC = (): JSX.Element => {
         <Image
           src={lady}
           alt="why trust us"
-          width={{ base: 'auto', sm: '31%' }}
+          width={{ base: '145px', md: '334px' }}
           height="auto"
+          borderRadius={'10px'}
         />
       </Stack>
     </SectionWrapper>
