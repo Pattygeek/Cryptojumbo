@@ -33,7 +33,7 @@ export const TradeCoin: React.FC<TradeCoinProps> = ({
     <Stack
       align="center"
       flex={1}
-      // maxWidth={{ base: '100%', sm: '160px', md: '270.81px' }}
+      // width={{ base: '100%', sm: '49%' }}
       className="bg-white border-radius-sm"
       spacing={'20px'}
       p={{ base: '15px', sm: '15px 20px' }}
@@ -53,7 +53,7 @@ export const TradeCoin: React.FC<TradeCoinProps> = ({
             lineHeight="20px">
             {symbol}
           </Text>
-          <Text
+          {/* <Text
             className="color-gray-text font-xs font-weight-400"
             lineHeight="14px"
             textOverflow="nowrap">
@@ -64,20 +64,22 @@ export const TradeCoin: React.FC<TradeCoinProps> = ({
             lineHeight="14px"
             textOverflow="nowrap">
             #400 / #401
-          </Text>
+          </Text> */}
         </Box>
       </Flex>
-      <Box
-        as={Link}
-        _hover={{ background: '#F9F1EA' }}
-        borderRadius="5px"
-        p="10px 15px"
-        className="color-primary font-weight-500"
-        to="/dashboard/trade"
-        lineHeight="20px"
-        fontSize="12px">
-        Buy/Sell
-      </Box>
+      <Flex flex={1} direction="column" align="center">
+        <Box
+          as={Link}
+          _hover={{ background: '#F9F1EA' }}
+          borderRadius="5px"
+          p="10px 15px"
+          className="color-primary font-weight-500"
+          to="/dashboard/trade"
+          lineHeight="20px"
+          fontSize="12px">
+          Buy/Sell
+        </Box>
+      </Flex>
     </Stack>
   );
 };
@@ -162,23 +164,25 @@ export const SwapCoin: React.FC = (): JSX.Element => {
           </Box>
         </Flex>
       </Stack>
-      <Box
-        as="button"
-        onClick={() =>
-          push('/dashboard/wallet/transact', {
-            swapProp: { from, to },
-            transactionType: 'swap',
-            coinSymbol: 'swap',
-          })
-        }
-        _hover={{ background: '#F9F1EA' }}
-        borderRadius="5px"
-        p="10px 15px"
-        className="color-primary font-weight-500"
-        lineHeight="20px"
-        fontSize="12px">
-        Swap
-      </Box>
+      <Flex flex={1} direction="column" align="center">
+        <Box
+          as="button"
+          onClick={() =>
+            push('/dashboard/wallet/transact', {
+              swapProp: { from, to },
+              transactionType: 'swap',
+              coinSymbol: 'swap',
+            })
+          }
+          _hover={{ background: '#F9F1EA' }}
+          borderRadius="5px"
+          p="10px 15px"
+          className="color-primary font-weight-500"
+          lineHeight="20px"
+          fontSize="12px">
+          Swap
+        </Box>
+      </Flex>
     </Stack>
   );
 };

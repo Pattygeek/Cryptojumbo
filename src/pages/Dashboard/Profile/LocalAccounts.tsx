@@ -54,7 +54,11 @@ const LocalAccounts: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
-    if (!bankVerification[user?.account_number as string]) {
+    if (
+      user?.account_number &&
+      user?.bank_name &&
+      !bankVerification[user?.account_number as string]
+    ) {
       dispatch(
         verifyBankAccountRequest({
           data: {
@@ -97,14 +101,18 @@ const LocalAccounts: React.FC = () => {
                 {banks.find((el) => el.code === user?.bank_name)?.name}
               </Text>
             )}
-            <Text className="font-sm color-dark font-weight-500">
-              {user?.account_number} -{' '}
-              {bankVerification[user?.account_number as string] ? (
-                bankVerification[user?.account_number as string].account_name
-              ) : (
-                <Spinner size="sm" />
-              )}
-            </Text>
+            {user?.account_number ? (
+              <Text className="font-sm color-dark font-weight-500">
+                {user?.account_number} -{' '}
+                {bankVerification[user?.account_number as string] ? (
+                  bankVerification[user?.account_number as string].account_name
+                ) : !user?.account_number && verifyBankAccountLoading ? (
+                  <Spinner size="sm" />
+                ) : null}
+              </Text>
+            ) : (
+              <Text className="font-sm color-dark font-weight-500">No account</Text>
+            )}
           </Box>
         </Box>
       )}
@@ -207,6 +215,8 @@ const EditAccount: React.FC<Pick<UseDisclosureProps, 'onClose'>> = ({
         description: error.error,
       });
   }, [success, error]);
+  const validateAllFields =
+    formik.dirty && formik.isValid && bankVerification[formik.values.account_number];
   return (
     <Box as="section">
       <Stack direction="row" spacing={4} py={3}>
@@ -270,7 +280,7 @@ const EditAccount: React.FC<Pick<UseDisclosureProps, 'onClose'>> = ({
         <Box flex={0.2}>
           <SubmitButton
             action={formik.handleSubmit}
-            disabled={!(formik.dirty && formik.isValid)}
+            disabled={!validateAllFields}
             loading={loading}
             py={0}
             p="5px 10px">

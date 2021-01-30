@@ -59,6 +59,10 @@ import {
   ACTIVATE_ACCOUNT_FAILURE,
   VERIFY_BANK_ACCOUNT_FAILURE,
   VERIFY_BANK_ACCOUNT_SUCCESS,
+  GET_RATES_SUCCESS,
+  GET_RATES_FAILURE,
+  UPDATE_PROFILE_SETTINGS_FAILURE,
+  UPDATE_PROFILE_SETTINGS_SUCCESS,
 } from '../../types';
 
 export interface AjaxStatusesStore {
@@ -69,12 +73,12 @@ export interface AjaxStatusesStore {
     [key: string]: AjaxSuccessPayload;
   };
 }
-const initialState: AjaxStatusesStore = {
+const initialState = (): AjaxStatusesStore => ({
   errors: {},
   success: {},
-};
+});
 export const ajaxStatuses = (
-  prevState: AjaxStatusesStore = initialState,
+  prevState: AjaxStatusesStore = initialState(),
   { type, payload }: AjaxErrorProp & AjaxSuccessProp,
 ): AjaxStatusesStore => {
   switch (type) {
@@ -135,8 +139,7 @@ export const ajaxStatuses = (
       return { ...prevState };
 
     case LOGOUT_SUCCESS:
-      prevState.success.logout = payload;
-      return { ...prevState };
+      return initialState();
     case LOGOUT_FAILURE:
       prevState.errors.logout = payload;
       return { ...prevState };
@@ -159,6 +162,14 @@ export const ajaxStatuses = (
       prevState.errors.updateProfile = payload;
       return { ...prevState };
 
+    case UPDATE_PROFILE_SETTINGS_SUCCESS:
+      prevState.success.updateProfileSettings = payload;
+      return { ...prevState };
+    case UPDATE_PROFILE_SETTINGS_FAILURE:
+      prevState.errors.updateProfileSettings = payload;
+      return { ...prevState };
+
+    // Transaction Statuses
     case GET_ALL_TRANSACTIONS_SUCCESS:
       prevState.success.getAllTransactions = payload;
       return { ...prevState };
@@ -260,6 +271,12 @@ export const ajaxStatuses = (
       return { ...prevState };
     case VERIFY_BANK_ACCOUNT_FAILURE:
       prevState.errors.verifyBankAccount = payload;
+      return { ...prevState };
+    case GET_RATES_SUCCESS:
+      prevState.success.getRates = payload;
+      return { ...prevState };
+    case GET_RATES_FAILURE:
+      prevState.errors.getRates = payload;
       return { ...prevState };
     default:
       return prevState;

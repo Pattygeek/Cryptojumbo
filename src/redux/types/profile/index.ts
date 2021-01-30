@@ -28,6 +28,17 @@ export interface UpdateProfileRequestPayload extends Token {
   data: Partial<ProfileProps>;
 }
 
+export interface UpdateProfileSettingsRequestPayload extends Token {
+  data: {
+    email_notification: boolean;
+  };
+}
+
+export interface UpdateProfileSettingsSuccessPayload
+  extends Partial<AjaxSuccessPayload> {
+  email_notification: boolean;
+}
+
 export type UpdateProfileSuccessPayload = GetProfileSuccessPayload;
 
 export interface GetProfileRequestProp extends Type {
@@ -45,6 +56,16 @@ export interface UpdateProfileRequestProp extends Type {
 export interface UpdateProfileSuccessProp extends Type {
   payload: UpdateProfileSuccessPayload;
 }
+
+export interface UpdateProfileSettingsRequestProp extends Type {
+  payload: UpdateProfileSettingsRequestPayload;
+}
+
+export interface UpdateProfileSettingsSuccessProp extends Type {
+  payload: UpdateProfileSettingsSuccessPayload;
+}
+
 export type ProfileActions = GetProfileSuccessProp &
   UpdateProfileSuccessProp &
-  SignUpSuccessProp;
+  SignUpSuccessProp &
+  UpdateProfileSettingsSuccessProp;

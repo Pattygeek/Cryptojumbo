@@ -2,6 +2,7 @@ import {
   TransactionActions,
   GET_ALL_TRANSACTIONS_SUCCESS,
   TransactionProp,
+  LOGOUT_SUCCESS,
 } from '../../types';
 
 export interface TransactionStore {
@@ -10,13 +11,13 @@ export interface TransactionStore {
   next: null | number;
   previous: null | number;
 }
-const initialState: TransactionStore = {
+const initialState = (): TransactionStore => ({
   transactions: [],
   next: null,
   previous: null,
-};
+});
 export const transactionReducer = (
-  prevState: TransactionStore = initialState,
+  prevState: TransactionStore = initialState(),
   { type, payload }: TransactionActions,
 ): TransactionStore => {
   switch (type) {
@@ -27,6 +28,8 @@ export const transactionReducer = (
       prevState.next = next;
       prevState.previous = previous;
       return { ...prevState };
+    case LOGOUT_SUCCESS:
+      return initialState();
     default:
       return prevState;
   }

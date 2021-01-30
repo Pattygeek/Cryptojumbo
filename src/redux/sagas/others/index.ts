@@ -10,6 +10,7 @@ import {
   GET_FAQ_REQUEST,
   VerifyBankAccountRequestPayload,
   VERIFY_BANK_ACCOUNT_REQUEST,
+  GET_RATES_REQUEST,
 } from '../../types';
 
 import {
@@ -29,6 +30,10 @@ import {
   verifyBankAccountLoadingIndicator,
   verifyBankAccountRequest,
   verifyBankAccountSuccess,
+  getRatesFailure,
+  getRatesLoadingIndicator,
+  getRatesRequest,
+  getRatesSuccess,
 } from '../../actions';
 
 const ajaxDBCalls = {
@@ -55,6 +60,10 @@ const ajaxDBCalls = {
   },
   getFAQ: async () => {
     const response = await Axios.get(`/faq`);
+    return response;
+  },
+  getRates: async () => {
+    const response = await Axios.get(`/rates`);
     return response;
   },
 };
@@ -147,6 +156,32 @@ function* verifyBankAccount({
   }
 }
 
+function* getRates() {
+  try {
+    yield put(getRatesLoadingIndicator(true));
+    const {
+      data: { rates, ...rest },
+      status,
+    } = yield call(ajaxDBCalls.getRates);
+    yield put(getRatesSuccess({ rates, status, ...rest }));
+  } catch (err) {
+    console.log('error', err);
+    let status = 0;
+    let error = '';
+    if (typeof err === 'string') {
+      error = err;
+    } else if (!err.request && !err.request.response) error = clientErrorMessage;
+    if (err.response) {
+      status = err.response.status;
+      error = err.response.data.message;
+    }
+    console.log('error', err);
+    yield put(getRatesFailure({ error, status }));
+  } finally {
+    yield put(getRatesLoadingIndicator(false));
+  }
+}
+
 function* getFAQ() {
   try {
     yield put(getFAQLoadingIndicator(true));
@@ -190,9 +225,14 @@ function* getFAQWatcher(): IterableIterator<any> {
   yield takeLatest(GET_FAQ_REQUEST, getFAQ);
 }
 
+function* getRatesWatcher(): IterableIterator<any> {
+  yield takeLatest(GET_RATES_REQUEST, getRates);
+}
+
 export default function* OtherSagas() {
   yield spawn(getCurrenciesWWatcher);
   yield spawn(uploadUtilityBillWWatcher);
   yield spawn(verifyBankAccountWatcher);
   yield spawn(getFAQWatcher);
+  yield spawn(getRatesWatcher);
 }

@@ -6,6 +6,9 @@ import {
   GET_FAQ_SUCCESS,
   VERIFY_BANK_ACCOUNT_SUCCESS,
   BankDetailsProp,
+  LOGOUT_SUCCESS,
+  RateProps,
+  GET_RATES_SUCCESS,
 } from '../../types';
 
 export interface OtherStore {
@@ -21,18 +24,20 @@ export interface OtherStore {
   bankVerification: {
     [accountNo: string]: BankDetailsProp;
   };
+  rates: RateProps;
 }
 
-const initialState: OtherStore = {
+const initialState = (): OtherStore => ({
   currencies: {
     dollarEquivalent: {},
     nairaEquivalent: {},
   },
   faqs: [],
   bankVerification: {},
-};
+  rates: {},
+});
 export const otherReducer = (
-  prevState: OtherStore = initialState,
+  prevState: OtherStore = initialState(),
   { type, payload }: OtherActions,
 ): OtherStore => {
   switch (type) {
@@ -47,6 +52,11 @@ export const otherReducer = (
       prevState.bankVerification[payload.bankDetails.account_number] =
         payload.bankDetails;
       return { ...prevState };
+    case GET_RATES_SUCCESS:
+      prevState.rates = payload.rates;
+      return { ...prevState };
+    case LOGOUT_SUCCESS:
+      return initialState();
     default:
       return prevState;
   }

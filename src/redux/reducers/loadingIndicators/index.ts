@@ -28,15 +28,18 @@ import {
   GET_FAQ_LOADING_INDICATOR,
   ACTIVATE_ACCOUNT_LOADING_INDICATOR,
   VERIFY_BANK_ACCOUNT_LOADING_INDICATOR,
+  LOGOUT_SUCCESS,
+  GET_RATES_LOADING_INDICATOR,
+  UPDATE_PROFILE_SETTINGS_LOADING_INDICATOR,
 } from '../../types';
 
 export interface LoadingIndicatorStore {
   [key: string]: boolean;
 }
-const initialState: LoadingIndicatorStore = {};
+const initialState = (): LoadingIndicatorStore => ({});
 
 export const loadingIndicatorsReducer = (
-  prevState: LoadingIndicatorStore = initialState,
+  prevState: LoadingIndicatorStore = initialState(),
   { type, payload }: LoadingIndicatorProp,
 ): LoadingIndicatorStore => {
   switch (type) {
@@ -79,6 +82,11 @@ export const loadingIndicatorsReducer = (
     case UPDATE_PROFILE_LOADING_INDICATOR:
       prevState.updateProfile = payload.loading;
       return { ...prevState };
+    case UPDATE_PROFILE_SETTINGS_LOADING_INDICATOR:
+      prevState.updateProfileSettings = payload.loading;
+      return { ...prevState };
+
+    // Transaction Loading Indicators
     case GET_ALL_TRANSACTIONS_LOADING_INDICATOR:
       prevState.getAllTransactions = payload.loading;
       return { ...prevState };
@@ -133,6 +141,12 @@ export const loadingIndicatorsReducer = (
     case VERIFY_BANK_ACCOUNT_LOADING_INDICATOR:
       prevState.verifyBankAccount = payload.loading;
       return { ...prevState };
+    case GET_RATES_LOADING_INDICATOR:
+      prevState.getRates = payload.loading;
+      return { ...prevState };
+
+    case LOGOUT_SUCCESS:
+      return initialState();
     default:
       return prevState;
   }

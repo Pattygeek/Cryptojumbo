@@ -46,12 +46,15 @@ const coins: any = {
 };
 
 const Trade: React.FC = (): JSX.Element => {
-  const { dollarEquivalent, nairaEquivalent } = useSelector((state: AppState) => {
-    const {
-      currencies: { dollarEquivalent, nairaEquivalent },
-    } = state.others;
-    return { dollarEquivalent, nairaEquivalent };
-  });
+  const { dollarEquivalent, nairaEquivalent, rates } = useSelector(
+    (state: AppState) => {
+      const {
+        currencies: { dollarEquivalent, nairaEquivalent },
+        rates,
+      } = state.others;
+      return { dollarEquivalent, nairaEquivalent, rates };
+    },
+  );
   const [tradeType, setTradeType] = useState<'buy' | 'sell'>('buy');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [coin, setCoin] = useState<Coin>(coins.btc);
@@ -59,7 +62,10 @@ const Trade: React.FC = (): JSX.Element => {
   const [dollar, setDollar] = useState<number>(
     (coinPrice || 0) * +dollarEquivalent[coin.symbol],
   );
-  const amountInNaira = ((coinPrice || 0) * +nairaEquivalent[coin.symbol]).toFixed(
+  // const amountInNaira = ((coinPrice || 0) * +nairaEquivalent[coin.symbol]).toFixed(
+  //   2,
+  // );
+  const amountInNaira = ((coinPrice || 0) * +rates[coin.symbol][tradeType]).toFixed(
     2,
   );
   const handleCoinPriceChange = useCallback(
@@ -170,11 +176,13 @@ const Trade: React.FC = (): JSX.Element => {
                 <Text className="color-gray-text font-sm">
                   Buy{' '}
                   <Text as="span" className="color-dark">
-                    #231
-                  </Text>{' '}
-                  | Sell{' '}
+                    {formatAmount(+rates[coin.symbol].buy, 'NGN')}
+                  </Text>
+                </Text>
+                <Text className="color-gray-text font-sm">
+                  Sell{' '}
                   <Text as="span" className="color-dark">
-                    #341
+                    {formatAmount(+rates[coin.symbol].sell, 'NGN')}
                   </Text>
                 </Text>
               </Box>

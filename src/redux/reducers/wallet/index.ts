@@ -4,6 +4,7 @@ import {
   CryptoWalletProps,
   CurrencySymbols,
   DEPOSIT_NAIRA_SUCCESS,
+  LOGOUT_SUCCESS,
 } from '../../types';
 
 export interface WalletStore {
@@ -13,12 +14,12 @@ export interface WalletStore {
   depositLink?: string;
 }
 
-const initialState: WalletStore = {
+const initialState = (): WalletStore => ({
   cryptos: {},
-};
+});
 
 export const walletReducer = (
-  prevState: WalletStore = initialState,
+  prevState: WalletStore = initialState(),
   { type, payload }: WalletActions,
 ): WalletStore => {
   switch (type) {
@@ -34,6 +35,8 @@ export const walletReducer = (
     case DEPOSIT_NAIRA_SUCCESS:
       prevState.depositLink = payload.depositLink;
       return { ...prevState };
+    case LOGOUT_SUCCESS:
+      return initialState();
     default:
       return prevState;
   }

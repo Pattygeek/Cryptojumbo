@@ -144,6 +144,13 @@ function* login({ payload }: ReturnType<typeof loginRequest>) {
         message: 'login was successful',
       }),
     );
+    yield call(delay, 1);
+    yield put(
+      loginSuccess({
+        token: data.key as string,
+        status,
+      }),
+    );
   } catch (err) {
     let error = '';
     let status = 0;

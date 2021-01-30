@@ -18,6 +18,14 @@ import {
   UpdateProfileSuccessProp,
   GetProfileSuccessPayload,
   GetProfileSuccessProp,
+  UpdateProfileSettingsRequestPayload,
+  UpdateProfileSettingsRequestProp,
+  UpdateProfileSettingsSuccessPayload,
+  UpdateProfileSettingsSuccessProp,
+  UPDATE_PROFILE_SETTINGS_FAILURE,
+  UPDATE_PROFILE_SETTINGS_LOADING_INDICATOR,
+  UPDATE_PROFILE_SETTINGS_REQUEST,
+  UPDATE_PROFILE_SETTINGS_SUCCESS,
 } from '../../types';
 
 // Get Profile actions
@@ -85,6 +93,42 @@ export const updateProfileLoadingIndicator = (
 ): LoadingIndicatorProp => {
   return {
     type: UPDATE_PROFILE_LOADING_INDICATOR,
+    payload: { loading },
+  };
+};
+
+export const updateProfileSettingsRequest = (
+  prop: UpdateProfileSettingsRequestPayload,
+): UpdateProfileSettingsRequestProp => {
+  return {
+    type: UPDATE_PROFILE_SETTINGS_REQUEST,
+    payload: prop,
+  };
+};
+
+export const updateProfileSettingsSuccess = (
+  prop: UpdateProfileSettingsSuccessPayload,
+): UpdateProfileSettingsSuccessProp => {
+  return {
+    type: UPDATE_PROFILE_SETTINGS_SUCCESS,
+    payload: prop,
+  };
+};
+
+export const updateProfileSettingsFailure = (
+  prop?: AjaxErrorPayload,
+): AjaxErrorProp => {
+  return {
+    type: UPDATE_PROFILE_SETTINGS_FAILURE,
+    payload: prop,
+  };
+};
+
+export const updateProfileSettingsLoadingIndicator = (
+  loading: boolean,
+): LoadingIndicatorProp => {
+  return {
+    type: UPDATE_PROFILE_SETTINGS_LOADING_INDICATOR,
     payload: { loading },
   };
 };

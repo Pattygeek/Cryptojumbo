@@ -23,6 +23,14 @@ export interface BankDetailsProp {
   account_number: string;
   account_name: string;
 }
+
+export interface RateProps {
+  [currency: string]: {
+    buy: number | string;
+    sell: number | string;
+  };
+}
+
 export type UploadUtilityBillRequestPayload = Token & {
   data: FormData;
 };
@@ -51,6 +59,10 @@ export interface VerifyBankAccountRequestPayload {
 
 export interface VerifyBankAccountSuccessPayload extends AjaxSuccessPayload {
   bankDetails: BankDetailsProp;
+}
+
+export interface GetRatesSuccessPayload extends AjaxSuccessPayload {
+  rates: RateProps;
 }
 
 // Actions
@@ -92,7 +104,14 @@ export interface VerifyBankAccountSuccessProp extends Type {
   payload: VerifyBankAccountSuccessPayload;
 }
 
+export type GetRatesRequestProp = Type;
+
+export interface GetRatesSuccessProp extends Type {
+  payload: GetRatesSuccessPayload;
+}
+
 export type OtherActions = GetCurrenciesSuccessProp &
   TradeSuccessProp &
   GetFAQSuccessProp &
-  VerifyBankAccountSuccessProp;
+  VerifyBankAccountSuccessProp &
+  GetRatesSuccessProp;

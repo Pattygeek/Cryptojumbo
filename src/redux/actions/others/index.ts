@@ -41,6 +41,13 @@ import {
   VERIFY_BANK_ACCOUNT_LOADING_INDICATOR,
   VERIFY_BANK_ACCOUNT_REQUEST,
   VERIFY_BANK_ACCOUNT_SUCCESS,
+  GetRatesRequestProp,
+  GetRatesSuccessProp,
+  GET_RATES_FAILURE,
+  GET_RATES_LOADING_INDICATOR,
+  GET_RATES_REQUEST,
+  GET_RATES_SUCCESS,
+  GetRatesSuccessPayload,
 } from '../../types';
 
 // Get Currencies actions
@@ -197,6 +204,35 @@ export const verifyBankAccountLoadingIndicator = (
 ): LoadingIndicatorProp => {
   return {
     type: VERIFY_BANK_ACCOUNT_LOADING_INDICATOR,
+    payload: { loading },
+  };
+};
+
+export const getRatesRequest = (): GetRatesRequestProp => {
+  return {
+    type: GET_RATES_REQUEST,
+  };
+};
+
+export const getRatesSuccess = (
+  prop: GetRatesSuccessPayload,
+): GetRatesSuccessProp => {
+  return {
+    type: GET_RATES_SUCCESS,
+    payload: prop,
+  };
+};
+
+export const getRatesFailure = (prop: AjaxErrorPayload): AjaxErrorProp => {
+  return {
+    type: GET_RATES_FAILURE,
+    payload: prop,
+  };
+};
+
+export const getRatesLoadingIndicator = (loading: boolean): LoadingIndicatorProp => {
+  return {
+    type: GET_RATES_LOADING_INDICATOR,
     payload: { loading },
   };
 };
