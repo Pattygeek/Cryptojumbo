@@ -19,6 +19,7 @@ import {
   TransactionCard,
   SectionSpinnerWithText,
 } from '../components';
+import { RiHistoryLine } from 'react-icons/ri';
 
 const icons: any = {
   processing: HiOutlineExclamationCircle,
@@ -82,11 +83,11 @@ const Overview: React.FC = (): JSX.Element => {
         spacing={'10px'}
         width="100%"
         mb={'20px'}>
-        <Stack direction="row" spacing={'10px'} mb={6}>
+        <Stack direction="row" spacing={'10px'} mb={6} flex={1}>
           <TradeCoin key={tradableCoins[0].symbol} {...tradableCoins[0]} />
           <TradeCoin key={tradableCoins[1].symbol} {...tradableCoins[1]} />
         </Stack>
-        <Stack direction="row" spacing={'10px'} mb={6}>
+        <Stack direction="row" spacing={'10px'} mb={6} flex={1}>
           <TradeCoin key={tradableCoins[2].symbol} {...tradableCoins[2]} />
           <SwapCoin />
         </Stack>
@@ -143,25 +144,40 @@ const Overview: React.FC = (): JSX.Element => {
                 <TransactionCard key={index} {...asset} icon={icons[asset.status]} />
               ))
             ) : (
-              <Center px="15px" size="100px">
+              <Center px="15px" size="100px" flex={1}>
                 <SectionSpinnerWithText
                   spinning={loading}
                   text="Fetching Transactions..."
                 />
               </Center>
             )}
-            <Center px="15px">
-              {!loading && (
-                <Box
-                  as={Link}
-                  to="/dashboard/wallet"
-                  color="brand.250"
-                  _hover={{ color: 'brand.100' }}
-                  className="font-sm font-weight-500">
-                  View all
-                </Box>
-              )}
-            </Center>
+            {transactions.length === 0 && !loading && (
+              <Stack
+                flex={1}
+                justify={{ base: 'flex-start', sm: 'center' }}
+                align={{ base: 'center', sm: 'center' }}
+                direction={{ base: 'column', sm: 'row' }}
+                spacing={5}>
+                <RiHistoryLine size={40} className="color-gray-text" />
+                <Text className="font-md font-weight-500 color-gray-text">
+                  No transaction history
+                </Text>
+              </Stack>
+            )}
+            {transactions.length > 3 && (
+              <Center px="15px">
+                {!loading && (
+                  <Box
+                    as={Link}
+                    to="/dashboard/wallet"
+                    color="brand.250"
+                    _hover={{ color: 'brand.100' }}
+                    className="font-sm font-weight-500">
+                    View all
+                  </Box>
+                )}
+              </Center>
+            )}
           </Stack>
         </Box>
       </Box>

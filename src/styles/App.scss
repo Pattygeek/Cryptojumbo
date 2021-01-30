@@ -84,20 +84,6 @@
   }
 }
 
-// .offers {
-//   @extend .font-sm;
-//   img {
-//     width: 30px;
-//     height: auto;
-//     @include media-breakpoint-up(sm) {
-//       width: 75px;
-//     }
-//   }
-//   @include media-breakpoint-up(sm) {
-//     font: $md;
-//   }
-// }
-
 .coin-logo {
   width: 25px;
   height: 25px;
@@ -156,8 +142,8 @@
   background-image: url('../assets/header-cover.png');
   background-repeat: no-repeat;
   background-size: cover;
-  // width: 100%;
-  // height: 100%;
+  width: 100%;
+  height: auto;
   @include media-breakpoint-up(md) {
     width: 100%;
     height: auto;
@@ -316,8 +302,11 @@
 nav {
   .navlink-wrapper {
     .nav-links {
-      .navlink.active {
-        color: $primary;
+      .navlink {
+        font-size: 14px;
+        &.active {
+          color: $primary;
+        }
       }
     }
     @include media-breakpoint-down(md) {
@@ -335,7 +324,7 @@ nav {
         transform: translateX(-100%);
         transition: 0.3s transform;
         .navlink {
-          border-left: px solid transparent;
+          border-left: 4px solid transparent;
           padding-left: 20px !important;
           padding-right: 40px !important;
           width: 100%;
@@ -359,7 +348,7 @@ nav {
 }
 
 .footer-link {
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(xs) {
     position: relative;
     &::after {
       content: '';

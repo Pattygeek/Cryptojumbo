@@ -1,15 +1,18 @@
 import theme from '@chakra-ui/theme';
 import { extendTheme } from '@chakra-ui/react';
-// import { createBreakpoints } from '@chakra-ui/theme-tools';
+import { createBreakpoints } from '@chakra-ui/theme-tools';
 
-// const breakpoints = createBreakpoints({
-//   sm: '30em',
-//   md: '48em',
-//   lg: '62em',
-//   xl: '80em',
-// });
+const breakpoints = createBreakpoints({
+  sm: '30em',
+  md: '48em',
+  lg: '62em',
+  xl: '80em',
+  xlg: '92em',
+  xxlg: '110em',
+});
 
 export const CustomTheme = extendTheme({
+  // ...breakpoints,
   ...theme,
   fontFamily: {
     poppins: 'Poppins, sans-serif',
@@ -28,6 +31,7 @@ export const CustomTheme = extendTheme({
       150: '#FBBA84',
       200: '#FFF8F3',
       250: '#FFCF86',
+      300: '#FC9303',
     },
     gray: {
       100: '#949494',

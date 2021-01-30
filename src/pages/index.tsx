@@ -12,7 +12,7 @@ import ActivateAccount from './ActivateAccount';
 import { Route, Switch } from 'react-router-dom';
 import { PrivateRoute, FullScreenSpinner } from './components';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrenciesRequest, AppState } from '../redux';
+import { getCurrenciesRequest, AppState, getRatesRequest } from '../redux';
 import '../styles/App.scss';
 import '../styles/index.scss';
 const Pages: React.FC = (): JSX.Element => {
@@ -23,8 +23,8 @@ const Pages: React.FC = (): JSX.Element => {
     return { loading, token };
   });
   useLayoutEffect(() => {
-    console.log('uselayoutEdfetc');
     dispatch(getCurrenciesRequest({ token }));
+    dispatch(getRatesRequest());
   }, [token]);
   if (loading) return <FullScreenSpinner spinning={loading} />;
   return (

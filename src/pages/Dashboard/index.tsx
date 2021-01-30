@@ -38,6 +38,7 @@ const Dashboard: React.FC<RouteComponentProps> = ({
         <SectionWrapper
           mb={0}
           px={{ base: 5, sm: 10, md: '100px' }}
+          py={0}
           as="main"
           display="flex"
           flexDirection="column"

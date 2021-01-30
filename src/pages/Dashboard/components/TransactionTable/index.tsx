@@ -107,7 +107,7 @@ export const TransactionTable: React.FC = (): JSX.Element => {
           <TransactionRow {...e} key={e.id} icon={HiOutlineExclamationCircle} />
         ))}
       </Stack>
-      {transactions.length === 0 && (
+      {transactions.length === 0 && !loading && (
         <Center flexDirection="column" size={30} height="100%">
           <RiHistoryLine size={40} className="color-gray-text" />
           <Text mt={10} className="font-md font-weight-500 color-gray-text">

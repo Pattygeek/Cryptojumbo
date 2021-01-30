@@ -52,6 +52,7 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
   return (
     <Flex
       flex={1}
+      maxWidth="26%"
       className="bg-white"
       p={2}
       borderRadius={5}
@@ -75,7 +76,10 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
         </Flex>
         <Flex justify="space-between">
           <Text className="color-gray-text font-xs" flex={1} mr={2}>
-            {parseFloat(amount).toFixed(8)} {currency} - {status}
+            {currency !== CurrencySymbols.NGN
+              ? parseFloat(amount).toFixed(8)
+              : parseFloat(amount).toFixed(2)}{' '}
+            {currency} - {status}
           </Text>
           <Text className="color-gray-text font-xs" flex={0.4}>
             {formatDate(modified)}
