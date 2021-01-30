@@ -8,13 +8,15 @@ export const SectionWrapper: React.FC<BoxProps> = ({
   return (
     <Box
       as={as}
-      px={{ base: 10, md: 20, lg: 40 }}
+      px={{ base: '30px', md: 20, lg: 40 }}
       py={15}
       mb={{ base: '60px', md: '180px' }}
       display="flex"
-      justifyContent="center"
+      justifyContent={{ base: 'flex-start', lg: 'center' }}
       {...rest}>
-      <Box maxWidth="1500px">{children}</Box>
+      <Box maxWidth="1500px" width="full">
+        {children}
+      </Box>
     </Box>
   );
 };

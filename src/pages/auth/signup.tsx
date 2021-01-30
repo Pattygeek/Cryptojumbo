@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { SubmitButton, FormInput, useAjaxToast } from '../components';
+import { SubmitButton, FormInput, useAjaxToast, PasswordInput } from '../components';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Text, Flex, Box } from '@chakra-ui/react';
@@ -43,42 +43,47 @@ const SignUp: React.FC<AuthProps> = ({ setState, state }): JSX.Element => {
         status: 'error',
         description: error.error,
       });
-    if (success) {
+    if (success && formik.values.email) {
       setState('verify-email');
     }
-  }, [error]);
-  if (success) return <Redirect to="/dashboard" />;
+  }, [error, success, formik.values.email]);
   return (
     <Box>
       {state !== 'verify-email' && (
-        <Box>
+        <Box pt={5}>
           <Flex direction="column" justify="center" align="center" mb={5}>
             <Text
               as="h2"
-              mb={3}
-              className="capitalize color-dark font-lg font-weight-600">
+              mb={{ base: 0, md: 3 }}
+              fontSize={{ base: '16px', md: '24px' }}
+              lineHeight="16px"
+              className="capitalize color-dark font-weight-600">
               Let’s get started
             </Text>
-            <Text className="capitalize color-gray-text font-md">Signup</Text>
+            <Text
+              fontSize={{ base: '11px', md: '20px' }}
+              lineHeight="24px"
+              className="capitalize color-gray-text font-md">
+              Signup
+            </Text>
           </Flex>
-          <Flex direction="column" align="center" px={{ base: '10px', md: 10 }}>
-            <form onSubmit={formik.handleSubmit}>
-              <FormInput
-                {...formik.getFieldProps('email')}
-                placeholder="email@example.com"
-                label="Email"
-                isRequired
-                labelClassName="color-dark"
-              />
-              <FormInput
-                {...formik.getFieldProps('password')}
-                placeholder="Password"
-                type="password"
-                label="Password"
-                isRequired
-                labelClassName="color-primary"
-              />
-              <Flex justify="flex-end">
+          <Flex direction="column" align="center">
+            <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
+              <Box mb="50px">
+                <FormInput
+                  {...formik.getFieldProps('email')}
+                  placeholder="email@example.com"
+                  label="Email"
+                  isRequired
+                />
+                <PasswordInput
+                  {...formik.getFieldProps('password')}
+                  placeholder="Password"
+                  type="password"
+                  label="Password"
+                  isRequired
+                />
+                {/* <Flex justify="flex-end">
                 <Box
                   as="button"
                   type="button"
@@ -88,7 +93,8 @@ const SignUp: React.FC<AuthProps> = ({ setState, state }): JSX.Element => {
                   onClick={() => setState('forgot-password')}>
                   Forgot Password?
                 </Box>
-              </Flex>
+              </Flex> */}
+              </Box>
               <SubmitButton
                 loading={loading}
                 disabled={!(formik.isValid && formik.dirty)}
@@ -96,12 +102,16 @@ const SignUp: React.FC<AuthProps> = ({ setState, state }): JSX.Element => {
                 SignUp
               </SubmitButton>
             </form>
-            <Text className="color-gray-text font-weight-400 font-sm padding-vertical-sm">
+            <Text
+              m={'35px 0 10px'}
+              fontSize={{ base: '11px', md: '14px' }}
+              lineHeight="24px"
+              className="color-gray-text font-weight-400">
               Already have an account?{' '}
               <button
                 onClick={() => setState('login')}
                 type="button"
-                className="font-weight-500">
+                className="font-weight-600">
                 Login
               </button>
             </Text>

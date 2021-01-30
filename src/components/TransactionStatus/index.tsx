@@ -51,7 +51,7 @@ export const TransactionStatus: React.FC<TransactionStatusProps> = ({
           <Text
             textAlign="center"
             verticalAlign="middle"
-            className="font-weight-400 color-white font-sm capitalize">
+            className="font-weight-400 color-white font-sm">
             {statusMessage}
           </Text>
         </Box>

@@ -35,23 +35,33 @@ export const AvailableCoinsSmallBox: React.FC = (): JSX.Element => {
       {Object.keys(dollarEquivalent).map((symbol) => {
         if (Object.values(CurrencySymbols).includes(symbol as CurrencySymbols))
           return (
-            <Flex key={symbol} flex={1}>
+            <Stack
+              direction="row"
+              align={{ base: 'center', md: 'flex-start' }}
+              spacing={3}
+              key={symbol}
+              flex={1}>
               <Image
                 src={coinLogo[symbol]}
                 alt="Coin Icon"
-                width={{ base: 25, md: 35 }}
-                height={{ base: 25, md: 35 }}
-                mr={3}
+                width={{ base: '23px', md: '33px' }}
+                height="auto"
               />
               <Box>
-                <Text className="color-gray-text font-xs font-weight-500">
+                <Text
+                  fontSize={{ base: '8px', md: '9px' }}
+                  lineHeight="10px"
+                  className="color-gray-text font-weight-500">
                   {symbol}/USD
                 </Text>
-                <Text className="color-dark font-sm font-weight-500">
+                <Text
+                  fontSize={{ base: '9px', md: '14px' }}
+                  lineHeight="14px"
+                  className="color-dark font-weight-500">
                   {formatAmount(+dollarEquivalent[symbol])}
                 </Text>
               </Box>
-            </Flex>
+            </Stack>
           );
       })}
     </Stack>
@@ -59,11 +69,12 @@ export const AvailableCoinsSmallBox: React.FC = (): JSX.Element => {
 };
 
 export const AvailableCoinsLargeBox: React.FC = (): JSX.Element => {
-  const { dollarEquivalent } = useSelector((state: AppState) => {
+  const { dollarEquivalent, rates } = useSelector((state: AppState) => {
     const {
       currencies: { dollarEquivalent },
+      rates,
     } = state.others;
-    return { dollarEquivalent };
+    return { dollarEquivalent, rates };
   });
   return (
     <Box
@@ -76,42 +87,62 @@ export const AvailableCoinsLargeBox: React.FC = (): JSX.Element => {
           if (Object.values(CurrencySymbols).includes(symbol as CurrencySymbols))
             return (
               <Stack
-                direction={{ base: 'column', sm: 'row' }}
-                p={{ base: 3, sm: 5 }}
+                direction={{ base: 'row', sm: 'row' }}
+                spacing={{ base: '10px', md: 3 }}
+                p={{ base: '10px 15px', md: 5 }}
                 flex={1}
                 justifyContent="center"
-                alignItems="center"
+                alignItems={{ base: 'flex-start', md: 'center' }}
                 key={symbol}
-                backgroundColor="#F6F7FB">
+                backgroundColor="#F6F7FB"
+                borderRadius={5}>
                 <Image
                   src={coinLogo[symbol]}
                   alt="Coin Icon"
                   width={{ base: 25, md: 35 }}
                   height={{ base: 25, md: 35 }}
-                  mr={3}
                 />
                 <Box>
-                  <Text className="font-md font-weight-600 color-dark">
+                  <Text
+                    fontSize={{ base: '9px', md: '18px' }}
+                    lineHeight={{ base: '15px', md: '20px' }}
+                    className="font-weight-600 color-dark">
                     {symbol}
                   </Text>
-                  <Text className="color-gray-text font-xs font-weight-500">
-                    Buy / Sell
-                  </Text>
-                  <Text className="color-primary font-xs font-weight-500">
-                    #410/401
-                  </Text>
+                  {rates[symbol] && (
+                    <Box>
+                      <Text className="color-gray-text font-xs font-weight-500">
+                        Buy{' '}
+                        <Text
+                          as="span"
+                          className="color-primary font-xs font-weight-500">
+                          {formatAmount(+rates[symbol].buy, 'NGN')}
+                        </Text>
+                      </Text>
+                      <Text className="color-gray-text font-xs font-weight-500">
+                        Sell{' '}
+                        <Text
+                          as="span"
+                          className="color-primary font-xs font-weight-500">
+                          {formatAmount(+rates[symbol].sell, 'NGN')}
+                        </Text>
+                      </Text>
+                    </Box>
+                  )}
                 </Box>
               </Stack>
             );
         })}
       </Stack>
-      <Flex justifyContent="center" alignItems="center" py={2}>
+      <Flex justifyContent="center" alignItems="center" pt={{ base: 0, md: 2 }}>
         <Box
           as={Link}
           to="/dashboard/trade"
           borderRadius={5}
           className="bg-primary color-white font-md font-weight-500"
-          px={{ base: 5, sm: 10, md: 20 }}
+          px={{ base: '50px', sm: 10, md: 20 }}
+          fontSize={{ base: '12px', md: '18px' }}
+          lineHeight={{ base: '18px', md: '27px' }}
           py={3}>
           Begin trade
         </Box>

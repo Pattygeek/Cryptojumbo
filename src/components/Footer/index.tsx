@@ -37,8 +37,9 @@ export const PreFooter: React.FC<PreFooterProps> = ({
           bg: 'brand.100',
           color: 'white',
         }}
-        px={'50px'}
-        py={2}>
+        borderWidth="1.5px"
+        px={{ base: '50px', md: '80px' }}
+        py={{ base: 2, md: '15px' }}>
         Begin trade
       </Box>
     </Center>
@@ -71,8 +72,8 @@ export const Footer: React.FC = (): JSX.Element => {
             </Flex>
             <Text
               className="font-weight-normal color-white"
-              textAlign={{ base: 'center', md: 'left' }}
-              lineHeight={{ base: '18.5px', md: '15.5px' }}
+              textAlign={{ base: 'center', sm: 'left' }}
+              lineHeight={{ base: '18.5px', sm: '15.5px' }}
               fontSize={{ base: '10px', md: '13px' }}>
               The most secure & efficient medium to sell your crypto. We have a
               global reputation for the fastest transaction coupled with the best
@@ -93,13 +94,13 @@ export const Footer: React.FC = (): JSX.Element => {
             </Box>
             <Stack flex={1} direction="row" spacing={{ base: '20px', md: 10 }}>
               <Stack
-                direction={{ base: 'row', md: 'column' }}
-                spacing={{ base: '10px', md: '20px' }}
-                justify={{ base: 'space-between', md: 'flex-start' }}
+                direction={{ base: 'row', sm: 'column' }}
+                spacing={{ base: '10px', sm: '20px' }}
+                justify={{ base: 'space-between', sm: 'flex-start' }}
                 flex={1}>
                 <Box
                   as={Link}
-                  order={{ base: 2, md: 1 }}
+                  order={{ base: 2, sm: 1 }}
                   to="/contact"
                   fontSize={{ base: '10px', md: '14px' }}
                   fontWeight={{ base: '400', md: '500' }}
@@ -109,7 +110,7 @@ export const Footer: React.FC = (): JSX.Element => {
                 </Box>
                 <Box
                   as={Link}
-                  order={{ base: 1, md: 2 }}
+                  order={{ base: 1, sm: 2 }}
                   to="/about"
                   fontSize={{ base: '10px', md: '14px' }}
                   fontWeight={{ base: '400', md: '500' }}
@@ -119,13 +120,13 @@ export const Footer: React.FC = (): JSX.Element => {
                 </Box>
               </Stack>
               <Stack
-                direction={{ base: 'row', md: 'column' }}
-                spacing={{ base: '10px', md: '20px' }}
-                justify={{ base: 'space-between', md: 'flex-start' }}
+                direction={{ base: 'row', sm: 'column' }}
+                spacing={{ base: '10px', sm: '20px' }}
+                justify={{ base: 'space-between', sm: 'flex-start' }}
                 flex={1}>
                 <Box
                   as={Link}
-                  order={{ base: 2, md: 1 }}
+                  order={{ base: 2, sm: 1 }}
                   to="/privacy"
                   fontSize={{ base: '10px', md: '14px' }}
                   fontWeight={{ base: '400', md: '500' }}
@@ -135,7 +136,7 @@ export const Footer: React.FC = (): JSX.Element => {
                 </Box>
                 <Box
                   as={Link}
-                  order={{ base: 1, md: 2 }}
+                  order={{ base: 1, sm: 2 }}
                   to="/faqs"
                   fontSize={{ base: '10px', md: '14px' }}
                   fontWeight={{ base: '400', md: '500' }}
@@ -148,7 +149,7 @@ export const Footer: React.FC = (): JSX.Element => {
           </Box>
         </Stack>
       </SectionWrapper>
-      <SectionWrapper mb={0} py={0}>
+      <SectionWrapper mb={0} py={0} justifyContent="center">
         <Stack
           spacing={5}
           direction={{ base: 'column', md: 'row' }}

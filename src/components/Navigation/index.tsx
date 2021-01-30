@@ -3,8 +3,14 @@ import { Box, Flex, Text, Stack } from '@chakra-ui/react';
 import logo from '../../assets/logo.png';
 import { NavLink } from 'react-router-dom';
 import { GoThreeBars } from 'react-icons/go';
+import { useSelector } from 'react-redux';
+import { AppState } from '../../redux';
 
 const NavigationBar: React.FC = () => {
+  const { token } = useSelector((state: AppState) => {
+    const { token } = state.auth;
+    return { token };
+  });
   const ref = useRef<HTMLDivElement>(null);
   const toggleNavbar = () => {
     ref.current?.classList.toggle('toggle');
@@ -52,11 +58,7 @@ const NavigationBar: React.FC = () => {
         </Box>
         <Flex align="center">
           <Box as="img" src={logo} className="logo" mr="10px" />
-          <Text
-            fontWeight={{ base: '500', md: '600' }}
-            className="font-md color-dark">
-            CryptoJumbo
-          </Text>
+          <Text className="font-md font-weight-600 color-dark">CryptoJumbo</Text>
         </Flex>
       </Stack>
       <Flex
@@ -130,12 +132,20 @@ const NavigationBar: React.FC = () => {
           <Box
             as={NavLink}
             activeClassName="active"
-            to="/auth"
+            to={!token ? '/auth' : '/dashboard'}
             className="btn-primary-outline font-sm">
-            Login / Signup
+            {!token ? 'Login / Signup' : 'Dashboard'}
           </Box>
         </Flex>
       </Flex>
+      <Box
+        display={{ base: 'inline-block', md: 'none' }}
+        as={NavLink}
+        activeClassName="active"
+        to={!token ? '/auth' : '/dashboard'}
+        className="btn-primary-outline font-sm">
+        {!token ? 'Login / Signup' : 'Dashboard'}
+      </Box>
     </Flex>
   );
 };

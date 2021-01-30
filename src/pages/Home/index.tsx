@@ -34,32 +34,64 @@ const Home: React.FC = (): JSX.Element => {
         as="header"
         className="header"
         p={{ base: '0px', sm: '15px 20px', md: '20px 40px' }}
-        mb={{ base: '70%', sm: '40%', md: '20%' }}>
+        mb={{ base: '63%', sm: '40%', md: '20%' }}>
         <NavigationTop />
-        <Box px={{ base: 10, sm: 15, md: 30, lg: '80px' }}>
+        <Box
+          position="relative"
+          pb={{ base: '50px', md: 0 }}
+          px={{ base: '30px', sm: 15, md: 30, lg: '80px' }}>
           <Box mb={5}>
-            <Flex direction="column" mt={40}>
-              <Flex direction={{ base: 'column', md: 'row' }}>
-                <Box flex={0.45} mr={{ base: '0px', md: 10 }}>
-                  <Text
-                    textAlign={{ base: 'center', md: 'left' }}
-                    mb={2}
-                    pr="20px"
-                    className="font-xlg color-dark font-weight-600"
-                    lineHeight="31px">
-                    Buy, Sell and swap Cryptocurrency with ease
-                  </Text>
-                  <Text
-                    textAlign={{ base: 'center', md: 'left' }}
-                    className="color-white font-slg font-weight-400">
-                    Fast Payout | Secured Trade | Affordable rate
-                  </Text>
-                  <AvailableCoinsSmallBox />
+            <Flex direction="column" mt={{ base: 10, md: 40 }}>
+              <Box display={{ base: 'block', md: 'none' }}>
+                <Text
+                  textAlign={{ base: 'center', md: 'left' }}
+                  mb={2}
+                  pr="20px"
+                  px={{ base: '30px', md: 0 }}
+                  fontSize={{ base: '18px', md: '30px' }}
+                  className="color-dark font-weight-600"
+                  lineHeight={{ base: '17px', md: '31px' }}>
+                  Buy, Sell and swap Cryptocurrency with ease
+                </Text>
+                <Text
+                  fontSize={{ base: '12px', md: '20px' }}
+                  lineHeight="24px"
+                  textAlign={{ base: 'center', md: 'left' }}
+                  className="color-white font-weight-400">
+                  Fast Payout | Secured Trade | Affordable rate
+                </Text>
+              </Box>
+              <Stack spacing={5} direction={{ base: 'column', md: 'row' }}>
+                <Box
+                  order={{ base: 2, md: 1 }}
+                  flex={0.45}
+                  mr={{ base: '0px', md: 10 }}>
+                  <Box display={{ base: 'none', md: 'block' }}>
+                    <Text
+                      textAlign={{ base: 'center', md: 'left' }}
+                      mb={2}
+                      pr="20px"
+                      fontSize={{ base: '18px', md: '30px' }}
+                      className="color-dark font-weight-600"
+                      lineHeight={{ base: '17px', md: '31px' }}>
+                      Buy, Sell and swap Cryptocurrency with ease
+                    </Text>
+                    <Text
+                      fontSize={{ base: '12px', md: '20px' }}
+                      lineHeight="24px"
+                      textAlign={{ base: 'center', md: 'left' }}
+                      className="color-white font-weight-400">
+                      Fast Payout | Secured Trade | Affordable rate
+                    </Text>
+                  </Box>
+                  <Box px={{ base: '20px', md: 0 }}>
+                    <AvailableCoinsSmallBox />
+                  </Box>
                 </Box>
-                <Box flex={0.55}>
+                <Box order={{ base: 1, md: 2 }} flex={0.55}>
                   <AvailableCoinsLargeBox />
                 </Box>
-              </Flex>
+              </Stack>
             </Flex>
           </Box>
           <Box
@@ -68,10 +100,14 @@ const Home: React.FC = (): JSX.Element => {
             className="bg-white offers"
             py={{ base: '20px', md: '60px' }}
             px={{ base: 5, md: 20 }}
-            transform={{ base: 'translateY(80%)', md: 'translateY(50%)' }}>
+            position={{ base: 'absolute', md: 'unset' }}
+            bottom={{ base: '-12px', md: 'none' }}
+            left={{ base: '30px', md: 'none' }}
+            right={{ base: '30px', md: 'none' }}
+            transform={{ base: 'translateY(77%)', md: 'translateY(50%)' }}>
             <Text
               textAlign="center"
-              mb={'30px'}
+              mb={{ base: '20px', md: '30px' }}
               fontSize={{ base: '13px', md: '24px' }}
               lineHeight="24px"
               className="color-gray-heading font-weight-500">
@@ -221,7 +257,7 @@ const Home: React.FC = (): JSX.Element => {
 
 const HowItWorks: React.FC = (): JSX.Element => {
   return (
-    <SectionWrapper px={{ base: 10, md: 20 }}>
+    <SectionWrapper px={{ base: '30px', md: 20, lg: 40 }}>
       <Center flexDirection="column" mb={5}>
         <Box maxWidth="550px" px="30px">
           <Text

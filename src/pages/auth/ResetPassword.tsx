@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { SubmitButton, FormInput, useAjaxToast } from '../components';
+import { SubmitButton, FormInput, useAjaxToast, PasswordInput } from '../components';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { Text, Flex, Box } from '@chakra-ui/react';
@@ -51,44 +51,40 @@ const ResetPassword: React.FC<AuthProps> = ({ setState }): JSX.Element => {
     if (error) toast({ status: 'error', description: error.error });
   }, [success, error]);
   return (
-    <Box>
-      <Flex direction="column" justify="center" align="center" mb={5}>
+    <Box pt={5}>
+      <Flex direction="column" justify="center" align="center" mb={10}>
         <Text
           as="h2"
-          mb={3}
-          className="capitalize color-blue-medium font-lg font-weight-600">
+          mb={{ base: 0, md: 3 }}
+          fontSize={{ base: '16px', md: '24px' }}
+          lineHeight="16px"
+          className="capitalize color-dark font-weight-600">
           Set new password
         </Text>
       </Flex>
-      <Flex
-        direction="column"
-        align="center"
-        mb={5}
-        px={{ base: '10px', md: 10 }}
-        flex={1}>
-        <form onSubmit={formik.handleSubmit} style={{ flex: 1, height: '80%' }}>
+      <Flex direction="column" align="center" mb={5}>
+        <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
           <Flex direction="column" justify="space-between" flex={1} height="100%">
-            <Box mb={5}>
-              <FormInput
+            <Box mb={'50px'}>
+              <PasswordInput
                 {...formik.getFieldProps('password')}
                 placeholder="password"
                 label="Password"
                 isRequired
-                labelClassName="color-blue-medium"
               />
-              <FormInput
+              <PasswordInput
                 {...formik.getFieldProps('confirm_password')}
-                placeholder="confirm password"
+                placeholder="Password again"
                 label="Confirm Password"
                 isRequired
-                labelClassName="color-blue-medium"
               />
             </Box>
             <SubmitButton
               loading={loading}
+              mb="50px"
               disabled={!(formik.isValid && formik.dirty)}
               action={formik.handleSubmit}>
-              ResetPassword
+              Continue
             </SubmitButton>
           </Flex>
         </form>

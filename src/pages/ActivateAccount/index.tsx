@@ -1,4 +1,3 @@
-// https://cryptojumbo.netlify.app/activate/MGNiMzk5YWMtZmFiNC00N2Y2LWExMjMtYjY2YjgwZWNkYWNh/ag7bga-c30e962400f80626fbfba037eb5cbec5
 import React, { useLayoutEffect, useEffect } from 'react';
 import { RouteComponentProps, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -44,7 +43,7 @@ const ActivateAccount: React.FC<
         flexDirection="column"
         width="100%"
         height="100vh"
-        px={{ base: '10px', md: 10 }}>
+        px={{ base: '20px', md: 10 }}>
         <TransactionStatus
           status="success"
           statusTitle="Account successfully verified"
@@ -60,7 +59,7 @@ const ActivateAccount: React.FC<
         flexDirection="column"
         width="100%"
         height="100vh"
-        px={{ base: '10px', md: 10 }}>
+        px={{ base: '20px', md: 10 }}>
         <TransactionStatus
           status="failure"
           statusTitle="Account verification failed"

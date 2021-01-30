@@ -29,40 +29,48 @@ const Auth: React.FC = (): JSX.Element => {
         className="header"
         p={{ base: '0px', sm: '15px 20px', md: '20px 40px' }}>
         <NavigationTop />
-        <Box px={{ base: 10, sm: 15, md: 30, lg: '70px' }}>
-          <Flex direction="column" mt={'50px'}>
-            <Stack direction={{ base: 'column', md: 'row' }} spacing={'80px'}>
+        <Box px={{ base: '40px', sm: 15, md: 30, lg: '70px' }}>
+          <Flex direction="column" mt={{ base: '0px', md: '50px' }}>
+            <Stack
+              direction={{ base: 'column', md: 'row' }}
+              spacing={{ base: '30px', sm: '80px' }}>
               <Flex
                 direction="column"
                 align={{ base: 'center', md: 'flex-start' }}
                 flex={0.5}
                 order={{ base: 2, md: 1 }}
                 mb={5}
-                mt={'100px'}>
+                mt={{ base: '20px', md: '100px' }}>
                 <Text
                   textAlign={{ base: 'center', md: 'left' }}
                   mb={2}
                   pr="20px"
-                  className="font-xlg color-dark font-weight-600"
-                  lineHeight="31px">
+                  px={{ base: '30px', md: 0 }}
+                  fontSize={{ base: '18px', md: '30px' }}
+                  className="color-dark font-weight-600"
+                  lineHeight={{ base: '17px', md: '31px' }}>
                   Buy, Sell and swap Cryptocurrency with ease
                 </Text>
                 <Text
+                  fontSize={{ base: '12px', md: '20px' }}
+                  lineHeight="24px"
                   textAlign={{ base: 'center', md: 'left' }}
-                  className="color-white font-slg font-weight-400"
-                  lineHeight="24px">
+                  className="color-white font-weight-400">
                   Fast Payout | Secured Trade | Affordable rate
                 </Text>
                 <AvailableCoinsSmallBox />
               </Flex>
-              <Flex order={{ base: 1, md: 2 }} flex={0.45} mb={5}>
+              <Flex
+                justify={{ sm: 'center', md: 'flex-end' }}
+                order={{ base: 1, md: 2 }}
+                flex={0.45}
+                mb={5}>
                 <Flex
                   direction="column"
-                  height={{ base: '100%', md: '481px' }}
+                  width={{ base: '100%', sm: '417px' }}
                   maxWidth={{ base: '100%', md: '417px' }}
-                  justify="center"
-                  align="center"
-                  className="padding-md padding-vertical-md bg-white border-radius-xs">
+                  p={{ base: '20px 40px', md: '20px 60px' }}
+                  className="bg-white border-radius-xs">
                   {state === 'login' && <Login setState={setState} />}
                   {state === 'signup' && (
                     <SignUp state={state} setState={setState} />

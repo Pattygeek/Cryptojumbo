@@ -5,7 +5,6 @@ import {
   AccordionItem,
   AccordionButton,
   Box,
-  AccordionIcon,
   AccordionPanel,
   Text,
 } from '@chakra-ui/react';
@@ -24,7 +23,7 @@ export const Accordion: React.FC<AccordionProps> = ({ items }): JSX.Element => {
   return (
     <ChakraAccordion allowToggle allowMultiple>
       {items.map((item) => (
-        <AccordionItem key={item.title} mb={10}>
+        <AccordionItem key={item.title} mb={{ base: 5, md: 10 }}>
           {({ isExpanded }: { isExpanded: boolean }) => (
             <>
               <AccordionButton
@@ -33,11 +32,14 @@ export const Accordion: React.FC<AccordionProps> = ({ items }): JSX.Element => {
                   boxShadow: 'none',
                 }}
                 className={`accordion-btn-bg`}
-                borderRadius={5}
-                py={5}
+                borderRadius={{ base: 2, md: 5 }}
+                py={{ base: 2, md: 5 }}
                 px={{ base: 5, md: 20 }}>
                 <Box flex={1} textAlign="left" py="10px">
-                  <Text className="font-md font-weight-500 color-white">
+                  <Text
+                    fontSize={{ base: '12px', md: '18px' }}
+                    lineHeight="16px"
+                    className="font-weight-500 color-white">
                     {item.title}
                   </Text>
                 </Box>
@@ -50,7 +52,8 @@ export const Accordion: React.FC<AccordionProps> = ({ items }): JSX.Element => {
                 />
               </AccordionButton>
               <AccordionPanel
-                lineHeight={'24px'}
+                fontSize={{ base: '12px', md: '16px' }}
+                lineHeight={{ base: '16px', md: '24px' }}
                 className="bg-white"
                 px={{ base: 5, md: 20 }}
                 py={10}

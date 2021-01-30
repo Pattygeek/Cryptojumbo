@@ -35,23 +35,33 @@ const VerifyOtp: React.FC<AuthProps> = ({ setState }): JSX.Element => {
     if (error) toast({ status: 'error', description: error.error });
   }, [success, error]);
   return (
-    <Box px={10}>
+    <Box pt={5}>
       <Flex direction="column" align="center" mb={5} px={{ base: '10px', md: 10 }}>
         <Text
           as="h2"
-          mb={3}
-          className="capitalize font-lg color-dark font-weight-600">
+          mb={{ base: '10px', md: 3 }}
+          fontSize={{ base: '16px', md: '24px' }}
+          lineHeight="16px"
+          className="capitalize color-dark font-weight-600">
           Forgot Password
         </Text>
-        <Text className="capitalize color-gray-text font-sm" textAlign="center">
+        <Text
+          fontSize={{ base: '12px', md: '20px' }}
+          lineHeight="16px"
+          className="color-gray-text"
+          textAlign="center">
           A one-time-password has been sent to your mail. Input the 5 digit password
           below.
         </Text>
       </Flex>
-      <Flex direction="column" align="center" mb={5} flex={1}>
-        <form onSubmit={formik.handleSubmit}>
-          <Flex mb={'80px'} justify="center">
-            <FormInput {...formik.getFieldProps('otp')} placeholder="*****" />
+      <Flex direction="column" align="center" mb={'80px'} flex={1}>
+        <form onSubmit={formik.handleSubmit} style={{ width: '100%' }}>
+          <Flex mb={'60px'} justify="center" px={'50px'}>
+            <FormInput
+              inputProps={{ letterSpacing: '14px' }}
+              {...formik.getFieldProps('otp')}
+              placeholder="******"
+            />
           </Flex>
           <SubmitButton
             loading={loading}

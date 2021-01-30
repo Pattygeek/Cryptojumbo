@@ -1,8 +1,6 @@
 import React from 'react';
 import { Box, Flex, Text, Image, Square, Stack, Center } from '@chakra-ui/react';
 import { NavigationTop, Footer, SectionWrapper } from '../components';
-import { AiOutlineStar } from 'react-icons/ai';
-import { FaAward } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import educate from '../../assets/education.png';
 import plant from '../../assets/plant.png';
@@ -15,146 +13,190 @@ const Academy: React.FC = (): JSX.Element => {
       <Box
         as="header"
         className="academy-header"
-        mb={{ base: '75%', sm: '40%', md: '20%' }}>
+        mb={{ base: '75%', sm: '40%', md: '20%' }}
+        pb="25px">
         <Box p={{ base: '0px', md: '20px 45px' }}>
           <NavigationTop />
         </Box>
-        <SectionWrapper>
-          <Flex direction="column" mt={{ base: 10, md: 20 }}>
-            <Box
-              flex={0.5}
-              maxWidth={{ base: '100%', md: '480px' }}
-              className="color-white">
-              <Text
-                as="h1"
-                className="font-xlg font-weight-600"
-                lineHeight="31px"
-                mb={'15px'}>
-                Jumbo Academy
-              </Text>
-              <Text lineHeight="29.5px" className="font-lg font-weight-400" mb={10}>
-                We believe the finanacial market should be universally accessible to
-                you.
-              </Text>
+        <Box position="relative">
+          <SectionWrapper justifyContent="flex-start">
+            <Flex direction="column" width="100%" mt={{ base: 5, md: 20 }}>
               <Box
-                as={Link}
-                to="/"
-                className="padding-horizontal-md padding-vertical-sm bg-white color-dark"
-                borderRadius={5}
-                transition="0.2s box-shadow"
-                _hover={{ boxShadow: '2px 4px 15px 1px rgba(0, 0, 0, 0.2)' }}>
-                Join Academy
-              </Box>
-            </Box>
-          </Flex>
-        </SectionWrapper>
-        <SectionWrapper mb={'60px'}>
-          <Box
-            as="article"
-            borderRadius={15}
-            boxShadow="0px 5px 20px rgba(20, 102, 204, 0.15)"
-            className="bg-white offers"
-            py={'40px'}
-            px={{ base: 5, md: '55px' }}
-            transform="translateY(70%)">
-            <Stack
-              direction={{ base: 'column', md: 'row' }}
-              className="what-we-do"
-              spacing={{ base: '20px', sm: '40px', md: 20 }}>
-              <Stack direction="row" spacing={5} flex={1}>
-                <Box display={{ base: 'inline-block', md: 'none' }}>
-                  <Image src={educate} alt="Education" width="25px" height="25px" />
+                flex={0.1}
+                className="color-white"
+                maxWidth={{ base: '180px', sm: '440px' }}>
+                <Text
+                  as="h1"
+                  fontSize={{ base: '14px', md: '30px' }}
+                  lineHeight="31px"
+                  className="font-weight-600"
+                  mb={{ base: '0px', md: '15px' }}>
+                  Jumbo Academy
+                </Text>
+                <Text
+                  fontSize={{ base: '11px', md: '22px' }}
+                  lineHeight={{ base: '14px', md: '29px' }}
+                  className="font-weight-400"
+                  mb={10}>
+                  We believe the finanacial market should be universally accessible
+                  to you.
+                </Text>
+                <Box
+                  as={Link}
+                  to="/"
+                  className="padding-horizontal-md padding-vertical-sm bg-white color-dark"
+                  borderRadius={5}
+                  transition="0.2s box-shadow"
+                  _hover={{ boxShadow: '2px 4px 15px 1px rgba(0, 0, 0, 0.2)' }}>
+                  Join Academy
                 </Box>
-                <Stack
-                  spacing={{ base: '10px', md: 5 }}
-                  direction="column"
-                  flex={1}
-                  className="academy">
-                  <Flex align="center" justify="space-between">
-                    <Box>
-                      <Text
-                        mb={{ base: '5px', md: 3 }}
-                        className="font-slg color-gray-heading font-weight-500">
-                        We educate
-                      </Text>
-                      <Box width="45px" height="2px" className="stroke" />
-                    </Box>
+              </Box>
+            </Flex>
+          </SectionWrapper>
+          <Box
+            position={{ base: 'absolute' }}
+            bottom={{ base: '-300px', sm: '-90%', md: '-400px' }}
+            left={{ base: '25px', md: 20, lg: 40 }}
+            right={{ base: '25px', md: 20, lg: 40 }}
+            display="flex"
+            flexDirection="column"
+            alignItems={{ base: 'flex-start', lg: 'center' }}>
+            <Box
+              width="100%"
+              maxWidth="1500px"
+              as="article"
+              borderRadius={15}
+              boxShadow="0px 5px 20px rgba(20, 102, 204, 0.15)"
+              className="bg-white offers"
+              py={{ base: '20px', md: '60px' }}
+              px={{ base: '30px', md: '50px', lg: '100px' }}>
+              <Stack
+                direction={{ base: 'column', sm: 'row' }}
+                className="what-we-do"
+                spacing={{ base: '20px', sm: '40px', md: 20 }}>
+                <Stack direction="row" spacing={5} flex={1}>
+                  <Box display={{ base: 'inline-block', md: 'none' }}>
                     <Image
                       src={educate}
                       alt="Education"
-                      display={{ base: 'none', md: 'inline-block' }}
+                      width="25px"
+                      height="25px"
                     />
-                  </Flex>
-                  <Text className="color-gray-text font-md" lineHeight="24px">
-                    We provide you with timely information to access better
-                    oppurtunities in the crypto space
-                  </Text>
+                  </Box>
+                  <Stack
+                    spacing={{ base: '5px', md: 5 }}
+                    direction="column"
+                    flex={1}
+                    className="academy">
+                    <Flex align="center" justify="space-between">
+                      <Box>
+                        <Text
+                          fontSize={{ base: '12px', md: '18px' }}
+                          lineHeight={'24px'}
+                          mb={{ base: '1px', md: 3 }}
+                          className="color-gray-heading font-weight-500">
+                          We educate
+                        </Text>
+                        <Box width="45px" height="2px" className="stroke" />
+                      </Box>
+                      <Image
+                        src={educate}
+                        alt="Education"
+                        display={{ base: 'none', md: 'inline-block' }}
+                      />
+                    </Flex>
+                    <Text
+                      fontSize={{ base: '9px', md: '14px' }}
+                      lineHeight={{ base: '11px', md: '24px' }}
+                      className="color-gray-text">
+                      We provide you with timely information to access better
+                      oppurtunities in the crypto space
+                    </Text>
+                  </Stack>
                 </Stack>
-              </Stack>
-              <Stack direction="row" spacing={5} flex={1}>
-                <Box display={{ base: 'inline-block', md: 'none' }}>
-                  <Image src={plant} alt="Plant" width="25px" height="25px" />
-                </Box>
-                <Stack spacing={5} direction="column" flex={1} className="academy">
-                  <Flex align="center" justify="space-between">
-                    <Box>
-                      <Text
-                        mb={{ base: '5px', md: 3 }}
-                        className="font-slg color-gray-heading font-weight-500">
-                        We inspire
-                      </Text>
-                      <Box width="45px" height="2px" className="stroke" />
-                    </Box>
-                    <Image
-                      src={plant}
-                      width="10px"
-                      height="auto"
-                      alt="Education"
-                      display={{ base: 'none', md: 'inline-block' }}
-                    />
-                  </Flex>
-                  <Text className="color-gray-text font-md" lineHeight="24px">
-                    Our diverse & collaborative team will inspire you with thoughtful
-                    & constructive feedbacks.
-                  </Text>
+                <Stack direction="row" spacing={5} flex={1}>
+                  <Box display={{ base: 'inline-block', md: 'none' }}>
+                    <Image src={plant} alt="Plant" width="25px" height="25px" />
+                  </Box>
+                  <Stack
+                    spacing={{ base: '5px', md: 5 }}
+                    direction="column"
+                    flex={1}
+                    className="academy">
+                    <Flex align="center" justify="space-between">
+                      <Box>
+                        <Text
+                          fontSize={{ base: '12px', md: '18px' }}
+                          lineHeight={'24px'}
+                          mb={{ base: '1px', md: 3 }}
+                          className="color-gray-heading font-weight-500">
+                          We inspire
+                        </Text>
+                        <Box width="45px" height="2px" className="stroke" />
+                      </Box>
+                      <Image
+                        src={plant}
+                        width="10px"
+                        height="auto"
+                        alt="Education"
+                        display={{ base: 'none', md: 'inline-block' }}
+                      />
+                    </Flex>
+                    <Text
+                      fontSize={{ base: '9px', md: '14px' }}
+                      lineHeight={{ base: '11px', md: '24px' }}
+                      className="color-gray-text">
+                      Our diverse & collaborative team will inspire you with
+                      thoughtful & constructive feedbacks.
+                    </Text>
+                  </Stack>
                 </Stack>
-              </Stack>
-              <Stack direction="row" spacing={5} flex={1}>
-                <Box display={{ base: 'inline-block', md: 'none' }}>
-                  <Image
-                    src={lightbulb}
-                    alt="Light bulb"
-                    width="25px"
-                    height="25px"
-                  />
-                </Box>
-                <Stack spacing={5} direction="column" flex={1} className="academy">
-                  <Flex align="center" justify="space-between">
-                    <Box>
-                      <Text
-                        mb={{ base: '5px', md: 3 }}
-                        className="font-slg color-gray-heading font-weight-500">
-                        We enrich
-                      </Text>
-                      <Box width="45px" height="2px" className="stroke" />
-                    </Box>
+                <Stack direction="row" spacing={5} flex={1}>
+                  <Box display={{ base: 'inline-block', md: 'none' }}>
                     <Image
                       src={lightbulb}
-                      width="10px"
-                      height="auto"
                       alt="Light bulb"
-                      display={{ base: 'none', md: 'inline-block' }}
+                      width="25px"
+                      height="25px"
                     />
-                  </Flex>
-                  <Text className="color-gray-text font-md" lineHeight="24px">
-                    We provide you with timely information to access better
-                    oppurtunities in the crypto space
-                  </Text>
+                  </Box>
+                  <Stack
+                    spacing={{ base: '5px', md: 5 }}
+                    direction="column"
+                    flex={1}
+                    className="academy">
+                    <Flex align="center" justify="space-between">
+                      <Box>
+                        <Text
+                          fontSize={{ base: '12px', md: '18px' }}
+                          lineHeight={'24px'}
+                          mb={{ base: '1px', md: 3 }}
+                          className="color-gray-heading font-weight-500">
+                          We enrich
+                        </Text>
+                        <Box width="45px" height="2px" className="stroke" />
+                      </Box>
+                      <Image
+                        src={lightbulb}
+                        width="10px"
+                        height="auto"
+                        alt="Light bulb"
+                        display={{ base: 'none', md: 'inline-block' }}
+                      />
+                    </Flex>
+                    <Text
+                      fontSize={{ base: '9px', md: '14px' }}
+                      lineHeight={{ base: '11px', md: '24px' }}
+                      className="color-gray-text">
+                      Our long term objective would enrich your goals, decisions &
+                      risks
+                    </Text>
+                  </Stack>
                 </Stack>
               </Stack>
-            </Stack>
+            </Box>
           </Box>
-        </SectionWrapper>
+        </Box>
       </Box>
       <AcademicPackage />
       <Center
@@ -197,6 +239,8 @@ const AcademicPackage: React.FC = (): JSX.Element => {
       <Box px={{ base: '10px', sm: '20px', md: '60px', lg: '120px' }}>
         <Stack direction="row" align="center" spacing={5} mb={10}>
           <Text
+            fontSize={{ base: '12px', md: '24px' }}
+            lineHeight="24px"
             textAlign="center"
             className="font-lg font-weight-500 color-gray-heading">
             Academy Stages & Packages
@@ -212,14 +256,23 @@ const AcademicPackage: React.FC = (): JSX.Element => {
               direction={{ base: 'row', sm: 'column' }}
               spacing={{ base: 3, sm: '35px' }}
               flex={0.4}>
-              <Square size={'60px'} borderRadius={5} bg="blue.100">
-                <Image src={award} width="30px" height="auto" />
+              <Square
+                size={{ base: '45px', md: '57px' }}
+                borderRadius={5}
+                bg="blue.100">
+                <Image
+                  src={award}
+                  width={{ base: '22px', md: '28px' }}
+                  height="auto"
+                />
               </Square>
               <Box flex={1}>
                 <Text
+                  fontSize={{ base: '11px', md: '16px' }}
+                  lineHeight={{ base: '16.5px', md: '24px' }}
                   mb={{ base: 1, sm: 3 }}
                   color="blue.100"
-                  className="uppercase font-md font-weight-500">
+                  className="uppercase font-weight-500">
                   beginner
                 </Text>
                 <Text className="font-sm color-gray-text">
@@ -232,14 +285,23 @@ const AcademicPackage: React.FC = (): JSX.Element => {
               direction={{ base: 'row', sm: 'column' }}
               spacing={{ base: 3, sm: '35px' }}
               flex={0.4}>
-              <Square size={'60px'} borderRadius={5} bg="brown.100">
-                <Image src={award} width="30px" height="auto" />
+              <Square
+                size={{ base: '45px', md: '57px' }}
+                borderRadius={5}
+                bg="brown.100">
+                <Image
+                  src={award}
+                  width={{ base: '22px', md: '28px' }}
+                  height="auto"
+                />
               </Square>
               <Box flex={1}>
                 <Text
+                  fontSize={{ base: '11px', md: '16px' }}
+                  lineHeight={{ base: '16.5px', md: '24px' }}
                   mb={{ base: 1, sm: 3 }}
                   color="brown.100"
-                  className="uppercase font-md font-weight-500">
+                  className="uppercase font-weight-500">
                   pro-beginner
                 </Text>
                 <Text className="font-sm color-gray-text">
@@ -257,13 +319,22 @@ const AcademicPackage: React.FC = (): JSX.Element => {
               direction={{ base: 'row', sm: 'column' }}
               spacing={{ base: 3, sm: '35px' }}
               flex={0.4}>
-              <Square size={'60px'} borderRadius={5} className="bg-primary-dirty">
-                <Image src={award} width="30px" height="auto" />
+              <Square
+                size={{ base: '45px', md: '57px' }}
+                borderRadius={5}
+                className="bg-primary-dirty">
+                <Image
+                  src={award}
+                  width={{ base: '22px', md: '28px' }}
+                  height="auto"
+                />
               </Square>
               <Box flex={1}>
                 <Text
+                  fontSize={{ base: '11px', md: '16px' }}
+                  lineHeight={{ base: '16.5px', md: '24px' }}
                   mb={{ base: 1, sm: 3 }}
-                  className="uppercase font-md color-primary-dirty font-weight-500">
+                  className="uppercase color-primary-dirty font-weight-500">
                   intermediate
                 </Text>
                 <Text className="font-sm color-gray-text">
@@ -276,13 +347,22 @@ const AcademicPackage: React.FC = (): JSX.Element => {
               direction={{ base: 'row', sm: 'column' }}
               spacing={{ base: 3, sm: '35px' }}
               flex={0.4}>
-              <Square size={'60px'} borderRadius={5} className="bg-primary">
-                <Image src={award} width="30px" height="auto" />
+              <Square
+                size={{ base: '45px', md: '57px' }}
+                borderRadius={5}
+                className="bg-primary">
+                <Image
+                  src={award}
+                  width={{ base: '22px', md: '28px' }}
+                  height="auto"
+                />
               </Square>
               <Box flex={1}>
                 <Text
+                  fontSize={{ base: '11px', md: '16px' }}
+                  lineHeight={{ base: '16.5px', md: '24px' }}
                   mb={{ base: 1, sm: 3 }}
-                  className="uppercase font-md color-primary font-weight-500">
+                  className="uppercase color-primary font-weight-500">
                   expert
                 </Text>
                 <Text className="font-sm color-gray-text">

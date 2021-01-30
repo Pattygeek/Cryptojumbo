@@ -35,27 +35,25 @@ const ForgotPassword: React.FC<AuthProps> = ({ setState }): JSX.Element => {
     if (error) toast({ status: 'error', description: error.error });
   }, [success, error]);
   return (
-    <Box flex={1}>
+    <Box pt={5}>
       <Flex direction="column" justify="center" align="center" mb={5}>
         <Text
           as="h2"
-          mb={3}
-          className="capitalize font-lg color-dark font-weight-600">
+          mb={{ base: 0, md: 3 }}
+          fontSize={{ base: '16px', md: '24px' }}
+          lineHeight="16px"
+          className="capitalize color-dark font-weight-600">
           Forgot Password
         </Text>
-        <Text className="capitalize color-gray-text font-md">
+        <Text
+          fontSize={{ base: '11px', md: '20px' }}
+          lineHeight="24px"
+          className="capitalize color-gray-text font-md">
           Recover your account
         </Text>
       </Flex>
-      <Flex
-        direction="column"
-        align="center"
-        justify="space-between"
-        mb={5}
-        px={{ base: '10px', md: 10 }}
-        flex={1}
-        height="80%">
-        <Box>
+      <Flex direction="column" align="center" justify="space-between" width="full">
+        <Box width="full" mb="60px">
           <FormInput
             {...formik.getFieldProps('email')}
             placeholder="email@example.com"
@@ -63,12 +61,14 @@ const ForgotPassword: React.FC<AuthProps> = ({ setState }): JSX.Element => {
             isRequired
           />
         </Box>
-        <SubmitButton
-          loading={loading}
-          disabled={!(formik.isValid && formik.dirty)}
-          action={formik.handleSubmit}>
-          Continue
-        </SubmitButton>
+        <Box mb="50px" width="full">
+          <SubmitButton
+            loading={loading}
+            disabled={!(formik.isValid && formik.dirty)}
+            action={formik.handleSubmit}>
+            Continue
+          </SubmitButton>
+        </Box>
         <Box>
           <Text
             textAlign="center"
