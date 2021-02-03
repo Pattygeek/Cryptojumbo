@@ -5,8 +5,10 @@ export interface ProfileProps {
   first_name: string;
   last_name: string;
   gender: string;
-  account_number: string;
-  bank_name: string;
+  deposit_account_number: string;
+  deposit_bank_name: string;
+  withdrawal_account_number: string;
+  withdrawal_bank_name: string;
   birthday: string;
   phone: string;
   state: string;

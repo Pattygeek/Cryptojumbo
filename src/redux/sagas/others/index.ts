@@ -5,8 +5,8 @@ import { clientErrorMessage } from '../reusables';
 import {
   GET_CURRENCIES_REQUEST,
   GetProfileRequestPayload,
-  UploadUtilityBillRequestPayload,
-  UPLOAD_UTILITY_BILL_REQUEST,
+  IdVerificationRequestPayload,
+  ID_VERIFICATION_REQUEST,
   GET_FAQ_REQUEST,
   VerifyBankAccountRequestPayload,
   VERIFY_BANK_ACCOUNT_REQUEST,
@@ -18,10 +18,10 @@ import {
   getCurrenciesFailure,
   getCurrenciesRequest,
   getCurrenciesLoadingIndicator,
-  uploadUtilityBillLoadingIndicator,
-  uploadUtilityBillSuccess,
-  uploadUtilityBillFailure,
-  uploadUtilityBillRequest,
+  idVerificationLoadingIndicator,
+  idVerificationSuccess,
+  idVerificationFailure,
+  idVerificationRequest,
   getFAQRequest,
   getFAQLoadingIndicator,
   getFAQSuccess,
@@ -45,11 +45,10 @@ const ajaxDBCalls = {
     const response = await Axios.get(`/currencies/price?convert=NGN`);
     return response;
   },
-  uploadUtilityBill: async ({ token, data }: UploadUtilityBillRequestPayload) => {
-    const response = await Axios.post(`/upload/utility-bill`, data, {
+  idVerification: async ({ token, data }: IdVerificationRequestPayload) => {
+    const response = await Axios.post(`/identity/verify`, data, {
       headers: {
         Authorization: `Token ${token}`,
-        'Content-Type': 'multipart/formdata',
       },
     });
     return response;
@@ -104,14 +103,12 @@ function* getCurrencies() {
   }
 }
 
-function* uploadUtilityBill({
-  payload,
-}: ReturnType<typeof uploadUtilityBillRequest>) {
+function* idVerification({ payload }: ReturnType<typeof idVerificationRequest>) {
   try {
-    yield put(uploadUtilityBillLoadingIndicator(true));
-    const { data, status } = yield call(ajaxDBCalls.uploadUtilityBill, payload);
+    yield put(idVerificationLoadingIndicator(true));
+    const { data, status } = yield call(ajaxDBCalls.idVerification, payload);
 
-    yield put(uploadUtilityBillSuccess({ ...data, status }));
+    yield put(idVerificationSuccess({ ...data, status }));
   } catch (err) {
     let status = 0;
     let error = '';
@@ -121,9 +118,9 @@ function* uploadUtilityBill({
       error = err.response.data.message;
     }
     console.log('error', err);
-    yield put(uploadUtilityBillFailure({ error, status }));
+    yield put(idVerificationFailure({ error, status }));
   } finally {
-    yield put(uploadUtilityBillLoadingIndicator(false));
+    yield put(idVerificationLoadingIndicator(false));
   }
 }
 
@@ -213,8 +210,8 @@ function* getCurrenciesWWatcher(): IterableIterator<any> {
   yield takeLatest(GET_CURRENCIES_REQUEST, getCurrencies);
 }
 
-function* uploadUtilityBillWWatcher(): IterableIterator<any> {
-  yield takeLatest(UPLOAD_UTILITY_BILL_REQUEST, uploadUtilityBill);
+function* idVerificationWWatcher(): IterableIterator<any> {
+  yield takeLatest(ID_VERIFICATION_REQUEST, idVerification);
 }
 
 function* verifyBankAccountWatcher(): IterableIterator<any> {
@@ -231,7 +228,7 @@ function* getRatesWatcher(): IterableIterator<any> {
 
 export default function* OtherSagas() {
   yield spawn(getCurrenciesWWatcher);
-  yield spawn(uploadUtilityBillWWatcher);
+  yield spawn(idVerificationWWatcher);
   yield spawn(verifyBankAccountWatcher);
   yield spawn(getFAQWatcher);
   yield spawn(getRatesWatcher);

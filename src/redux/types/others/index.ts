@@ -31,11 +31,17 @@ export interface RateProps {
   };
 }
 
-export type UploadUtilityBillRequestPayload = Token & {
-  data: FormData;
+export type IdVerificationRequestPayload = Token & {
+  data: {
+    id_type: string;
+    id_number: string;
+    first_name: string;
+    last_name: string;
+    date_of_birth: string;
+  };
 };
 
-export type UploadUtilityBillSuccessPayload = AjaxSuccessPayload;
+export type IdVerificationSuccessPayload = AjaxSuccessPayload;
 
 export type TradeRequestPayload = Token & {
   data: {
@@ -74,12 +80,12 @@ export interface GetCurrenciesSuccessProp extends Type {
   payload: GetCurrenciesSuccessPayload;
 }
 
-export interface UploadUtilityBillRequestProp extends Type {
-  payload: UploadUtilityBillRequestPayload;
+export interface IdVerificationRequestProp extends Type {
+  payload: IdVerificationRequestPayload;
 }
 
-export interface UploadUtilityBillSuccessProp extends Type {
-  payload: UploadUtilityBillSuccessPayload;
+export interface IdVerificationSuccessProp extends Type {
+  payload: IdVerificationSuccessPayload;
 }
 
 export interface TradeRequestProp extends Type {

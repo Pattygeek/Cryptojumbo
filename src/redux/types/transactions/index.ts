@@ -43,13 +43,13 @@ export interface TransactionProp {
 
 //payloads
 export interface AllTransactionRequestPayload extends Token {
-  limit?: number;
-  offset?: number;
+  page?: number;
 }
 
 export type AllTransactionSuccessPayload = AjaxSuccessPayload & {
   data: {
     count: number;
+    total_pages: number;
     next: null | number;
     previous: null | number;
     results: TransactionProp[];

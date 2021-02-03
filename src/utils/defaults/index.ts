@@ -14,3 +14,11 @@ export const coinFaucets = {
   ETH: 'https://ropsten.etherscan.io/tx/',
   USDT: 'https://ropsten.etherscan.io/tx/',
 };
+
+export const identificationTypes = [
+  { value: 'bvn', name: 'BVN' },
+  { value: 'voter', name: "Voter's Card" },
+  { value: 'passport', name: 'Passport' },
+  { value: 'national_id', name: 'National ID' },
+  { value: 'driver_license', name: "Driver's License" },
+];

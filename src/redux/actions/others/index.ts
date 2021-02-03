@@ -10,14 +10,14 @@ import {
   LoadingIndicatorProp,
   AjaxErrorPayload,
   AjaxErrorProp,
-  UploadUtilityBillRequestPayload,
-  UploadUtilityBillRequestProp,
-  UPLOAD_UTILITY_BILL_REQUEST,
-  UploadUtilityBillSuccessPayload,
-  UploadUtilityBillSuccessProp,
-  UPLOAD_UTILITY_BILL_SUCCESS,
-  UPLOAD_UTILITY_BILL_FAILURE,
-  UPLOAD_UTILITY_BILL_LOADING_INDICATOR,
+  IdVerificationRequestPayload,
+  IdVerificationRequestProp,
+  ID_VERIFICATION_REQUEST,
+  IdVerificationSuccessPayload,
+  IdVerificationSuccessProp,
+  ID_VERIFICATION_SUCCESS,
+  ID_VERIFICATION_FAILURE,
+  ID_VERIFICATION_LOADING_INDICATOR,
   TradeRequestPayload,
   TradeRequestProp,
   TRADE_REQUEST,
@@ -85,36 +85,36 @@ export const getCurrenciesLoadingIndicator = (
   };
 };
 
-export const uploadUtilityBillRequest = (
-  prop: UploadUtilityBillRequestPayload,
-): UploadUtilityBillRequestProp => {
+export const idVerificationRequest = (
+  prop: IdVerificationRequestPayload,
+): IdVerificationRequestProp => {
   return {
-    type: UPLOAD_UTILITY_BILL_REQUEST,
+    type: ID_VERIFICATION_REQUEST,
     payload: prop,
   };
 };
 
-export const uploadUtilityBillSuccess = (
-  prop: UploadUtilityBillSuccessPayload,
-): UploadUtilityBillSuccessProp => {
+export const idVerificationSuccess = (
+  prop: IdVerificationSuccessPayload,
+): IdVerificationSuccessProp => {
   return {
-    type: UPLOAD_UTILITY_BILL_SUCCESS,
+    type: ID_VERIFICATION_SUCCESS,
     payload: prop,
   };
 };
 
-export const uploadUtilityBillFailure = (prop: AjaxErrorPayload): AjaxErrorProp => {
+export const idVerificationFailure = (prop: AjaxErrorPayload): AjaxErrorProp => {
   return {
-    type: UPLOAD_UTILITY_BILL_FAILURE,
+    type: ID_VERIFICATION_FAILURE,
     payload: prop,
   };
 };
 
-export const uploadUtilityBillLoadingIndicator = (
+export const idVerificationLoadingIndicator = (
   loading: boolean,
 ): LoadingIndicatorProp => {
   return {
-    type: UPLOAD_UTILITY_BILL_LOADING_INDICATOR,
+    type: ID_VERIFICATION_LOADING_INDICATOR,
     payload: { loading },
   };
 };

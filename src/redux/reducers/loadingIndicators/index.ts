@@ -15,7 +15,7 @@ import {
   UPDATE_TRANSACTION_LOADING_INDICATOR,
   UPDATE_PROFILE_LOADING_INDICATOR,
   GET_CURRENCIES_LOADING_INDICATOR,
-  UPLOAD_UTILITY_BILL_LOADING_INDICATOR,
+  ID_VERIFICATION_LOADING_INDICATOR,
   SWAP_CRYPTO_LOADING_INDICATOR,
   BUY_CRYPTO_LOADING_INDICATOR,
   SELL_CRYPTO_LOADING_INDICATOR,
@@ -132,8 +132,8 @@ export const loadingIndicatorsReducer = (
     case GET_CURRENCIES_LOADING_INDICATOR:
       prevState.getCurrencies = payload.loading;
       return { ...prevState };
-    case UPLOAD_UTILITY_BILL_LOADING_INDICATOR:
-      prevState.uploadUtilityBill = payload.loading;
+    case ID_VERIFICATION_LOADING_INDICATOR:
+      prevState.idVerification = payload.loading;
       return { ...prevState };
     case GET_FAQ_LOADING_INDICATOR:
       prevState.getFAQ = payload.loading;

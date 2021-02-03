@@ -31,8 +31,8 @@ import {
   GET_CRYPTO_WALLETS_FAILURE,
   GET_CURRENCIES_SUCCESS,
   GET_CURRENCIES_FAILURE,
-  UPLOAD_UTILITY_BILL_SUCCESS,
-  UPLOAD_UTILITY_BILL_FAILURE,
+  ID_VERIFICATION_SUCCESS,
+  ID_VERIFICATION_FAILURE,
   SWAP_CRYPTO_SUCCESS,
   SWAP_CRYPTO_FAILURE,
   BUY_CRYPTO_SUCCESS,
@@ -254,11 +254,11 @@ export const ajaxStatuses = (
     case GET_CURRENCIES_FAILURE:
       prevState.errors.getCurrencies = payload;
       return { ...prevState };
-    case UPLOAD_UTILITY_BILL_SUCCESS:
-      prevState.success.uploadUtilityBill = payload;
+    case ID_VERIFICATION_SUCCESS:
+      prevState.success.idVerification = payload;
       return { ...prevState };
-    case UPLOAD_UTILITY_BILL_FAILURE:
-      prevState.errors.uploadUtilityBill = payload;
+    case ID_VERIFICATION_FAILURE:
+      prevState.errors.idVerification = payload;
       return { ...prevState };
     case GET_FAQ_SUCCESS:
       prevState.success.getFAQ = payload;

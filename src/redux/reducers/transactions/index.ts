@@ -10,6 +10,7 @@ export interface TransactionStore {
   count?: number;
   next: null | number;
   previous: null | number;
+  total_pages?: number;
 }
 const initialState = (): TransactionStore => ({
   transactions: [],
@@ -22,11 +23,12 @@ export const transactionReducer = (
 ): TransactionStore => {
   switch (type) {
     case GET_ALL_TRANSACTIONS_SUCCESS:
-      const { count, next, previous, results } = payload.data;
-      prevState.transactions = [...prevState.transactions, ...results];
+      const { count, next, previous, results, total_pages } = payload.data;
+      prevState.transactions = [...results];
       prevState.count = count;
       prevState.next = next;
       prevState.previous = previous;
+      prevState.total_pages = total_pages;
       return { ...prevState };
     case LOGOUT_SUCCESS:
       return initialState();

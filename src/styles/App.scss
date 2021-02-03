@@ -126,7 +126,7 @@
   }
 
   .payment-method {
-    border: 1px solid transparent;
+    border: 1px solid #f7f7f7;
     &.checked {
       border-color: $primary;
     }
@@ -320,7 +320,7 @@ nav {
       .nav-links {
         background: #fbfbfb;
         width: auto !important;
-        height: 100vh;
+        height: 100%;
         transform: translateX(-100%);
         transition: 0.3s transform;
         .navlink {
@@ -363,23 +363,6 @@ nav {
     }
   }
 }
-
-// .asset-container {
-//   @extend .slim-border-bottom;
-//   @include media-breakpoint-up(sm) {
-//     border-bottom: none;
-//     &:nth-of-type(odd) {
-//       border-right: 1px solid #e0e0e0;
-//     }
-//   }
-// }
-
-// .asset-wrapper-divider {
-//   border-bottom: none;
-//   @include media-breakpoint-up(sm) {
-//     border-bottom: 1px solid rgba(231, 231, 231, 0.31);
-//   }
-// }
 
 .tooltip {
   opacity: 0;
@@ -434,5 +417,23 @@ nav {
   border-bottom: 1px solid #e0e0e0;
   &:last-of-type {
     border-bottom: none;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.page {
+  font-size: 0.8em;
+  padding: 2px 10px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  margin-right: 10px;
+  cursor: pointer;
+  &:hover {
+    border-color: #dcdcdc;
   }
 }

@@ -28,8 +28,8 @@ import { clientErrorMessage } from '../reusables';
 import Axios from '../axios';
 
 const ajaxDBCalls = {
-  getTransactions: async ({ token }: AllTransactionRequestPayload) => {
-    const response = await Axios.get('/transactions', {
+  getTransactions: async ({ token, page = 1 }: AllTransactionRequestPayload) => {
+    const response = await Axios.get(`/transactions?page=${page}`, {
       headers: { Authorization: `Token ${token}` },
     });
     return response;
