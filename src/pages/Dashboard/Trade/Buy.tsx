@@ -17,8 +17,9 @@ import {
   CurrencySymbols,
   MakePaymentMethods,
   ReceivePaymentMethods,
-  uploadUtilityBillRequest,
+  idVerificationRequest,
 } from '../../../redux';
+import { IdentityVerification } from './Sell';
 
 declare interface BuyProps extends TradeWrapperProps {
   amount: string;
@@ -59,7 +60,7 @@ const Buy: React.FC<BuyProps> = ({
       {progress !== Progress.paymentResponse && !(error || success) ? (
         <TradeWrapper heading={heading} onClose={onClose}>
           {progress === Progress.utility && (
-            <UploadUtilityBill action={() => setProgress(Progress.payment)} />
+            <IdentityVerification action={() => setProgress(Progress.payment)} />
           )}
           {progress === Progress.payment && (
             <MakePayment coinSymbol={coin} coinValue={coinValue} amount={amount} />
@@ -83,82 +84,82 @@ const Buy: React.FC<BuyProps> = ({
   );
 };
 
-declare interface UploadUtilityBillProps {
-  action: () => void;
-}
-export const UploadUtilityBill: React.FC<UploadUtilityBillProps> = ({
-  action,
-}): JSX.Element => {
-  const { FileUpload, file } = useFileUpload();
-  const toast = useAjaxToast();
-  const dispatch = useDispatch();
-  const { loading, success, error, token } = useSelector((state: AppState) => {
-    const { token } = state.auth;
-    const { buyCrypto: loading } = state.loadingIndicators;
-    const {
-      success: { uploadUtilityBill: success },
-      errors: { uploadUtilityBill: error },
-    } = state.ajaxStatuses;
-    return { loading, success, error, token };
-  });
-  const uploadBill = () => {
-    const formData = new FormData();
-    formData.append('file', file as File);
-    dispatch(uploadUtilityBillRequest({ token, data: formData }));
-  };
-  useEffect(() => {
-    if (error)
-      toast({
-        status: 'error',
-        description: error.error,
-      });
-    if (success) action();
-  }, [success, error]);
-  return (
-    <Box>
-      <Text
-        mb={10}
-        textAlign="center"
-        className="color-gray-text font-sm font-weight-400">
-        We’d need a few more details to complete this trade
-      </Text>
-      <Flex borderRadius="20px" mb={10} className="trade-upload-area">
-        <Flex
-          direction="column"
-          align="center"
-          justify="center"
-          width="100%"
-          height="100%">
-          <Text
-            px={5}
-            className="font-weight-500 font-sm color-dark text-overflow-1"
-            mb={5}>
-            {!file ? 'Upload Utility Bill' : file.name}
-          </Text>
-          <FileUpload
-            fileType={[fileTypes['image/jpeg'], fileTypes['image/png']]}
-            maxFileSize={2}>
-            <Box
-              display="inline-flex"
-              alignItems="center"
-              p={2}
-              className={`border-radius-xs ${
-                !file ? 'bg-primary' : 'bg-primary-transparent'
-              }`}>
-              <Text mr={2} className="font-sm color-white font-weight-500">
-                Choose file
-              </Text>
-              <AiOutlinePlus size={16} className="color-white" />
-            </Box>
-          </FileUpload>
-        </Flex>
-      </Flex>
-      <SubmitButton loading={loading} disabled={!file} action={uploadBill}>
-        Continue
-      </SubmitButton>
-    </Box>
-  );
-};
+// declare interface IdVerificationProps {
+//   action: () => void;
+// }
+// export const IdVerification: React.FC<IdVerificationProps> = ({
+//   action,
+// }): JSX.Element => {
+//   const { FileUpload, file } = useFileUpload();
+//   const toast = useAjaxToast();
+//   const dispatch = useDispatch();
+//   const { loading, success, error, token } = useSelector((state: AppState) => {
+//     const { token } = state.auth;
+//     const { buyCrypto: loading } = state.loadingIndicators;
+//     const {
+//       success: { idVerification: success },
+//       errors: { idVerification: error },
+//     } = state.ajaxStatuses;
+//     return { loading, success, error, token };
+//   });
+//   const uploadBill = () => {
+//     const formData = new FormData();
+//     formData.append('file', file as File);
+//     dispatch(idVerificationRequest({ token, data: formData }));
+//   };
+//   useEffect(() => {
+//     if (error)
+//       toast({
+//         status: 'error',
+//         description: error.error,
+//       });
+//     if (success) action();
+//   }, [success, error]);
+//   return (
+//     <Box>
+//       <Text
+//         mb={10}
+//         textAlign="center"
+//         className="color-gray-text font-sm font-weight-400">
+//         We’d need a few more details to complete this trade
+//       </Text>
+//       <Flex borderRadius="20px" mb={10} className="trade-upload-area">
+//         <Flex
+//           direction="column"
+//           align="center"
+//           justify="center"
+//           width="100%"
+//           height="100%">
+//           <Text
+//             px={5}
+//             className="font-weight-500 font-sm color-dark text-overflow-1"
+//             mb={5}>
+//             {!file ? 'Upload Utility Bill' : file.name}
+//           </Text>
+//           <FileUpload
+//             fileType={[fileTypes['image/jpeg'], fileTypes['image/png']]}
+//             maxFileSize={2}>
+//             <Box
+//               display="inline-flex"
+//               alignItems="center"
+//               p={2}
+//               className={`border-radius-xs ${
+//                 !file ? 'bg-primary' : 'bg-primary-transparent'
+//               }`}>
+//               <Text mr={2} className="font-sm color-white font-weight-500">
+//                 Choose file
+//               </Text>
+//               <AiOutlinePlus size={16} className="color-white" />
+//             </Box>
+//           </FileUpload>
+//         </Flex>
+//       </Flex>
+//       <SubmitButton loading={loading} disabled={!file} action={uploadBill}>
+//         Continue
+//       </SubmitButton>
+//     </Box>
+//   );
+// };
 
 declare interface MakePaymentProps {
   amount: string;
@@ -220,7 +221,7 @@ const MakePayment: React.FC<MakePaymentProps> = ({
   }, [success, error]);
   return (
     <Flex flex={1} direction="column" justifyContent="space-between">
-      <Box>
+      <Box pb="180px">
         <Text className="font-sm color-gray-text font-weight-500">Pay with</Text>
         <RadioGroup onChange={setMethod} value={method}>
           <Stack spacing={2} direction="column">
@@ -266,9 +267,11 @@ const MakePayment: React.FC<MakePaymentProps> = ({
           </Stack>
         </RadioGroup>
       </Box>
-      <SubmitButton loading={loading} action={makePayment}>
-        Continue
-      </SubmitButton>
+      <Box px={{ base: 0, sm: 5 }}>
+        <SubmitButton loading={loading} action={makePayment}>
+          Continue
+        </SubmitButton>
+      </Box>
     </Flex>
   );
 };

@@ -12,6 +12,7 @@ import {
   FormControl,
   InputGroup,
   useDisclosure,
+  Center,
 } from '@chakra-ui/react';
 import bitcoin from '../../../assets/bitcoin.png';
 import eth from '../../../assets/ethereum.png';
@@ -88,17 +89,23 @@ const Trade: React.FC = (): JSX.Element => {
     }
   }, [coin, coinPrice, dollarEquivalent]);
   return (
-    <Flex direction="column" justify="center" align="center" flex={1} height="100%">
+    <Flex
+      direction="column"
+      justify="center"
+      align="center"
+      flex={1}
+      height="100%"
+      width="full"
+      pb={{ base: 0, md: 5 }}>
       {!isOpen && (
         <Flex
           className="trade card-shadow"
           borderRadius="0px 6px 6px 0px"
-          maxWidth={{ base: '100%', sm: '421px' }}
+          width={{ base: '100%', sm: '421px' }}
           height={{ base: 'auto', sm: '449px' }}
           boxShadow="8px 8px 16px 4px rgba(137, 143, 150, 0.04)">
           <Flex
             direction="column"
-            flex={2}
             maxWidth={{ base: '79px', sm: '95px' }}
             className="trade-sidebar"
             borderRadius="0px 6px 6px 0px">
@@ -140,14 +147,15 @@ const Trade: React.FC = (): JSX.Element => {
               </Flex>
             ))}
           </Flex>
-          <Box flex={7} px={10} py={5} className="bg-white">
+          <Box flex={1} px={10} py={5} className="bg-white">
             <Flex
               direction="column"
               justify="center"
               align="center"
               flex={1}
+              width="full"
               height="100%">
-              <Box mb={10}>
+              <Center flexDirection="column" mb={10} width="full">
                 <ButtonGroup
                   p={'5px'}
                   className="trade-type-btn-group border-radius-sm"
@@ -185,9 +193,9 @@ const Trade: React.FC = (): JSX.Element => {
                     {formatAmount(+rates[coin.symbol].sell, 'NGN')}
                   </Text>
                 </Text>
-              </Box>
-              <Box mb={5}>
-                <FormControl mb={4}>
+              </Center>
+              <Box mb={5} width="full">
+                <FormControl mb={4} width="full">
                   <Text className="font-weight-500 color-dark font-sm">
                     {coin.symbol}
                   </Text>
@@ -204,6 +212,7 @@ const Trade: React.FC = (): JSX.Element => {
                       value={coinPrice}
                       onChange={handleCoinPriceChange}
                       focusBorderColor="brand.100"
+                      width="full"
                       mb={1}>
                       <NumberInputField
                         value={coinPrice}
@@ -214,7 +223,10 @@ const Trade: React.FC = (): JSX.Element => {
                   </InputGroup>
                 </FormControl>
                 <Box>
-                  <Text className="font-weight-500 font-sm color-gray-text">
+                  <Text
+                    fontSize={{ base: '14px', md: '16px' }}
+                    lineHeight="18px"
+                    className="font-weight-500 color-gray-text">
                     USD
                   </Text>
                   <NumberInput
@@ -223,7 +235,7 @@ const Trade: React.FC = (): JSX.Element => {
                     onChange={handleDollarChange}
                     focusInputOnChange={false}
                     flex={0.7}
-                    backgroundColor="rgba(225, 225, 225, 0.48)"
+                    backgroundColor="gray.300"
                     border="0px"
                     focusBorderColor="transparent">
                     <NumberInputField
@@ -238,7 +250,8 @@ const Trade: React.FC = (): JSX.Element => {
                     <Box
                       display="inline-block"
                       p={2}
-                      className="border-radius-sm bg-gray">
+                      borderRadius={4}
+                      className="bg-gray">
                       <Text
                         textAlign="right"
                         className="font-sm color-gray-text font-weight-400">

@@ -33,6 +33,7 @@ export const TradeCoin: React.FC<TradeCoinProps> = ({
     <Stack
       align="center"
       flex={1}
+      mb={{ base: 0, sm: 6, lg: 0 }}
       // width={{ base: '100%', sm: '49%' }}
       className="bg-white border-radius-sm"
       spacing={'20px'}
@@ -102,6 +103,7 @@ export const SwapCoin: React.FC = (): JSX.Element => {
     <Stack
       align="center"
       flex={1}
+      mb={{ base: 0, sm: 6, lg: 0 }}
       borderWidth="2px"
       borderColor="brand.100"
       borderStyle="solid"
@@ -115,7 +117,6 @@ export const SwapCoin: React.FC = (): JSX.Element => {
         spacing="10px"
         borderRadius={5}
         border="1px solid #BDBDBD"
-        mb={{ sm: 5, md: 0 }}
         p={'6px'}
         align="center">
         <Flex align="center">

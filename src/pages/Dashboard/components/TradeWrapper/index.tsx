@@ -12,10 +12,7 @@ export const TradeWrapper: React.FC<TradeWrapperProps> = ({
   heading,
 }): JSX.Element => {
   return (
-    <Box
-      className="trade"
-      width={{ base: '100%', sm: '380px' }}
-      height={{ base: '100%', sm: '500px' }}>
+    <Box className="trade" width={{ base: '100%', sm: '380px' }} height="auto">
       <Flex
         align="center"
         className="bg-secondary"
@@ -46,8 +43,8 @@ export const TradeWrapper: React.FC<TradeWrapperProps> = ({
         height="full"
         borderTopLeftRadius={6}
         borderTopRightRadius={6}
-        py={10}
-        pb={'90px'}
+        pt={10}
+        pb={'20px'}
         px={10}
         mt={-4}
         className="bg-white">

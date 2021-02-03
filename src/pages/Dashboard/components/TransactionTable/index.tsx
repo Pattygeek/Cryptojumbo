@@ -1,7 +1,9 @@
+/* eslint-disable prefer-const */
 import React, { useState, useLayoutEffect } from 'react';
 import { FiCheckCircle } from 'react-icons/fi';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import { FaRegTimesCircle } from 'react-icons/fa';
+import ReactPaginate from 'react-paginate';
 import {
   Flex,
   Square,
@@ -46,20 +48,30 @@ export const TransactionTable: React.FC = (): JSX.Element => {
   const dispatch = useDispatch();
   const [coinType, setCoinType] = useState<string>('All');
   const coins = ['All', 'BTC', 'ETH', 'USDT', 'NGN'];
-  const { token, transactions, loading } = useSelector((state: AppState) => {
-    const { token } = state.auth;
-    let { transactions } = state.transaction;
-    if (coinType.toLowerCase() !== 'all') {
-      transactions = transactions.filter(
-        (transaction) => transaction.currency === coinType,
-      );
-    }
-    const { getAllTransactions: loading } = state.loadingIndicators;
-    return { token, transactions, loading };
-  });
+  const { token, transactions, loading, total_pages } = useSelector(
+    (state: AppState) => {
+      const { token } = state.auth;
+      let { transactions, total_pages } = state.transaction;
+      if (coinType.toLowerCase() !== 'all') {
+        transactions = transactions.filter(
+          (transaction) => transaction.currency === coinType,
+        );
+      }
+      const { getAllTransactions: loading } = state.loadingIndicators;
+      return { token, transactions, loading, total_pages };
+    },
+  );
   useLayoutEffect(() => {
     if (transactions.length === 0) dispatch(allTransactionRequest({ token }));
   }, []);
+  const handlePageChange = (selectedObject: any) => {
+    dispatch(
+      allTransactionRequest({
+        token,
+        page: selectedObject.selected + 1,
+      }),
+    );
+  };
   if (loading)
     return (
       <Box flex={1} className="bg-white border-radius-sm" p={5}>
@@ -78,11 +90,13 @@ export const TransactionTable: React.FC = (): JSX.Element => {
       </Text>
       <Stack
         direction="row"
+        flexWrap="wrap"
         display="inline-flex"
         className="border-radius-xs"
         bg="gray.200"
         p={1}
-        mb={5}>
+        mb={5}
+        spacing="0px">
         {coins.map((coin) => (
           <Box
             key={coin}
@@ -117,6 +131,23 @@ export const TransactionTable: React.FC = (): JSX.Element => {
           </Text>
         </Center>
       )}
+      <Flex justify="flex-end" mt={5}>
+        {total_pages && (
+          <ReactPaginate
+            pageCount={total_pages as number}
+            pageRangeDisplayed={2}
+            marginPagesDisplayed={2}
+            onPageChange={handlePageChange}
+            containerClassName={'container'}
+            previousLinkClassName={'page'}
+            breakClassName={'page'}
+            nextLinkClassName={'page'}
+            pageClassName={'page'}
+            disabledClassName={'disabled'}
+            activeClassName={'active bg-primary font-weight-600 color-white'}
+          />
+        )}
+      </Flex>
     </Box>
   );
 };

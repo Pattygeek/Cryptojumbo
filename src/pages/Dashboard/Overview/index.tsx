@@ -83,11 +83,11 @@ const Overview: React.FC = (): JSX.Element => {
         spacing={'10px'}
         width="100%"
         mb={'20px'}>
-        <Stack direction="row" spacing={'10px'} mb={6} flex={1}>
+        <Stack direction="row" flexWrap="wrap" spacing={'10px'} mb={6} flex={1}>
           <TradeCoin key={tradableCoins[0].symbol} {...tradableCoins[0]} />
           <TradeCoin key={tradableCoins[1].symbol} {...tradableCoins[1]} />
         </Stack>
-        <Stack direction="row" spacing={'10px'} mb={6} flex={1}>
+        <Stack direction="row" flexWrap="wrap" spacing={'10px'} mb={6} flex={1}>
           <TradeCoin key={tradableCoins[2].symbol} {...tradableCoins[2]} />
           <SwapCoin />
         </Stack>
@@ -101,8 +101,14 @@ const Overview: React.FC = (): JSX.Element => {
         </Flex>
         <Stack
           direction={{ base: 'column', sm: 'row' }}
-          spacing={'10px'}
-          divider={<StackDivider borderColor="gray.500" />}
+          spacing={'0px'}
+          align="stretch"
+          divider={
+            <StackDivider
+              display={{ base: 'none', lg: 'block' }}
+              borderColor="gray.500"
+            />
+          }
           flexWrap="wrap">
           {Object.keys(cryptos).map((currency) => {
             if (Object.values(CurrencySymbols).includes(currency as CurrencySymbols))

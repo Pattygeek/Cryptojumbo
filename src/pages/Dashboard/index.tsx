@@ -39,9 +39,11 @@ const Dashboard: React.FC<RouteComponentProps> = ({
           mb={0}
           px={{ base: 5, sm: 10, md: '100px' }}
           py={0}
+          pt={5}
           as="main"
           display="flex"
           flexDirection="column"
+          justifyContent="flex-start"
           flex={1}
           height="100%">
           <Route exact path={`${path}`} component={Overview} />

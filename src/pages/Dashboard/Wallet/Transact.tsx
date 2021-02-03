@@ -130,37 +130,39 @@ const DepositNaira: React.FC<{ coinSymbol: string }> = ({
 }): JSX.Element => {
   const dispatch = useDispatch();
   const toast = useAjaxToast();
-  const { token, success, error, loading, depositLink } = useSelector(
-    (state: AppState) => {
-      const { token } = state.auth;
-      const { depositLink } = state.wallet;
-      const {
-        success: { depositNaira: success },
-        errors: { depositNaira: error },
-      } = state.ajaxStatuses;
-      const { depositNaira: loading } = state.loadingIndicators;
-      return { token, success, error, loading, depositLink };
-    },
-  );
-  const formik = useFormik({
-    initialValues: {
-      amount: '',
-    },
-    validationSchema: yup.object({
-      amount: yup.string().required('Amount is required'),
-    }),
-    onSubmit: ({ amount }) => {
-      dispatch(depositNairaRequest({ token, data: { amount } }));
-    },
+  const {
+    token,
+    success,
+    error,
+    loading,
+    depositLink,
+    deposit_account_number,
+    deposit_bank_name,
+  } = useSelector((state: AppState) => {
+    const { token } = state.auth;
+    const { depositLink } = state.wallet;
+    const { deposit_account_number, deposit_bank_name } = state.profile;
+    const {
+      success: { depositNaira: success },
+      errors: { depositNaira: error },
+    } = state.ajaxStatuses;
+    const { depositNaira: loading } = state.loadingIndicators;
+    return {
+      token,
+      success,
+      error,
+      loading,
+      depositLink,
+      deposit_account_number,
+      deposit_bank_name,
+    };
   });
-  const accountNo = '01234567890';
   const copyToClipboard = async () => {
     if (!navigator.clipboard) {
-      // Clipboard API not available
       return;
     }
     try {
-      await navigator.clipboard.writeText(accountNo as string);
+      await navigator.clipboard.writeText(deposit_account_number as string);
       toast({
         status: 'success',
         description: `Account number copied successfully`,
@@ -170,56 +172,21 @@ const DepositNaira: React.FC<{ coinSymbol: string }> = ({
       console.error('Failed to copy!', err);
     }
   };
-  // useEffect(() => {
-  //   if (error)
-  //     toast({
-  //       status: 'error',
-  //       description: error.error,
-  //     });
-  //   if (success) {
-  //     toast({
-  //       status: 'success',
-  //       description: success.message,
-  //     });
-  //     window.open(depositLink, '_blank', 'noopener,noreferrer');
-  //   }
-  // }, [success, error]);
   return (
     <Flex as="section" flex={1} direction="column" justify="space-between">
-      {/* <FormControl mb={5}>
-        <Text mb={1} className="color-gray-text font-weight-400">
-          Amount
-        </Text>
-        <InputGroup>
-          <InputRightElement>
-            <Text className="color-gray-text font-sm" mr={2}>
-              {coinSymbol}
-            </Text>
-          </InputRightElement>
-          <NumberInput
-            {...formik.getFieldProps('amount')}
-            placeholder="Amount"
-            focusBorderColor="brand.100">
-            <NumberInputField {...formik.getFieldProps('amount')} px={2} />
-          </NumberInput>
-        </InputGroup>
-      </FormControl>
-      <SubmitButton loading={loading} action={formik.handleSubmit}>
-        Deposit {formatAmount(+formik.values.amount, 'NGN')}
-      </SubmitButton> */}
       <Flex direction="column" align="center">
         <Text className="font-lg color-dark font-weight-600" mb={2}>
-          {accountNo}
+          {deposit_account_number}
         </Text>
         <Text
           className="font-md color-dark font-weight-500 uppercase"
           mb={5}
           textAlign="center">
-          PROVIDUS BANK
+          {deposit_bank_name}
         </Text>
-        <Text className="font-md color-dark font-weight-400">
-          CryptoJumbo/Bruce Wayne
-        </Text>
+        {/* <Text className="font-md color-dark font-weight-400">
+          {deposit_bank_name}
+        </Text> */}
       </Flex>
       <Box as="button" onClick={copyToClipboard} className="btn-primary-outline">
         Copy Account Number
@@ -644,7 +611,8 @@ const SendCrypto: React.FC<SendCryptoProps> = ({
               defaultValue={0}
               {...formik.getFieldProps('amount')}
               placeholder="Amount"
-              focusBorderColor="brand.100">
+              focusBorderColor="brand.100"
+              width="full">
               <NumberInputField {...formik.getFieldProps('amount')} px={2} />
             </NumberInput>
           </InputGroup>
@@ -657,8 +625,18 @@ const SendCrypto: React.FC<SendCryptoProps> = ({
             bg="gray.300"
             {...formik.getFieldProps('address')}
             placeholder={`Paste ${coinSymbol} address here`}
+            _placeholder={{
+              color: '#CBCBCB',
+              fontSize: { base: '11px', md: '14px' },
+              lineHeight: '24px',
+              fontWeight: '500',
+            }}
             className="font-sm borderless-input"
+            focusBorderColor="transparent"
             _focusVisible={{ border: 'none' }}
+            _hover={{
+              border: 'none',
+            }}
           />
         </FormControl>
       </Box>
@@ -808,13 +786,13 @@ const SwapCrypto: React.FC<SwapCryptoProps & AjaxStatusState> = ({
     }
   }, [success, error]);
   return (
-    <Flex as="section" flex={1} direction="column" justify="space-between">
+    <Flex as="section" flex={1} direction="column" minHeight="480px">
       <Box>
         <Flex
           align="center"
           flex={{ base: 0, sm: 1 }}
           className="bg-white border-radius-sm trade-coin"
-          mb={10}
+          mb={5}
           flexDirection={{ base: 'column', sm: 'row' }}>
           <Stack
             direction="row"
@@ -880,7 +858,7 @@ const SwapCrypto: React.FC<SwapCryptoProps & AjaxStatusState> = ({
             </Box>
           </Stack>
         </Flex>
-        <FormControl mb={10}>
+        <FormControl mb={'10px'}>
           <Text mb={1} className="color-gray-text font-sm font-weight-400">
             Swap
           </Text>
@@ -901,6 +879,7 @@ const SwapCrypto: React.FC<SwapCryptoProps & AjaxStatusState> = ({
               </Stack>
             </InputRightElement>
             <NumberInput
+              width="full"
               {...formik.getFieldProps('amount')}
               placeholder="Amount"
               border="none"
@@ -915,8 +894,17 @@ const SwapCrypto: React.FC<SwapCryptoProps & AjaxStatusState> = ({
           </InputGroup>
         </FormControl>
         <Flex justify="space-between" align="center" mb={10}>
-          <Text className="color-gray-text font-sm font-weight-400">To</Text>
-          <Stack direction="row" spacing={2}>
+          <Text mr={2} className="color-gray-text font-sm font-weight-400">
+            To
+          </Text>
+          <Stack
+            direction="row"
+            spacing={2}
+            flex={1}
+            borderRadius={4}
+            p="10px 15px"
+            bg="rgba(244, 244, 244, 0.31)"
+            justify="flex-end">
             <Text className="color-dark font-sm font-weight-400">
               {parseFloat(formik.values.to_amount).toFixed(8)}
             </Text>
@@ -934,12 +922,14 @@ const SwapCrypto: React.FC<SwapCryptoProps & AjaxStatusState> = ({
         has already been deducted from what is displayed in the {swap.to} input
         field.
       </Text>
-      <SubmitButton
-        loading={loading}
-        disabled={!(formik.dirty && formik.isValid)}
-        action={formik.handleSubmit}>
-        Swap {swap.from} to {swap.to}
-      </SubmitButton>
+      <Box px={'10px'}>
+        <SubmitButton
+          loading={loading}
+          disabled={!(formik.dirty && formik.isValid)}
+          action={formik.handleSubmit}>
+          Swap {swap.from} to {swap.to}
+        </SubmitButton>
+      </Box>
     </Flex>
   );
 };

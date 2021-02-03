@@ -52,7 +52,7 @@ export const TransactionCard: React.FC<TransactionCardProps> = ({
   return (
     <Flex
       flex={1}
-      maxWidth="26%"
+      maxWidth={{ base: '100%', sm: '49%', lg: '26%' }}
       className="bg-white"
       p={2}
       borderRadius={5}

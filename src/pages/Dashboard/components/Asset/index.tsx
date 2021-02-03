@@ -30,8 +30,8 @@ export const Asset: React.FC<AssetProps> = ({
   return (
     <Flex
       flex={1}
-      width={{ base: '100%', sm: '48%', md: maxWidth }}
-      maxWidth={{ base: '100%', sm: '48%', md: maxWidth }}
+      // width={{ base: '100%', sm: '48%', md: maxWidth }}
+      // maxWidth={{ base: '100%', sm: '48%', md: maxWidth }}
       mb={2}
       p="20px 15px 10px"
       flexDirection="column"

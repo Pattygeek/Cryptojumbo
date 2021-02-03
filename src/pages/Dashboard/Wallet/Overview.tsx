@@ -35,7 +35,7 @@ const Assets: React.FC = (): JSX.Element => {
     return { cryptos };
   });
   return (
-    <Box flex={0.25}>
+    <Box>
       <Flex align="center" mb={3} p="10px 15px">
         <Text className="font-weight-500 color-dark font-md" mr={4}>
           Your assets
@@ -153,7 +153,7 @@ const Swap: React.FC = (): JSX.Element => {
               </Text>
             </Flex>
             <Box position="relative" className="tooltip-wrapper">
-              <Box as="button" mr={1} mt={'-3px'}>
+              <Box as="button" mr={1}>
                 <Box as={IoIosArrowDown} size={20} />
               </Box>
               <Box

@@ -55,15 +55,15 @@ const LocalAccounts: React.FC = () => {
 
   useEffect(() => {
     if (
-      user?.account_number &&
-      user?.bank_name &&
-      !bankVerification[user?.account_number as string]
+      user?.withdrawal_account_number &&
+      user?.withdrawal_bank_name &&
+      !bankVerification[user?.withdrawal_account_number as string]
     ) {
       dispatch(
         verifyBankAccountRequest({
           data: {
-            account_number: user?.account_number as string,
-            account_bank: user?.bank_name as string,
+            account_number: user?.withdrawal_account_number as string,
+            account_bank: user?.withdrawal_bank_name as string,
           },
         }),
       );
@@ -92,21 +92,22 @@ const LocalAccounts: React.FC = () => {
             </Box>
           </Flex>
           <Box py={5}>
-            {user?.bank_name && (
+            {user?.withdrawal_bank_name && (
               <Text
                 className="font-weight-normal capitalize"
                 fontSize="10px"
                 lineHeight="12px"
                 mb={1}>
-                {banks.find((el) => el.code === user?.bank_name)?.name}
+                {banks.find((el) => el.code === user?.withdrawal_bank_name)?.name}
               </Text>
             )}
-            {user?.account_number ? (
+            {user?.withdrawal_account_number ? (
               <Text className="font-sm color-dark font-weight-500">
-                {user?.account_number} -{' '}
-                {bankVerification[user?.account_number as string] ? (
-                  bankVerification[user?.account_number as string].account_name
-                ) : !user?.account_number && verifyBankAccountLoading ? (
+                {user?.withdrawal_account_number} -{' '}
+                {bankVerification[user?.withdrawal_account_number as string] ? (
+                  bankVerification[user?.withdrawal_account_number as string]
+                    .account_name
+                ) : !user?.withdrawal_account_number && verifyBankAccountLoading ? (
                   <Spinner size="sm" />
                 ) : null}
               </Text>
@@ -165,30 +166,33 @@ const EditAccount: React.FC<Pick<UseDisclosureProps, 'onClose'>> = ({
   });
   const formik = useFormik({
     initialValues: {
-      bank_name: '',
+      withdrawal_bank_name: '',
       account_number: '',
     },
     validationSchema: yup.object({
-      bank_name: yup.string().required('Required'),
+      withdrawal_bank_name: yup.string().required('Required'),
       account_number: yup.string().required('Required'),
     }),
-    onSubmit: ({ bank_name, account_number }) => {
+    onSubmit: ({ withdrawal_bank_name, account_number }) => {
       dispatch(
         updateProfileRequest({
           token,
-          data: { bank_name, account_number },
+          data: { withdrawal_bank_name, withdrawal_account_number: account_number },
         }),
       );
     },
   });
 
   useEffect(() => {
-    if (formik.values.account_number.length === 10 && formik.values.bank_name) {
+    if (
+      formik.values.account_number.length === 10 &&
+      formik.values.withdrawal_bank_name
+    ) {
       dispatch(
         verifyBankAccountRequest({
           data: {
             account_number: formik.values.account_number,
-            account_bank: formik.values.bank_name,
+            account_bank: formik.values.withdrawal_bank_name,
           },
         }),
       );
@@ -223,9 +227,9 @@ const EditAccount: React.FC<Pick<UseDisclosureProps, 'onClose'>> = ({
         <Box flex={0.6}>
           <Select
             mb={1}
-            value={formik.values.bank_name}
+            value={formik.values.withdrawal_bank_name}
             onChange={(event) =>
-              formik.setFieldValue('bank_name', event.target.value)
+              formik.setFieldValue('withdrawal_bank_name', event.target.value)
             }
             bg="gray.300"
             className="color-dark"

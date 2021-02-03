@@ -8,7 +8,7 @@ import KYC from './KYC';
 
 const Profile: React.FC = (): JSX.Element => {
   return (
-    <Flex justify="space-between" direction={{ base: 'column', md: 'row' }}>
+    <Flex justify="space-between" pb={5} direction={{ base: 'column', md: 'row' }}>
       <Box flex={0.35} mb={5}>
         <PersonalInfo />
         <LocalAccounts />

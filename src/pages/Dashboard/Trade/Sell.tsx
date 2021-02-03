@@ -25,10 +25,10 @@ import {
   SubmitButton,
   TransactionStatus,
   useAjaxToast,
+  FormInput,
 } from '../components';
 import { AiOutlinePlus } from 'react-icons/ai';
-import { banks, formatAmount } from '../../../utils';
-import { UploadUtilityBill } from './Buy';
+import { banks, formatAmount, identificationTypes } from '../../../utils';
 import QRCode from 'qrcode.react';
 import CopyToClipBoard from 'react-copy-to-clipboard';
 import {
@@ -38,9 +38,12 @@ import {
   ReceivePaymentMethods,
   MakePaymentMethods,
   verifyBankAccountRequest,
+  idVerificationRequest,
 } from '../../../redux';
 import { useSelector, useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
 
 declare interface SellProps extends TradeWrapperProps {
   amount: string;
@@ -49,7 +52,7 @@ declare interface SellProps extends TradeWrapperProps {
 }
 
 export enum Progress {
-  utility = 'utility-bill',
+  verifyId = 'id-verification',
   debitFrom = 'debit-from',
   payment = 'payment',
   verifyPayment = 'verify-payment',
@@ -62,7 +65,7 @@ const Sell: React.FC<SellProps> = ({
   heading,
   coinValue,
 }): JSX.Element => {
-  const [progress, setProgress] = useState<Progress>(Progress.debitFrom);
+  const [progress, setProgress] = useState<Progress>(Progress.verifyId);
   const { success, error } = useSelector((state: AppState) => {
     const {
       success: { sellCrypto: success },
@@ -74,8 +77,8 @@ const Sell: React.FC<SellProps> = ({
     <Box as="section">
       {!error && !success && (
         <TradeWrapper heading={heading} onClose={onClose}>
-          {progress === Progress.utility && (
-            <UploadUtilityBill action={() => setProgress(Progress.debitFrom)} />
+          {progress === Progress.verifyId && (
+            <IdentityVerification action={() => setProgress(Progress.debitFrom)} />
           )}
           {progress === Progress.debitFrom && (
             <DebitFrom
@@ -149,11 +152,11 @@ const DebitFrom: React.FC<DebitFromProps> = ({
     return +amount - splitAmount;
   }, [bankDetails]);
   const addBankDetails = useCallback(() => {
-    if (
-      !bankDetails[bankDetails.length - 1].accountName ||
-      !bankDetails[bankDetails.length - 1].amount
-    )
-      return;
+    // if (
+    //   !bankDetails[bankDetails.length - 1].accountName ||
+    //   !bankDetails[bankDetails.length - 1].amount
+    // )
+    //   return;
     setBankDetails((prev) => [
       ...prev,
       { bank: '', accountNo: '', accountName: '', id: uuidv4() },
@@ -171,10 +174,13 @@ const DebitFrom: React.FC<DebitFromProps> = ({
       index: number,
     ) => {
       const oldState = [...bankDetails];
+      if (fieldName === 'amount') {
+        if (+value > calculateUnsplitAmount) return;
+      }
       oldState[index][fieldName] = value;
       setBankDetails(oldState);
     },
-    [bankDetails],
+    [bankDetails, calculateUnsplitAmount],
   );
   const { token, success, error, loading } = useSelector((state: AppState) => {
     const { token } = state.auth;
@@ -238,88 +244,103 @@ const DebitFrom: React.FC<DebitFromProps> = ({
       creditWallet === ReceivePaymentMethods['In app wallet'] ||
       (creditWallet &&
         bankDetails.every((details) => details.accountNo && details.bank)));
-  console.log('bankDetails', bankDetails);
   return (
-    <Flex flex={1} direction="column" justifyContent="space-between">
-      <Box mb={5}>
-        <Text className="font-sm color-gray-text font-weight-500">
-          Sell {coin} from{' '}
-        </Text>
-        <Select
-          value={sellFrom}
-          onChange={(event) => setSellFrom(event.target.value)}
-          bg="gray.300"
-          fontSize="0.9em"
-          focusBorderColor="none"
-          border="none"
-          placeholder="Select option">
-          <option value={ReceivePaymentMethods['In app wallet']}>
-            Your cryptojumbo {coin} wallet
-          </option>
-          <option value={ReceivePaymentMethods['External wallet']}>
-            Another {coin} wallet
-          </option>
-        </Select>
-      </Box>
-      <Box mb={5}>
-        <Text className="font-sm color-gray-text font-weight-500">
-          Receive Payment to{' '}
-        </Text>
-        <RadioGroup onChange={setCreditWallet} value={creditWallet}>
-          <Stack spacing={2} direction="row">
-            <Box
-              py={1}
-              px={2}
-              borderWidth={1}
-              borderColor="transparent"
-              className={`border-radius-xs payment-method ${
-                creditWallet === ReceivePaymentMethods['In app wallet']
-                  ? 'checked'
-                  : ''
-              }`}>
-              <Radio
-                colorScheme="orange"
-                value={ReceivePaymentMethods['In app wallet']}>
-                <Text
-                  className={`font-weight-500 font-sm ${
-                    creditWallet === ReceivePaymentMethods['In app wallet']
-                      ? 'color-dark'
-                      : 'color-gray-text'
-                  }`}>
-                  CryptoJumbo NGN Wallet
-                </Text>
-              </Radio>
-            </Box>
-            <Box
-              py={1}
-              px={2}
-              borderWidth={1}
-              borderColor="transparent"
-              className={`border-radius-xs payment-method ${
-                creditWallet === ReceivePaymentMethods['External wallet']
-                  ? 'checked'
-                  : ''
-              }`}>
-              <Radio
-                colorScheme="orange"
-                value={ReceivePaymentMethods['External wallet']}>
-                <Box
-                  className={`font-weight-500 font-sm ${
-                    creditWallet === ReceivePaymentMethods['External wallet']
-                      ? 'color-dark'
-                      : 'color-gray-text'
-                  }`}>
-                  <Text className="font-sm">Local NGN account</Text>
-                </Box>
-              </Radio>
-            </Box>
-          </Stack>
-        </RadioGroup>
+    <Flex
+      flex={1}
+      direction="column"
+      width="full"
+      justifyContent="space-between"
+      minHeight="380px">
+      <Box>
+        <Box mb={5}>
+          <Text fontSize="16px" className="color-gray-text font-weight-500">
+            Sell {coin} from{' '}
+          </Text>
+          <Select
+            value={sellFrom}
+            onChange={(event) => setSellFrom(event.target.value)}
+            bg="gray.300"
+            fontSize="16px"
+            lineHeight="24px"
+            focusBorderColor="none"
+            border="none"
+            placeholder="Select option"
+            className="color-dark">
+            <option value={ReceivePaymentMethods['In app wallet']}>
+              Your cryptojumbo {coin} wallet
+            </option>
+            <option value={ReceivePaymentMethods['External wallet']}>
+              Another {coin} wallet
+            </option>
+          </Select>
+        </Box>
+        <Box mb={5}>
+          <Text
+            fontSize="16px"
+            lineHeight="24px"
+            className="color-gray-text font-weight-500">
+            Receive Payment to{' '}
+          </Text>
+          <RadioGroup onChange={setCreditWallet} value={creditWallet}>
+            <Stack spacing={2} direction="row">
+              <Box
+                py={1}
+                px={2}
+                borderWidth={1}
+                borderColor="transparent"
+                className={`border-radius-xs payment-method ${
+                  creditWallet === ReceivePaymentMethods['In app wallet']
+                    ? 'checked'
+                    : ''
+                }`}>
+                <Radio
+                  colorScheme="orange"
+                  value={ReceivePaymentMethods['In app wallet']}>
+                  <Text
+                    fontSize="14px"
+                    lineHeight="17px"
+                    className={`font-weight-500 ${
+                      creditWallet === ReceivePaymentMethods['In app wallet']
+                        ? 'color-dark'
+                        : 'color-gray-text'
+                    }`}>
+                    CryptoJumbo NGN Wallet
+                  </Text>
+                </Radio>
+              </Box>
+              <Box
+                py={1}
+                px={2}
+                borderWidth={1}
+                borderColor="transparent"
+                className={`border-radius-xs payment-method ${
+                  creditWallet === ReceivePaymentMethods['External wallet']
+                    ? 'checked'
+                    : ''
+                }`}>
+                <Radio
+                  colorScheme="orange"
+                  value={ReceivePaymentMethods['External wallet']}>
+                  <Box
+                    className={`font-weight-500 ${
+                      creditWallet === ReceivePaymentMethods['External wallet']
+                        ? 'color-dark'
+                        : 'color-gray-text'
+                    }`}>
+                    <Text fontSize="14px" lineHeight="17px">
+                      Local NGN account
+                    </Text>
+                  </Box>
+                </Radio>
+              </Box>
+            </Stack>
+          </RadioGroup>
+        </Box>
       </Box>
       <Box mb={10}>
         <Stack
           direction="column"
-          spacing={5}
+          spacing={'1px'}
           divider={<StackDivider borderColor="gray.500" />}>
           {creditWallet === ReceivePaymentMethods['External wallet'] &&
             bankDetails.map((details, index) => (
@@ -334,25 +355,25 @@ const DebitFrom: React.FC<DebitFromProps> = ({
             ))}
         </Stack>
         <Stack align="center" direction="row" spacing={2} mt={5}>
-          <Box flex={0.5}>
+          <Box>
             {splitPayment && bankDetails.length > 1 && (
               <Text fontSize="0.75em" className="color-gray-text font-weight-500">
                 {formatAmount(calculateUnsplitAmount, 'NGN')} Remaining
               </Text>
             )}
           </Box>
-          <Flex direction="column" justify="flex-end" flex={0.5}>
-            {calculateUnsplitAmount >= 1 && (
-              <Box
-                as="button"
-                onClick={
-                  !splitPayment ? () => setSplitPayment(true) : addBankDetails
-                }
-                fontSize="0.75em"
-                className="color-primary font-weight-500">
-                {!splitPayment ? 'Split to multiple accounts' : 'Add account'}
-              </Box>
-            )}
+          <Flex direction="column" align="flex-end" flex={1}>
+            {creditWallet === ReceivePaymentMethods['External wallet'] &&
+              calculateUnsplitAmount >= 1 && (
+                <Box
+                  onClick={
+                    !splitPayment ? () => setSplitPayment(true) : addBankDetails
+                  }
+                  fontSize="0.75em"
+                  className="color-primary font-weight-500">
+                  {!splitPayment ? 'Split to multiple accounts' : 'Add account'}
+                </Box>
+              )}
           </Flex>
         </Stack>
       </Box>
@@ -485,12 +506,15 @@ const BankInfo: React.FC<BankInfoProps> = ({
               value={values.amount}
               className="color-dark font-weight-500"
               onChange={(value) => handleBankInfoChange(value, 'amount', index)}
-              focusInputOnChange={false}>
+              focusBorderColor="brand.100"
+              borderWidth="1px">
               <NumberInputField
                 value={values.amount}
                 fontSize="0.9em"
                 pl={'50px'}
                 className="color-dark font-weight-500"
+                bg="gray.300"
+                focusBorderColor="brand.100"
               />
             </NumberInput>
           </InputGroup>
@@ -506,8 +530,7 @@ const BankInfo: React.FC<BankInfoProps> = ({
           value={values.accountNo}
           onChange={(value) => handleBankInfoChange(value, 'accountNo', index)}
           focusInputOnChange={false}
-          placeholder="Account number"
-          backgroundColor="rgba(225, 225, 225, 0.48)">
+          placeholder="Account number">
           <NumberInputField
             bg="gray.300"
             focusBorderColor="none"
@@ -522,7 +545,10 @@ const BankInfo: React.FC<BankInfoProps> = ({
           />
         </NumberInput>
         {bankVerification[values.accountNo] && (
-          <Text className="font-weight-500 color-gray-text font-sm">
+          <Text
+            fontSize="14px"
+            lineHeight="14.5px"
+            className="font-weight-500 color-gray-text">
             {bankVerification[values.accountNo].account_name}
           </Text>
         )}
@@ -596,6 +622,120 @@ const GenerateQrCode: React.FC<GenerateQrCodeProps> = ({ coin }): JSX.Element =>
       <Text textAlign="center" className="font-sm color-primary font-weight-500">
         {coin} Sent
       </Text>
+    </Flex>
+  );
+};
+
+declare interface IdVerificationProps {
+  action: () => void;
+}
+export const IdentityVerification: React.FC<IdVerificationProps> = ({ action }) => {
+  const toast = useAjaxToast();
+  const dispatch = useDispatch();
+  const { token, success, error, loading } = useSelector((state: AppState) => {
+    const { token } = state.auth;
+    const {
+      success: { idVerification: success },
+      errors: { idVerification: error },
+    } = state.ajaxStatuses;
+    const { idVerification: loading } = state.loadingIndicators;
+    return {
+      token,
+      success,
+      error,
+      loading,
+    };
+  });
+  const formik = useFormik({
+    initialValues: {
+      id_type: '',
+      id_number: '',
+      first_name: '',
+      last_name: '',
+      date_of_birth: '',
+    },
+    validationSchema: yup.object({
+      id_type: yup.string().required('Required'),
+      id_number: yup.string().required('Required'),
+      first_name: yup.string().required('Required'),
+      last_name: yup.string().required('Required'),
+      date_of_birth: yup.string().required('Required'),
+    }),
+    onSubmit: (props) => {
+      dispatch(idVerificationRequest({ token, data: props }));
+    },
+  });
+  useEffect(() => {
+    if (error)
+      toast({
+        status: 'error',
+        description: error.error,
+      });
+    if (success) {
+      toast({
+        status: 'success',
+        description: success.message,
+      });
+      action();
+    }
+  }, [success, error]);
+  return (
+    <Flex
+      flex={1}
+      direction="column"
+      width="full"
+      justifyContent="space-between"
+      minHeight="380px">
+      <Box>
+        <Stack spacing={1} direction="row">
+          <Select
+            flex={1}
+            value={formik.values.id_type}
+            onChange={(event) => formik.setFieldValue('id_type', event.target.value)}
+            bg="gray.300"
+            fontSize="16px"
+            lineHeight="24px"
+            focusBorderColor="none"
+            border="none"
+            placeholder="Select ID type"
+            className="color-dark">
+            {identificationTypes.map((id, index) => (
+              <option key={index} value={id.value}>
+                {id.name}
+              </option>
+            ))}
+          </Select>
+          <FormInput
+            flex={1}
+            placeholder="ID number"
+            {...formik.getFieldProps('id_number')}
+          />
+        </Stack>
+        <Stack spacing={1} direction="row">
+          <FormInput
+            flex={1}
+            placeholder="First name"
+            {...formik.getFieldProps('first_name')}
+          />
+          <FormInput
+            flex={1}
+            placeholder="Last name"
+            {...formik.getFieldProps('last_name')}
+          />
+        </Stack>
+        <FormInput
+          type="date"
+          flex={1}
+          placeholder="Date of Birth"
+          {...formik.getFieldProps('date_of_birth')}
+        />
+      </Box>
+      <SubmitButton
+        loading={loading}
+        action={formik.handleSubmit}
+        disabled={!(formik.dirty && formik.isValid)}>
+        Continue
+      </SubmitButton>
     </Flex>
   );
 };
