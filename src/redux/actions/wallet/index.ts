@@ -29,25 +29,6 @@ import {
   SendBTCRequestPayload,
   SendBTCRequestProp,
   SEND_BTC_REQUEST,
-  SendBTCSuccessPayload,
-  SendBTCSuccessProp,
-  SEND_BTC_SUCCESS,
-  SEND_BTC_FAILURE,
-  SEND_BTC_LOADING_INDICATOR,
-  SendUSDTRequestPayload,
-  SendUSDTRequestProp,
-  SEND_USDT_REQUEST,
-  SendUSDTSuccessPayload,
-  SendUSDTSuccessProp,
-  SEND_USDT_SUCCESS,
-  SEND_USDT_FAILURE,
-  SEND_USDT_LOADING_INDICATOR,
-  WithdrawNairaRequestPayload,
-  WithdrawNairaRequestProp,
-  WITHDRAW_NAIRA_REQUEST,
-  WithdrawNairaSuccessPayload,
-  WithdrawNairaSuccessProp,
-  WITHDRAW_NAIRA_SUCCESS,
   WITHDRAW_NAIRA_FAILURE,
   WITHDRAW_NAIRA_LOADING_INDICATOR,
 } from '../../types';
@@ -156,76 +137,8 @@ export const sendBTCRequest = (prop: SendBTCRequestPayload): SendBTCRequestProp 
   };
 };
 
-export const sendBTCSuccess = (prop: SendBTCSuccessPayload): SendBTCSuccessProp => {
-  return {
-    type: SEND_BTC_SUCCESS,
-    payload: prop,
-  };
-};
 
-export const sendBTCFailure = (prop?: AjaxErrorPayload): AjaxErrorProp => {
-  return {
-    type: SEND_BTC_FAILURE,
-    payload: prop,
-  };
-};
 
-export const sendBTCLoadingIndicator = (loading: boolean): LoadingIndicatorProp => {
-  return {
-    type: SEND_BTC_LOADING_INDICATOR,
-    payload: { loading },
-  };
-};
-
-export const sendUSDTRequest = (
-  prop: SendUSDTRequestPayload,
-): SendUSDTRequestProp => {
-  return {
-    type: SEND_USDT_REQUEST,
-    payload: prop,
-  };
-};
-
-export const sendUSDTSuccess = (
-  prop: SendUSDTSuccessPayload,
-): SendUSDTSuccessProp => {
-  return {
-    type: SEND_USDT_SUCCESS,
-    payload: prop,
-  };
-};
-
-export const sendUSDTFailure = (prop?: AjaxErrorPayload): AjaxErrorProp => {
-  return {
-    type: SEND_USDT_FAILURE,
-    payload: prop,
-  };
-};
-
-export const sendUSDTLoadingIndicator = (loading: boolean): LoadingIndicatorProp => {
-  return {
-    type: SEND_USDT_LOADING_INDICATOR,
-    payload: { loading },
-  };
-};
-
-export const withdrawNairaRequest = (
-  prop: WithdrawNairaRequestPayload,
-): WithdrawNairaRequestProp => {
-  return {
-    type: WITHDRAW_NAIRA_REQUEST,
-    payload: prop,
-  };
-};
-
-export const withdrawNairaSuccess = (
-  prop: WithdrawNairaSuccessPayload,
-): WithdrawNairaSuccessProp => {
-  return {
-    type: WITHDRAW_NAIRA_SUCCESS,
-    payload: prop,
-  };
-};
 
 export const withdrawNairaFailure = (prop?: AjaxErrorPayload): AjaxErrorProp => {
   return {
