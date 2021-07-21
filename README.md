@@ -7,4 +7,20 @@ This codebase is a READONLY version of the Cryptojumbo platform. It should be so
 ## Screenshots
 
 **Login Page**
+
 ![Cryptojumbo Login](https://github.com/Pattygeek/Cryptojumbo/blob/main/docs/images/CJ-login.jpg)
+
+
+**Home Page**
+
+![Cryptojumbo Homepage](https://github.com/Pattygeek/Cryptojumbo/blob/main/docs/images/CJ-homepage.jpg)
+
+
+**Overview Page**
+
+![Cryptojumbo Overview](https://github.com/Pattygeek/Cryptojumbo/blob/main/docs/images/CJ-Overview.jpg)
+
+
+**Profile Page**
+
+![Cryptojumbo Profile](https://github.com/Pattygeek/Cryptojumbo/blob/main/docs/images/CJ-profile.jpg)
